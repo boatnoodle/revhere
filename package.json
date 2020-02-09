@@ -1,0 +1,22 @@
+{
+  "name": "revhere-frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:boatnoodle/revhere-frontend.git",
+  "author": "boatnoodle <nattasit31@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next"
+  },
+  "dependencies": {
+    "@types/next": "^9.0.0",
+    "@types/react": "^16.9.19",
+    "@zeit/next-typescript": "^1.1.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.0",
+    "typescript": "^3.7.5"
+  }
+}
