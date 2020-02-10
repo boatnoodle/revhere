@@ -1,18 +1,28 @@
-import * as React from "react";
-import { Menu} from 'antd';
-const Navbar: React.FunctionComponent = () => (
-    <nav>
+import { FunctionComponent } from "react/";
+import { Menu } from 'antd';
+const Navbar: FunctionComponent = () => {
+    const menuList = [
+        {
+            'title': 'Home',
+            'url': '',
+        },
+        {
+            'title': 'test',
+            'url': '',
+        }
+    ];
+    const navStyle = {
+        lineHeight: '64px',
+    };
+    return (<nav>
         <div className="logo" />
         <Menu
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={['2']}
-            style={{ lineHeight: '64px' }}
-        >
-            <Menu.Item key="1">nav 1</Menu.Item>
-            <Menu.Item key="2">nav 2</Menu.Item>
-            <Menu.Item key="3">nav 3</Menu.Item>
+            style={navStyle}>
+            {menuList.map((item, index) => (<Menu.Item key={index}>{item.title}</Menu.Item>))}
         </Menu>
-    </nav>
-);
+    </nav >);
+};
 export default Navbar;
