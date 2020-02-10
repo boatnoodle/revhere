@@ -6,7 +6,9 @@
   "author": "boatnoodle <nattasit31@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "next"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
     "@types/next": "^9.0.0",

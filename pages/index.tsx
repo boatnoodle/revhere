@@ -3,7 +3,9 @@ import Layout from "../components/Layout";
 const Index: React.FunctionComponent = () => {
   return (
     <Layout title="Home">
-      <h1>Hello Next.js 👋</h1>
+      <h1>Review here is coming soon. 👋</h1>
+      <p>Edit test something changed!!!!</p>
+      <img src="/logo.png" />
     </Layout>
   );
 };
