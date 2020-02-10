@@ -1,4 +1,4 @@
-import * as React from "react";
+import { FunctionComponent } from "react";
 import Head from "next/head";
 import Navbar from './Navbar';
 import { Layout } from 'antd';
@@ -6,7 +6,7 @@ type LayoutProps = {
   title?: string;
 };
 const { Header, Footer, Content } = Layout;
-const Layouts: React.FunctionComponent<LayoutProps> = ({ children, title }) => (
+const Layouts: FunctionComponent<LayoutProps> = ({ children, title }) => (
   <Layout>
     <Head>
       <title>{title}</title>
