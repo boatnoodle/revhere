@@ -42,27 +42,12 @@ jobs:
       - run:
           name: "ssh to server & login private registry & pull image & stop & start"
           command: |
-          ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP
-          docker login hub.phukethomevilla.com -u $PRIVATE_REGISTRY_USERNAME -p $PRIVATE_REGISTRY_PASSWORD
-          docker pull hub.phukethomevilla.com/docker-nextjs
-          docker stop revhere-production
-          docker run --rm -p 3000:3000 --name revhere-production hub.phukethomevilla.com/docker-nextjs
-          docker ps
-      # - run:
-      #     name: "Login to docker private registry"
-      #     command:
-      # - run:
-      #     name: "Pull image from docker private registry"
-      #     command:
-      # - run:
-      #     name: "Stop container for new one"
-      #     command:
-      # - run:
-      #     name: "Run the new one container"
-      #     command:
-      # - run:
-      #     name: "Production ready"
-      #     command:
+            ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP
+            docker login hub.phukethomevilla.com -u $PRIVATE_REGISTRY_USERNAME -p $PRIVATE_REGISTRY_PASSWORD
+            docker pull hub.phukethomevilla.com/docker-nextjs
+            docker stop revhere-production
+            docker run --rm -p 3000:3000 --name revhere-production hub.phukethomevilla.com/docker-nextjs
+            docker ps
 workflows:
   version: 2
   build-and-deploy:
