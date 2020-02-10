@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Icon, Input, Button } from "antd";
 
-import Layout from "../components/Layout";
+import Layout from "../components/Layout/Layout";
 
 const Index: React.FunctionComponent = () => {
   const handleSubmit = () => {};
