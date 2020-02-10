@@ -1,11 +1,13 @@
 import { FunctionComponent } from "react";
 import Head from "next/head";
 import Navbar from './Navbar';
-import { Layout } from 'antd';
+import { Layout, Row, Col } from 'antd';
+
 type LayoutProps = {
   title?: string;
 };
-const { Header, Footer, Content } = Layout;
+
+const { Footer, Content } = Layout;
 const Layouts: FunctionComponent<LayoutProps> = ({ children, title }) => (
   <Layout>
     <Head>
@@ -13,11 +15,13 @@ const Layouts: FunctionComponent<LayoutProps> = ({ children, title }) => (
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <Header>
-      <Navbar />
-    </Header>
+    <Navbar />
     <Content>
-      {children}
+      <Row>
+        <Col>
+          {children}
+        </Col>
+      </Row>
     </Content>
     <Footer></Footer>
   </Layout>
