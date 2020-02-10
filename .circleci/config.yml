@@ -31,14 +31,15 @@ jobs:
 
       # - setup_remote_docker
       - run:
-          name: "Login to docker private registry"
-          command: docker login  hub.phukethomevilla.com -u $PRIVATE_REGISTRY_USERNAME -p $PRIVATE_REGISTRY_PASSWORD
+          name: "Login to docker hub"
+          command: docker login -u $HUB_USERNAME -p $HUB_PASSWORD
       - run:
           name: "Build image for production"
-          command: docker build -t hub.phukethomevilla.com/docker-nextjs .
+          command: docker build -t $IMAGE_NAME .
       - run:
-          name: "Push image to docker private registry"
-          command: docker push hub.phukethomevilla.com/docker-nextjs
+          name: "Push image to docker hub"
+          command: docker push $IMAGE_NAME
+
       - run:
           name: "Pull image and start docker in production"
           command: |
