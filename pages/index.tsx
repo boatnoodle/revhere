@@ -39,9 +39,10 @@ const Index: React.FunctionComponent = () => {
       <Button type="primary">Primary</Button>
       <Button type="danger">Danger</Button>
 
-      <h1>Review here is coming soon. 👋</h1>
-      <p>Test automated deploy.</p>
-      <p>Edit test something changed!!!!</p>
+      <h1>
+        Review here is coming soon. 👋 From Yosssaporn (Co-Founder) And Nattasit
+        (Co-Founder)
+      </h1>
       <img src="/logo.png" />
     </Layout>
   );
