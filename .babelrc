@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "presets": ["next/babel", "@zeit/next-typescript/babel"],
   "plugins": [
     [
@@ -11,7 +10,3 @@
     ]
   ]
 }
-=======
-  "presets": ["next/babel", "@zeit/next-typescript/babel"]
-}
->>>>>>> 951f172ff01dbb43acf8c0740d48813538734b33
