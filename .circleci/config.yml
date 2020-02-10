@@ -23,20 +23,19 @@ jobs:
             - ~/.cache/yarn
 
   deploy-prod:
-    docker:
-      - image: circleci/node:12.14.0
     machine: true
+    # docker:
+    #   - image: circleci/node:12.14.0
     steps:
       - checkout
 
       # - setup_remote_docker
-
+      - run:
+          name: "Login to docker private registry"
+          command: docker login  hub.phukethomevilla.com -u $PRIVATE_REGISTRY_USERNAME -p $PRIVATE_REGISTRY_PASSWORD
       - run:
           name: "Build image for production"
           command: docker build -t hub.phukethomevilla.com/docker-nextjs .
-      - run:
-          name: "Login to docker private registry"
-          command: docker login -u $PRIVATE_REGISTRY_USERNAME -p $PRIVATE_REGISTRY_PASSWORD
       - run:
           name: "Push image to docker private registry"
           command: docker push hub.phukethomevilla.com/docker-nextjs
