@@ -1,0 +1,68 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:7.10
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+  deploy-prod:
+    docker:
+      - image: circleci/node:7.10
+    steps:
+      - checkout
+      - run:
+          name: "Build image for production"
+          command: docker build -t hub.phukethomevilla.com/docker-nextjs .
+      - run:
+          name: "Login to docker private registry"
+          command: docker login -u $PRIVATE_REGISTRY_USERNAME -p $PRIVATE_REGISTRY_PASSWORD
+      - run:
+          name: "Push image to docker private registry"
+          command: docker push hub.phukethomevilla.com/docker-nextjs
+      - run:
+          name: "ssh to server"
+          command: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP
+      - run:
+          name: "Login to docker private registry"
+          command: docker login -u $PRIVATE_REGISTRY_USERNAME -p $PRIVATE_REGISTRY_PASSWORD
+      - run:
+          name: "Pull image from docker private registry"
+          command: docker pull hub.phukethomevilla.com/docker-nextjs
+      - run:
+          name: "Stop container for new one"
+          command: docker stop revhere-production
+      - run:
+          name: "Run the new one container"
+          command: docker run --rm -p 3000:3000 --name revhere-production hub.phukethomevilla.com/docker-nextjs
+      - run:
+          name: "Production ready"
+          command: docker ps
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy-prod:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - build
