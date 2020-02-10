@@ -1,6 +1,5 @@
 const withTypescript = require("@zeit/next-typescript");
 
-<<<<<<< HEAD
 /* eslint-disable */
 const withLess = require("@zeit/next-less");
 const lessToJS = require("less-vars-to-js");
@@ -43,18 +42,3 @@ module.exports = withTypescript(
     }
   })
 );
-=======
-module.exports = withTypescript({
-  webpack(config, options) {
-    // config = {
-    //   resolve: {
-    //     modules: ['node_modules', 'src'],
-    //     alias: {
-    //       'antd': path.join(__dirname, './node_modules/antd/dist/antd.css')
-    //     }
-    //   }
-    // };
-    return config;
-  }
-});
->>>>>>> 951f172ff01dbb43acf8c0740d48813538734b33
