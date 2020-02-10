@@ -44,7 +44,7 @@ jobs:
           command: ssh -oStrictHostKeyChecking=no -v $DROPLET_USER@$DROPLET_IP
       - run:
           name: "Login to docker private registry"
-          command: docker login  -u $PRIVATE_REGISTRY_USERNAME --password-stdin $PRIVATE_REGISTRY_PASSWORD hub.phukethomevilla.com
+          command: docker login hub.phukethomevilla.com -u $PRIVATE_REGISTRY_USERNAME -p $PRIVATE_REGISTRY_PASSWORD
       - run:
           name: "Pull image from docker private registry"
           command: docker pull hub.phukethomevilla.com/docker-nextjs
