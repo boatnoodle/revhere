@@ -8,7 +8,7 @@ type LayoutProps = {
 };
 
 const { Footer, Content } = Layout;
-const Layouts: FunctionComponent<LayoutProps> = ({ children, title }) => (
+export const Layouts: FunctionComponent<LayoutProps> = ({ children, title }) => (
   <Layout>
     <Head>
       <title>{title}</title>
@@ -26,4 +26,3 @@ const Layouts: FunctionComponent<LayoutProps> = ({ children, title }) => (
     <Footer></Footer>
   </Layout>
 );
-export default Layouts;
