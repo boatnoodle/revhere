@@ -1,3 +1,4 @@
+
 import { FunctionComponent, Fragment } from 'react';
 import { ReviewItems } from 'containers/landing-page/Components/ReviewItems';
 
@@ -8,3 +9,4 @@ export const LandingPage: FunctionComponent = () => {
         <ReviewItems title='Explore Hot Reviews' subTitle='Find out hot reviews in our systems' items={items}></ReviewItems>
     );
 }
+

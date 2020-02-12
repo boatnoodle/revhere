@@ -1,3 +1,4 @@
+
 import react, { FunctionComponent } from 'react';
 import { Layouts } from '../components/Layout';
 
@@ -14,3 +15,4 @@ const About: FunctionComponent = () => {
     );
 }
 export default About;
+

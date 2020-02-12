@@ -32,7 +32,7 @@ jobs:
       # - setup_remote_docker
       - run:
           name: "Login to docker hub"
-          command: docker login -u $HUB_USERNAME -p $HUB_PASSWORD
+          command: docker login repo.treescale.com -u $HUB_USERNAME -p $HUB_PASSWORD
       - run:
           name: "Build image for production"
           command: docker build -t $IMAGE_NAME .
