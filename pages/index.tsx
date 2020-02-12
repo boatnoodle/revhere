@@ -1,11 +1,11 @@
 import { FunctionComponent } from "react";
-import Layout from "../components/Layout";
-import LandingPage from '../containers/landing-page';
+import { Layouts } from "../components/Layout";
+import { LandingPage } from '../containers/landing-page';
 const Index: FunctionComponent = () => {
   return (
-    <Layout>
+    <Layouts>
       <LandingPage />
-    </Layout>
+    </Layouts>
   );
 };
 export default Index;
