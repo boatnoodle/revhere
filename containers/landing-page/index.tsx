@@ -1,24 +1,10 @@
 import { FunctionComponent, Fragment } from 'react';
-import SearchZone from './Components/Search';
-import { ReviewItems } from './Components/ReviewItems';
-import Styled from 'styled-components';
-const SearchContainer = Styled.div`
-    padding:100px 0;
-    background-image: url(review-banner.jpg);
-    background-size: cover;
-    background-position-y: 40%;
-    color:white;
-`;
+import { ReviewItems } from 'containers/landing-page/Components/ReviewItems';
 
-let items = [];
+let items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 export const LandingPage: FunctionComponent = () => {
     return (
-        <Fragment>
-            <SearchContainer>
-                <SearchZone />
-            </SearchContainer>
-            <ReviewItems title='Explore Hot Reviews' subTitle='Find out hot reviews in our systems' items={items}></ReviewItems>
-        </Fragment>
+        <ReviewItems title='Explore Hot Reviews' subTitle='Find out hot reviews in our systems' items={items}></ReviewItems>
     );
 }

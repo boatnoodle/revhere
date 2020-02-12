@@ -1,48 +1,71 @@
 import { FunctionComponent } from "react/";
-import { Menu } from 'antd';
+import { Menu, Input, Button } from 'antd';
 import Styled from 'styled-components';
-const menuList = [
-    {
-        'title': 'Home',
-        'url': '',
-    },
-    {
-        'title': 'test',
-        'url': '',
-    }
-];
+import RouterLInk from 'next/router';
+
+const { Search } = Input;
 const MenuStyled = Styled(Menu)`
-        line-height: 64px;
         text-align: right !important;
         padding:auto 10px;
-        background-color:#00458B;
     `;
 const Logo = Styled.div`
-        background-image: url('./logo.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 66px;
-        height: 66px;
-        border-radius: 100%;
-        position: absolute;
-        top: 10px;
-        left: 10px;
+  background-image: url(./logo.png);
+    background-size: 53px 48px;
+    background-repeat: no-repeat;
+    background-position: -2px -2px;
+    width: 48px;
+    height: 46px;
+    position: absolute;
+    top: 14px;
+    left: 10px;
+    border-radius: 100%;
     `;
 
 const MenuItem = Styled(Menu.Item)`
-        color:white;
+        color:black;
+        padding:10px 5px;
+        border:none !important;
         &.ant-menu-item-selected,&:hover{
-            color: white !important;
+            color: gray!important;
         }
     `;
+
+const NotificationIcon = Styled.img`
+    width:30px;
+    height:30px;
+`;
+
+const menuList = [
+    {
+        'url': null,
+        'component':
+            <Search
+                placeholder="ค้นหาบน Revhere"
+                onSearch={value => console.log(value)}
+            />
+    },
+    {
+        'url': '/',
+        'component': <NotificationIcon src='./icons/icon-bell.png' />
+    },
+    {
+        'url': '/',
+        'component': <Button>เข้าสู่ระบบ</Button>
+    },
+];
+// Functionality
+const linkToUrl = (url) => (url ? RouterLInk.push(url) : null);
+
 const Navbar: FunctionComponent = () => {
     return (
         <nav>
             <Logo />
             <MenuStyled mode="horizontal" defaultSelectedKeys={['0']}>
-                {menuList.map((item, index) => (<MenuItem key={index}>{item.title}</MenuItem>))}
+                <MenuItem>
+                </MenuItem>
+                {menuList.map((item, index) => (<MenuItem onClick={() => linkToUrl(item.url)} key={index}>{item.component}</MenuItem>))}
             </MenuStyled>
-        </nav >
+        </nav>
     );
 };
 export default Navbar;
