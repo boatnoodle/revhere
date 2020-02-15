@@ -1,10 +1,17 @@
-import { FunctionComponent, Fragment } from 'react';
-import { ReviewItems } from 'containers/landing-page/Components/ReviewItems';
+import { FunctionComponent, Fragment } from "react";
+import { ReviewItems } from "containers/landing-page/Components/ReviewItems";
 
 let items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 export const LandingPage: FunctionComponent = () => {
-    return (
-        <ReviewItems title='Explore Hot Reviews' subTitle='Find out hot reviews in our systems' items={items}></ReviewItems>
-    );
-}
+  console.log("This shows errors");
+  return (
+    <Fragment>
+      <ReviewItems
+        title="Explore Hot Reviews"
+        subTitle="Find out hot reviews in our systems"
+        items={items}
+      ></ReviewItems>
+    </Fragment>
+  );
+};

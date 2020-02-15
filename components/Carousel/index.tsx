@@ -1,6 +1,8 @@
 import React, { useState, Fragment } from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
+import Styled, { css } from 'styled-components';
+import { Icon, Button } from 'antd';
 const carouselSettings = {
     responsive: {
         0: { items: 1 },
@@ -13,6 +15,18 @@ const carouselSettings = {
     buttonsDisabled: true,
     startIndex: 0,
 };
+const baseButtonStyle = css`
+    position: absolute;
+    top:  calc(50% + 10px);
+`;
+const PreviousButton = Styled(Button)`
+    ${baseButtonStyle}
+    left:20px;
+`;
+const NextButton = Styled(Button)`
+    ${baseButtonStyle}
+    right:20px;
+`;
 export const Carousel: React.FunctionComponent = ({ children }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -30,9 +44,10 @@ export const Carousel: React.FunctionComponent = ({ children }) => {
             <AliceCarousel {...carouselSettings} slideToIndex={currentIndex}>
                 {children}
             </AliceCarousel>
-
-            <button onClick={slidePrev} >Prev Page</button>
-            <button onClick={slideNext}>Next Page</button>
+            <PreviousButton onClick={slidePrev}><Icon type="left" /></PreviousButton>
+            <NextButton onClick={slideNext}><Icon type="right" /></NextButton>
         </Fragment>
     );
 }
+<style scoped>
+</style>
