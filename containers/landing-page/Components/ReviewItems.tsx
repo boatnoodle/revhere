@@ -40,7 +40,7 @@ interface Props {
     title: string;
     subTitle?: string;
     loading?: boolean;
-    items: Array<object>;
+    items: Array<number>;
 }
 export const ReviewItems: React.FunctionComponent<Props> = ({
     title = 'title',
