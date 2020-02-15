@@ -1,5 +1,5 @@
 #1st Stage
-FROM node:10-alpine as build
+FROM node:10 as build
 
 # Setting working directory. All the path will be relative to WORKDIR
 
