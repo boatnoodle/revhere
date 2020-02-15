@@ -4,15 +4,12 @@ import Navbar from './Navbar';
 import { Layout, Row, Col } from 'antd';
 
 type LayoutProps = {
-  title?: string;
-}
+    title?: string;
+};
 
 const { Footer, Content } = Layout;
 console.log('This shows errors');
-export const Layouts: FunctionComponent<LayoutProps> = ({
-    children,
-    title
-}) => (
+export const Layouts: FunctionComponent<LayoutProps> = ({ children, title }) => (
     <Layout>
         <Head>
             <title>{title}</title>
