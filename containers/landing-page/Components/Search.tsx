@@ -1,4 +1,4 @@
-import { FunctionComponent, Fragment } from 'react';
+import React, { FunctionComponent, Fragment } from 'react';
 import { Input, Row, Col } from 'antd';
 import Styled from 'styled-components';
 const { Search } = Input;

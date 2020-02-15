@@ -17,7 +17,7 @@ const carouselSettings = {
 };
 const baseButtonStyle = css`
     position: absolute;
-    top:  calc(50% + 10px);
+    top: calc(50% + 10px);
 `;
 const PreviousButton = Styled(Button)`
     ${baseButtonStyle}
@@ -38,16 +38,18 @@ export const Carousel: React.FunctionComponent = ({ children }) => {
         setCurrentIndex(currentIndex - 1);
     };
 
-
     return (
         <Fragment>
             <AliceCarousel {...carouselSettings} slideToIndex={currentIndex}>
                 {children}
             </AliceCarousel>
-            <PreviousButton onClick={slidePrev}><Icon type="left" /></PreviousButton>
-            <NextButton onClick={slideNext}><Icon type="right" /></NextButton>
+            <PreviousButton onClick={slidePrev}>
+                <Icon type="left" />
+            </PreviousButton>
+            <NextButton onClick={slideNext}>
+                <Icon type="right" />
+            </NextButton>
         </Fragment>
     );
 };
-<style scoped>
-</style>;
+<style scoped></style>;

@@ -40,34 +40,30 @@ interface Props {
     title: string;
     subTitle?: string;
     loading?: boolean;
-    items: Array<Record<string, any>>;
+    items: Array<number>;
 }
 export const ReviewItems: React.FunctionComponent<Props> = ({
     title = 'title',
     subTitle = null,
     items = [],
-    loading = false
+    loading = false,
 }) => {
     const Subtitle = () => {
         return subTitle && <SubTitle>{subTitle}</SubTitle>;
     };
 
     return (
-
         <CardWrapper>
             <Title>{title}</Title>
             <Subtitle />
             <Carousel>
-                {
-                    items.map((item, index) => (
-                        <CardComponent>
-                            <Img src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
-                            <ItemLabel>{index}</ItemLabel>
-                            <ItemDescription>Description</ItemDescription>
-                        </CardComponent>
-                    ))
-
-                }
+                {items.map((item, index) => (
+                    <CardComponent key={index}>
+                        <Img src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
+                        <ItemLabel>{index}</ItemLabel>
+                        <ItemDescription>Description</ItemDescription>
+                    </CardComponent>
+                ))}
             </Carousel>
         </CardWrapper>
     );

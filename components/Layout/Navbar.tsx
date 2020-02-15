@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react/';
+import React, { FunctionComponent } from 'react/';
 import { Menu, Input, Button } from 'antd';
 import Styled from 'styled-components';
 import RouterLInk from 'next/router';
@@ -37,33 +37,32 @@ const NotificationIcon = Styled.img`
 
 const menuList = [
     {
-        'url': null,
-        'component':
-            <Search
-                placeholder="ค้นหาบน Revhere"
-                onSearch={value => console.log(value)}
-            />
+        url: null,
+        component: <Search placeholder="ค้นหาบน Revhere" onSearch={value => console.log(value)} />,
     },
     {
-        'url': '/',
-        'component': <NotificationIcon src='./icons/icon-bell.png' />
+        url: '/',
+        component: <NotificationIcon src="./icons/icon-bell.png" />,
     },
     {
-        'url': '/',
-        'component': <Button>เข้าสู่ระบบ</Button>
+        url: '/',
+        component: <Button>เข้าสู่ระบบ</Button>,
     },
 ];
 // Functionality
-const linkToUrl = (url) => (url ? RouterLInk.push(url) : null);
+const linkToUrl = url => (url ? RouterLInk.push(url) : null);
 
 const Navbar: FunctionComponent = () => {
     return (
         <nav>
             <Logo />
             <MenuStyled mode="horizontal" defaultSelectedKeys={['0']}>
-                <MenuItem>
-                </MenuItem>
-                {menuList.map((item, index) => (<MenuItem onClick={() => linkToUrl(item.url)} key={index}>{item.component}</MenuItem>))}
+                <MenuItem></MenuItem>
+                {menuList.map((item, index) => (
+                    <MenuItem onClick={() => linkToUrl(item.url)} key={index}>
+                        {item.component}
+                    </MenuItem>
+                ))}
             </MenuStyled>
         </nav>
     );
