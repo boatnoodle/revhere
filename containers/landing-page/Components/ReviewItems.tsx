@@ -1,6 +1,6 @@
-import React from "react";
-import Styled from "styled-components";
-import { Carousel } from "components/Carousel";
+import React from 'react';
+import Styled from 'styled-components';
+import { Carousel } from 'components/Carousel';
 
 const CardComponent = Styled.div`
  float: left;
@@ -37,34 +37,34 @@ const Img = Styled.img`
     width:100%;
 `;
 interface Props {
-  title: String;
-  subTitle?: String;
-  loading?: boolean;
-  items: Array<Object>;
+    title: string;
+    subTitle?: string;
+    loading?: boolean;
+    items: Array<object>;
 }
 export const ReviewItems: React.FunctionComponent<Props> = ({
-  title = "title",
-  subTitle = null,
-  items = [],
-  loading = false
+    title = 'title',
+    subTitle = null,
+    items = [],
+    loading = false,
 }) => {
-  const Subtitle = () => {
-    return subTitle && <SubTitle>{subTitle}</SubTitle>;
-  };
+    const Subtitle = () => {
+        return subTitle && <SubTitle>{subTitle}</SubTitle>;
+    };
 
-  return (
-    <CardWrapper>
-      <Title>{title}</Title>
-      <Subtitle />
-      <Carousel>
-        {items.map((item, index) => (
-          <CardComponent key={index}>
-            <Img src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
-            <ItemLabel>{index}</ItemLabel>
-            <ItemDescription>Description</ItemDescription>
-          </CardComponent>
-        ))}
-      </Carousel>
-    </CardWrapper>
-  );
+    return (
+        <CardWrapper>
+            <Title>{title}</Title>
+            <Subtitle />
+            <Carousel>
+                {items.map((item, index) => (
+                    <CardComponent key={index}>
+                        <Img src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
+                        <ItemLabel>{index}</ItemLabel>
+                        <ItemDescription>Description</ItemDescription>
+                    </CardComponent>
+                ))}
+            </Carousel>
+        </CardWrapper>
+    );
 };
