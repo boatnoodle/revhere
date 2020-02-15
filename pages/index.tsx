@@ -13,7 +13,6 @@ const Index: FunctionComponent = () => {
 
   // the hook that calls the query.
   const hello = useQuery(HELLO);
-  console.log(hello);
   return (
     <Layouts>
       <LandingPage />

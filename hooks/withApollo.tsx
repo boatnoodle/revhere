@@ -1,8 +1,11 @@
+import fetch from "isomorphic-unfetch";
+import withApollo from "next-with-apollo";
+
+import { ApolloLink } from "apollo-link";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import withApollo from "next-with-apollo";
 import { createHttpLink } from "apollo-link-http";
-import fetch from "isomorphic-unfetch";
+import apolloLogger from "apollo-link-logger";
 
 // Update the GraphQL endpoint to any instance of GraphQL that you like
 const GRAPHQL_URL = process.env.GRAPHQL_URL;
@@ -19,7 +22,7 @@ export default withApollo(
   // e.g. ({ headers, ctx, initialState })
   ({ initialState }) =>
     new ApolloClient({
-      link: link,
+      link: ApolloLink.from([apolloLogger, link]),
       cache: new InMemoryCache()
         //  rehydrate the cache using the initial data passed from the server:
         .restore(initialState || {})
