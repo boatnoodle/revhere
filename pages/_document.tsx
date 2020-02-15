@@ -48,11 +48,7 @@ export default class MyDocument extends Document<any> {
           <meta name="theme-color" content="#ffffff" />
         </Head>
         <body>
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href="/static/ngprogress.css"
-          />
+          <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
           <Main />
           <NextScript />
         </body>

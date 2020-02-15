@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import Head from "next/head";
-import Navbar from "./Navbar";
+import Navbar from "./Component/Navbar";
 import { Layout, Row, Col } from "antd";
 
 type LayoutProps = {

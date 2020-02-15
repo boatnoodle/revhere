@@ -1,13 +1,17 @@
-import { FunctionComponent } from "react/";
-import { Menu, Input, Button } from "antd";
+import React, { useState } from "react";
 import Styled from "styled-components";
 import RouterLInk from "next/router";
 
+import { Menu, Input, Button } from "antd";
+import { ModalAuth } from "../ModaAuth";
+
 const { Search } = Input;
+
 const MenuStyled = Styled(Menu)`
         text-align: right !important;
         padding:auto 10px;
     `;
+
 const Logo = Styled.div`
   background-image: url('static/logo/logo.png');
     background-size: 53px 48px;
@@ -35,29 +39,35 @@ const NotificationIcon = Styled.img`
     height:30px;
 `;
 
-const menuList = [
-  {
-    url: null,
-    component: (
-      <Search
-        placeholder="ค้นหาบน Revhere"
-        onSearch={value => console.log(value)}
-      />
-    )
-  },
-  {
-    url: "/",
-    component: <NotificationIcon src="static/icons/icon-bell.png" />
-  },
-  {
-    url: "/",
-    component: <Button>เข้าสู่ระบบ</Button>
-  }
-];
 // Functionality
 const linkToUrl = url => (url ? RouterLInk.push(url) : null);
 
-const Navbar: FunctionComponent = () => {
+const Navbar: React.FunctionComponent = () => {
+  const [visible, setVisible] = useState();
+
+  const handleCancel = e => {
+    setVisible(!visible);
+  };
+
+  const menuList = [
+    {
+      url: null,
+      component: (
+        <Search
+          placeholder="ค้นหาบน Revhere"
+          onSearch={value => console.log(value)}
+        />
+      )
+    },
+    {
+      url: "/",
+      component: <NotificationIcon src="static/icons/icon-bell.png" />
+    },
+    {
+      url: "/",
+      component: <Button onClick={() => setVisible(true)}>เข้าสู่ระบบ</Button>
+    }
+  ];
   return (
     <nav>
       <Logo />
@@ -69,6 +79,7 @@ const Navbar: FunctionComponent = () => {
           </MenuItem>
         ))}
       </MenuStyled>
+      <ModalAuth handleCancel={handleCancel} visible={visible} />
     </nav>
   );
 };

@@ -1,10 +1,21 @@
 import React, { Fragment } from "react";
-import { DefaultSeo } from "next-seo";
 import App from "next/app";
 import withApollo from "../hooks/withApollo";
+import Router from "next/router";
+import NProgress from "nprogress";
 
+import { DefaultSeo } from "next-seo";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { ApolloClient, NormalizedCacheObject } from "apollo-boost";
+import Firebase, { FirebaseContext } from "components/Firebase";
+
+Router.events.on("routeChangeStart", url => {
+  NProgress.start();
+});
+Router.events.on("routeChangeComplete", url => {
+  NProgress.done();
+});
+Router.events.on("routeChangeError", () => NProgress.done());
 
 // since "apollo" isn't a native Next.js prop we have to declare it's type.
 interface IProps {
@@ -44,9 +55,11 @@ class MyApp extends App<IProps> {
             site_name: "Revhere"
           }}
         />
-        <ApolloProvider client={apollo}>
-          <Component {...pageProps} />
-        </ApolloProvider>
+        <FirebaseContext.Provider value={new Firebase()}>
+          <ApolloProvider client={apollo}>
+            <Component {...pageProps} />
+          </ApolloProvider>
+        </FirebaseContext.Provider>
       </Fragment>
     );
   }
