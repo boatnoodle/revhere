@@ -1,17 +1,25 @@
-FROM node:10-alpine
+#1st Stage
+FROM node:10-alpine as build
 
 # Setting working directory. All the path will be relative to WORKDIR
 WORKDIR /usr/src/app
 
 # Installing dependencies
-COPY package*.json ./
+COPY package*.json yarn.lock ./
+
 RUN yarn install
 
 # Copying source files
 COPY . .
 
 # Building app
-RUN npm run build
+RUN yarn build
 
-# Running the app
-CMD [ "npm", "start" ]
+#2nd Stage
+FROM node:10-alpine
+
+WORKDIR /usr/src/app
+
+COPY --from=build /usr/src/app .
+
+CMD ["npm", "start"]
