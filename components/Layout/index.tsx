@@ -8,7 +8,6 @@ type LayoutProps = {
 };
 
 const { Footer, Content } = Layout;
-console.log('This shows errors');
 export const Layouts: FunctionComponent<LayoutProps> = ({ children, title }) => (
     <Layout>
         <Head>
