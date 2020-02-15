@@ -1,26 +1,24 @@
 import { FunctionComponent } from "react";
 import Head from "next/head";
-import Navbar from './Navbar';
-import { Layout, Row, Col } from 'antd';
+import Navbar from "./Navbar";
+import { Layout, Row, Col } from "antd";
 
 type LayoutProps = {
   title?: string;
 };
 
 const { Footer, Content } = Layout;
-export const Layouts: FunctionComponent<LayoutProps> = ({ children, title }) => (
+export const Layouts: FunctionComponent<LayoutProps> = ({ children }) => (
   <Layout>
-    <Head>
+    {/* <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    </Head>
+    </Head> */}
     <Navbar />
     <Content>
       <Row>
-        <Col>
-          {children}
-        </Col>
+        <Col>{children}</Col>
       </Row>
     </Content>
     <Footer></Footer>

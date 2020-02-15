@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react/";
-import { Menu, Input, Button } from 'antd';
-import Styled from 'styled-components';
-import RouterLInk from 'next/router';
+import { Menu, Input, Button } from "antd";
+import Styled from "styled-components";
+import RouterLInk from "next/router";
 
 const { Search } = Input;
 const MenuStyled = Styled(Menu)`
@@ -9,7 +9,7 @@ const MenuStyled = Styled(Menu)`
         padding:auto 10px;
     `;
 const Logo = Styled.div`
-  background-image: url(./logo.png);
+  background-image: url('static/logo/logo.png');
     background-size: 53px 48px;
     background-repeat: no-repeat;
     background-position: -2px -2px;
@@ -36,36 +36,40 @@ const NotificationIcon = Styled.img`
 `;
 
 const menuList = [
-    {
-        'url': null,
-        'component':
-            <Search
-                placeholder="ค้นหาบน Revhere"
-                onSearch={value => console.log(value)}
-            />
-    },
-    {
-        'url': '/',
-        'component': <NotificationIcon src='./icons/icon-bell.png' />
-    },
-    {
-        'url': '/',
-        'component': <Button>เข้าสู่ระบบ</Button>
-    },
+  {
+    url: null,
+    component: (
+      <Search
+        placeholder="ค้นหาบน Revhere"
+        onSearch={value => console.log(value)}
+      />
+    )
+  },
+  {
+    url: "/",
+    component: <NotificationIcon src="static/icons/icon-bell.png" />
+  },
+  {
+    url: "/",
+    component: <Button>เข้าสู่ระบบ</Button>
+  }
 ];
 // Functionality
-const linkToUrl = (url) => (url ? RouterLInk.push(url) : null);
+const linkToUrl = url => (url ? RouterLInk.push(url) : null);
 
 const Navbar: FunctionComponent = () => {
-    return (
-        <nav>
-            <Logo />
-            <MenuStyled mode="horizontal" defaultSelectedKeys={['0']}>
-                <MenuItem>
-                </MenuItem>
-                {menuList.map((item, index) => (<MenuItem onClick={() => linkToUrl(item.url)} key={index}>{item.component}</MenuItem>))}
-            </MenuStyled>
-        </nav>
-    );
+  return (
+    <nav>
+      <Logo />
+      <MenuStyled mode="horizontal" defaultSelectedKeys={["0"]}>
+        <MenuItem></MenuItem>
+        {menuList.map((item, index) => (
+          <MenuItem onClick={() => linkToUrl(item.url)} key={index}>
+            {item.component}
+          </MenuItem>
+        ))}
+      </MenuStyled>
+    </nav>
+  );
 };
 export default Navbar;
