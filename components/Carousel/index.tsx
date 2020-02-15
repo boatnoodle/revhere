@@ -28,15 +28,15 @@ const NextButton = Styled(Button)`
     right:20px;
 `;
 export const Carousel: React.FunctionComponent = ({ children }) => {
-    const [currentIndex, setCurrentIndex] = useState(0)
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const slideNext = () => {
-        setCurrentIndex(currentIndex + 1)
-    }
+        setCurrentIndex(currentIndex + 1);
+    };
 
     const slidePrev = () => {
-        setCurrentIndex(currentIndex - 1)
-    }
+        setCurrentIndex(currentIndex - 1);
+    };
 
 
     return (
@@ -48,6 +48,6 @@ export const Carousel: React.FunctionComponent = ({ children }) => {
             <NextButton onClick={slideNext}><Icon type="right" /></NextButton>
         </Fragment>
     );
-}
+};
 <style scoped>
-</style>
+</style>;

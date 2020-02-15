@@ -9,10 +9,10 @@ const About: FunctionComponent = () => {
             <Layouts>
                 <div>
                     About page is here.
-            </div>
+                </div>
             </Layouts>
         </div>
     );
-}
+};
 export default About;
 

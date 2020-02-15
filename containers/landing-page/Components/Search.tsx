@@ -14,7 +14,7 @@ const searchProps = {
     placeholder: 'What are you looking for?, Search here for the best results.',
     loading: true,
     enterButton: true,
-}
+};
 const Title = Styled.p`
     font-size: 2.3em;
     font-weight: 500;
@@ -39,6 +39,6 @@ const SearchZone: FunctionComponent = () => {
             </Row>
         </Fragment>
     );
-}
+};
 
 export default SearchZone;

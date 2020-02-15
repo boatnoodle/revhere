@@ -1,5 +1,5 @@
-import React from "react";
-import Styled from "styled-components";
+import React from 'react';
+import Styled from 'styled-components';
 import { Carousel } from 'components/Carousel';
 
 const CardComponent = Styled.div`
@@ -37,13 +37,13 @@ const Img = Styled.img`
     width:100%;
 `;
 interface Props {
-    title: String;
-    subTitle?: String;
+    title: string;
+    subTitle?: string;
     loading?: boolean;
-    items: Array<Object>;
+    items: Array<Record<string, any>>;
 }
 export const ReviewItems: React.FunctionComponent<Props> = ({
-    title = "title",
+    title = 'title',
     subTitle = null,
     items = [],
     loading = false

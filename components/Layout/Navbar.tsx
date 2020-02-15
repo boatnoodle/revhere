@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react/";
+import { FunctionComponent } from 'react/';
 import { Menu, Input, Button } from 'antd';
 import Styled from 'styled-components';
 import RouterLInk from 'next/router';
