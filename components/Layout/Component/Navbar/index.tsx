@@ -63,6 +63,7 @@ const Navbar: React.FunctionComponent = () => {
             component: <Button onClick={() => setVisible(true)}>เข้าสู่ระบบ</Button>,
         },
     ];
+
     return (
         <nav>
             <Logo />
