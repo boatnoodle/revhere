@@ -23,7 +23,7 @@ WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app .
 
-ENV GRAPHQL_URL=https://phukethomevilla.com/graphql
+ENV GRAPHQL_URL=https://revhere.com/graphql
 ENV API_KEY=AIzaSyCf-zMEDcKa8nFOn96jNm-0mmcPlcpABBs
 ENV AUTH_DOMAIN=revhere-51751.firebaseapp.com
 ENV DATABASE_URL=https://revhere-51751.firebaseio.com

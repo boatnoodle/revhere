@@ -41,12 +41,12 @@ class MyApp extends App<Props> {
                     //   appId: "1010210579171890"
                     // }}
                     openGraph={{
-                        url: 'https://phukethomevilla.com',
+                        url: 'https://revhere.com',
                         title,
                         description,
                         images: [
                             {
-                                url: 'https://phukethomevilla.com/logo.png',
+                                url: 'https://revhere.com/logo.png',
                                 alt: 'Revhere',
                                 width: 882,
                                 height: 244,
