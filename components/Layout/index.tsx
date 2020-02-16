@@ -10,11 +10,11 @@ type LayoutProps = {
 const { Footer, Content } = Layout;
 export const Layouts: FunctionComponent<LayoutProps> = ({ children, title }) => (
     <Layout>
-        <Head>
+        {/* <Head>
             <title>{title}</title>
             <meta charSet="utf-8" />
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        </Head>
+        </Head> */}
         <Navbar />
         <Content>
             <Row>

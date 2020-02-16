@@ -9,7 +9,7 @@ const MenuStyled = Styled(Menu)`
         padding:auto 10px;
     `;
 const Logo = Styled.div`
-  background-image: url(./logo.png);
+  background-image: url(/static/logo/logo.png);
     background-size: 53px 48px;
     background-repeat: no-repeat;
     background-position: -2px -2px;
@@ -42,7 +42,7 @@ const menuList = [
     },
     {
         url: '/',
-        component: <NotificationIcon src="./icons/icon-bell.png" />,
+        component: <NotificationIcon src="/static/icons/icon-bell.png" />,
     },
     {
         url: '/',
