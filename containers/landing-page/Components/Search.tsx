@@ -11,9 +11,9 @@ const SearchComponent = Styled(Search)`
     }
 `;
 const searchProps = {
-    placeholder: 'What are you looking for?, Search here for the best results.',
-    loading: true,
-    enterButton: true,
+  placeholder: 'What are you looking for?, Search here for the best results.',
+  loading: true,
+  enterButton: true,
 };
 const Title = Styled.p`
     font-size: 2.3em;
@@ -28,17 +28,17 @@ const SubTitle = Styled.p`
     text-align:center;
 `;
 const SearchZone: FunctionComponent = () => {
-    return (
-        <Fragment>
-            <Row>
-                <Col span={12} offset={6}>
-                    <Title>Thailand Reviews Factory</Title>
-                    <SubTitle>The leading of reviews in Thailand, Explore your finding reviews here!</SubTitle>
-                    <SearchComponent {...searchProps} />
-                </Col>
-            </Row>
-        </Fragment>
-    );
+  return (
+    <Fragment>
+      <Row>
+        <Col span={12} offset={6}>
+          <Title>Thailand Reviews Factory</Title>
+          <SubTitle>The leading of reviews in Thailand, Explore your finding reviews here!</SubTitle>
+          <SearchComponent {...searchProps} />
+        </Col>
+      </Row>
+    </Fragment>
+  );
 };
 
 export default SearchZone;

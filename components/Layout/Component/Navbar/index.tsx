@@ -43,40 +43,40 @@ const NotificationIcon = Styled.img`
 const linkToUrl = url => (url ? RouterLInk.push(url) : null);
 
 const Navbar: React.FunctionComponent = () => {
-    const [visible, setVisible] = useState();
+  const [visible, setVisible] = useState();
 
-    const handleCancel = e => {
-        setVisible(!visible);
-    };
+  const handleCancel = e => {
+    setVisible(!visible);
+  };
 
-    const menuList = [
-        {
-            url: null,
-            component: <Search placeholder="ค้นหาบน Revhere" onSearch={value => console.log(value)} />,
-        },
-        {
-            url: '/',
-            component: <NotificationIcon src="static/icons/icon-bell.png" />,
-        },
-        {
-            url: '/',
-            component: <Button onClick={() => setVisible(true)}>เข้าสู่ระบบ</Button>,
-        },
-    ];
+  const menuList = [
+    {
+      url: null,
+      component: <Search placeholder="ค้นหาบน Revhere" onSearch={value => console.log(value)} />,
+    },
+    {
+      url: '/',
+      component: <NotificationIcon src="static/icons/icon-bell.png" />,
+    },
+    {
+      url: '/',
+      component: <Button onClick={() => setVisible(true)}>เข้าสู่ระบบ</Button>,
+    },
+  ];
 
-    return (
-        <nav>
-            <Logo />
-            <MenuStyled mode="horizontal" defaultSelectedKeys={['0']}>
-                <MenuItem></MenuItem>
-                {menuList.map((item, index) => (
-                    <MenuItem onClick={() => linkToUrl(item.url)} key={index}>
-                        {item.component}
-                    </MenuItem>
-                ))}
-            </MenuStyled>
-            <ModalAuth handleCancel={handleCancel} visible={visible} />
-        </nav>
-    );
+  return (
+    <nav>
+      <Logo />
+      <MenuStyled mode="horizontal" defaultSelectedKeys={['0']}>
+        <MenuItem></MenuItem>
+        {menuList.map((item, index) => (
+          <MenuItem onClick={() => linkToUrl(item.url)} key={index}>
+            {item.component}
+          </MenuItem>
+        ))}
+      </MenuStyled>
+      <ModalAuth handleCancel={handleCancel} visible={visible} />
+    </nav>
+  );
 };
 export default Navbar;
