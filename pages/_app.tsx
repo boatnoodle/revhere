@@ -57,9 +57,9 @@ class MyApp extends App<Props> {
                     }}
                 />
                 <FirebaseContext.Provider value={new Firebase()}>
-                    <ApolloProvider client={apollo}>
-                        <Component {...pageProps} />
-                    </ApolloProvider>
+                    {/* <ApolloProvider client={apollo}> */}
+                    <Component {...pageProps} />
+                    {/* </ApolloProvider> */}
                 </FirebaseContext.Provider>
             </Fragment>
         );

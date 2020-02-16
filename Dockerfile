@@ -1,6 +1,5 @@
 #1st Stage
-# FROM node:10 as build
-FROM node:12-alpine
+FROM node:10 as build
 
 # Setting working directory. All the path will be relative to WORKDIR
 
@@ -18,11 +17,11 @@ COPY . .
 RUN yarn build
 
 #2nd Stage
-# FROM node:10-alpine
+FROM node:10-alpine
 
-# WORKDIR /usr/src/app
+WORKDIR /usr/src/app
 
-# COPY --from=build /usr/src/app .
+COPY --from=build /usr/src/app .
 
 ENV GRAPHQL_URL=https://phukethomevilla.com/graphql
 ENV API_KEY=AIzaSyCf-zMEDcKa8nFOn96jNm-0mmcPlcpABBs
