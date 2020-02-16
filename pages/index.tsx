@@ -7,20 +7,18 @@ import { gql } from 'apollo-boost';
 import { withApollo } from 'providers/web-client/with-apollo-client';
 
 const Index: FunctionComponent = () => {
-    const HELLO = gql`
-        query {
-            hello
-        }
-    `;
+  const HELLO = gql`
+    query {
+      hello
+    }
+  `;
 
-    // the hook that calls the query.
-    const { loading, error, data } = useQuery(HELLO);
-    console.log(data);
-
-    return (
-        <Layouts>
-            <LandingPage />
-        </Layouts>
-    );
+  // the hook that calls the query.
+  const hello = useQuery(HELLO);
+  return (
+    <Layouts>
+      <LandingPage />
+    </Layouts>
+  );
 };
 export default withApollo(Index, { ssr: true });
