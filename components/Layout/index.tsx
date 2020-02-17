@@ -2,25 +2,33 @@ import React, { FunctionComponent } from 'react';
 import Head from 'next/head';
 import Navbar from './Component/Navbar';
 import { Layout, Row, Col } from 'antd';
+import Styled from 'styled-components';
+const { Footer, Content } = Layout;
+import { ProvideAuth } from 'components/Authentication';
 
 type LayoutProps = {
-    title?: string;
+  title?: string;
 };
 
-const { Footer, Content } = Layout;
+const StyledLayout = Styled(Layout)`
+    background-color:white !important;
+    & Footer{
+        text-align:center !important;
+    }
+`;
+
 export const Layouts: FunctionComponent<LayoutProps> = ({ children, title }) => (
-    <Layout>
-        {/* <Head>
-            <title>{title}</title>
-            <meta charSet="utf-8" />
-            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        </Head> */}
-        <Navbar />
-        <Content>
-            <Row>
-                <Col>{children}</Col>
-            </Row>
-        </Content>
-        <Footer></Footer>
-    </Layout>
+  <ProvideAuth>
+    <StyledLayout>
+      <Navbar />
+      <Content>
+        <Row>
+          <Col span={19} offset={3}>
+            {children}
+          </Col>
+        </Row>
+      </Content>
+      <Footer>Copyrights © 2020, RevHere</Footer>
+    </StyledLayout>
+  </ProvideAuth>
 );

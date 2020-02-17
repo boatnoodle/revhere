@@ -9,21 +9,18 @@ const { Search } = Input;
 
 const MenuStyled = Styled(Menu)`
         text-align: right !important;
-        padding:auto 10px;
-    `;
+`;
 
 const Logo = Styled.div`
-  background-image: url('static/logo/logo.png');
-    background-size: 53px 48px;
-    background-repeat: no-repeat;
-    background-position: -2px -2px;
-    width: 48px;
-    height: 46px;
-    position: absolute;
-    top: 14px;
-    left: 10px;
-    border-radius: 100%;
-    `;
+    color: #17BF63;
+    font-size: 2em;
+    font-weight: bold;
+    margin:10px;
+    & span{
+        color: #000000;
+    },
+ 
+`;
 
 const MenuItem = Styled(Menu.Item)`
         color:black;
@@ -34,49 +31,59 @@ const MenuItem = Styled(Menu.Item)`
         }
     `;
 
-const NotificationIcon = Styled.img`
-    width:30px;
-    height:30px;
+const Nav = Styled.div`
+    display: flex;
+    background-color: #FFFFFF;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const SearchBox = Styled.div`
+    width:500px;
+    float:left;
+`;
+
+const SearchInput = Styled(Search)`
+    & input{
+    border-radius:15px !important;
+    padding:20px !important;
+    }
 `;
 
 // Functionality
 const linkToUrl = url => (url ? RouterLInk.push(url) : null);
 
 const Navbar: React.FunctionComponent = () => {
-    const [visible, setVisible] = useState();
+  const [visible, setVisible] = useState();
 
-    const handleCancel = e => {
-        setVisible(!visible);
-    };
+  const handleCancel = e => {
+    setVisible(!visible);
+  };
 
-    const menuList = [
-        {
-            url: null,
-            component: <Search placeholder="ค้นหาบน Revhere" onSearch={value => console.log(value)} />,
-        },
-        {
-            url: '/',
-            component: <NotificationIcon src="static/icons/icon-bell.png" />,
-        },
-        {
-            url: '/',
-            component: <Button onClick={() => setVisible(true)}>เข้าสู่ระบบ</Button>,
-        },
-    ];
+  const menuList = [
+    {
+      url: '/',
+      component: <Button onClick={() => setVisible(true)}>เข้าสู่ระบบ</Button>,
+    },
+  ];
 
-    return (
-        <nav>
-            <Logo />
-            <MenuStyled mode="horizontal" defaultSelectedKeys={['0']}>
-                <MenuItem></MenuItem>
-                {menuList.map((item, index) => (
-                    <MenuItem onClick={() => linkToUrl(item.url)} key={index}>
-                        {item.component}
-                    </MenuItem>
-                ))}
-            </MenuStyled>
-            <ModalAuth handleCancel={handleCancel} visible={visible} />
-        </nav>
-    );
+  return (
+    <Nav>
+      <Logo>
+        <span>Rev</span>here
+      </Logo>
+      <SearchBox>
+        <SearchInput placeholder="ค้นหาบน Revhere" onSearch={value => console.log(value)} />
+      </SearchBox>
+      <MenuStyled mode="horizontal" defaultSelectedKeys={['0']}>
+        {menuList.map((item, index) => (
+          <MenuItem onClick={() => linkToUrl(item.url)} key={index}>
+            {item.component}
+          </MenuItem>
+        ))}
+      </MenuStyled>
+      <ModalAuth handleCancel={handleCancel} visible={visible} />
+    </Nav>
+  );
 };
 export default Navbar;
