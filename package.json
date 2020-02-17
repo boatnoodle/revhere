@@ -9,6 +9,8 @@
         "dev": "next",
         "build": "next build",
         "start": "next start",
+        "export": "next export",
+        "deploy": "npm run build && npm run export",
         "code-style": "yarn eslint --ext ts,tsx .",
         "code-style-fix": "yarn eslint --fix  --ext ts,tsx ."
     },
@@ -34,7 +36,6 @@
         "graphql": "^14.6.0",
         "graphql-tag": "^2.10.3",
         "isomorphic-unfetch": "^3.0.0",
-        "next-fonts": "^1.0.3",
         "jsonwebtoken": "^8.5.1",
         "lodash": "^4.17.15",
         "next-seo": "^4.1.0",
