@@ -17,6 +17,7 @@ const Index: FunctionComponent = () => {
     const { data, loading, error } = useQuery(USERS);
     return (
         <Layouts>
+            <p>Landing page</p>
             <LandingPage />
         </Layouts>
     );
