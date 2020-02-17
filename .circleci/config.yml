@@ -3,9 +3,6 @@ jobs:
     build:
         docker:
             - image: circleci/node:12.14.0
-
-        working_directory: ~/repo
-
         steps:
             - checkout
 
@@ -21,15 +18,22 @@ jobs:
                   key: yarn-packages-{{ checksum "yarn.lock" }}
                   paths:
                       - ~/.cache/yarn
+            - run:
+                  name: Build Public
+                  command: npm run build
+            - persist_to_workspace:
+                  root: /home/circleci/project
+                  paths:
+                      - public
 
     deploy-prod:
         docker:
             - image: circleci/node:12.14.0
 
-        working_directory: ~/repo
-
         steps:
             - checkout
+            - attach_workspace:
+                  at: /home/circleci/project/
 
             - run:
                   name: install netlify cli
