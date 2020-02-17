@@ -1,8 +1,6 @@
 // Initialize dotenv library
 require("dotenv").config();
 
-const webpack = require("webpack");
-
 /* eslint-disable */
 const withLess = require("@zeit/next-less");
 const withCSS = require("@zeit/next-css");
