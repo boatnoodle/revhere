@@ -3,9 +3,6 @@ jobs:
     build:
         docker:
             - image: circleci/node:12.14.0
-
-        working_directory: ~/repo
-
         steps:
             - checkout
 
@@ -21,29 +18,30 @@ jobs:
                   key: yarn-packages-{{ checksum "yarn.lock" }}
                   paths:
                       - ~/.cache/yarn
+            - run:
+                  name: Build Public
+                  command: npm run build
+            - persist_to_workspace:
+                  root: /home/circleci/project
+                  paths:
+                      - public
 
     deploy-prod:
-        machine: true
-        # docker:
-        #   - image: circleci/node:12.14.0
+        docker:
+            - image: circleci/node:12.14.0
+
         steps:
             - checkout
-            - run:
-                  name: Setup VirtualEnv
-                  command: |
-                      echo 'export TAG=0.1.${CIRCLE_BUILD_NUM}' >> $BASH_ENV
-                      echo 'export IMAGE_NAME=${IMAGE_NAME}' >> $BASH_ENV
-            - run:
-                  name: 'Build and push Docker image'
-                  command: |
-                      docker build -t $IMAGE_NAME:$TAG .
-                      echo $HUB_PASSWORD | docker login $HOST_REGISTRY -u $HUB_USERNAME -p $HUB_PASSWORD
-                      docker push $IMAGE_NAME:$TAG
+            - attach_workspace:
+                  at: /home/circleci/project/
 
             - run:
-                  name: 'Deploy app to Digital Ocean Server via Docker'
-                  command: |
-                      ssh -i ~/.ssh/id_rsa_circleci $DROPLET_USER@$DROPLET_IP "/bin/bash ./deploy_project.sh $IMAGE_NAME:$TAG"
+                  name: install netlify cli
+                  command: sudo npm install netlify-cli -g
+            - run:
+                  name: Netlify Deploy
+                  command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=public
+
 workflows:
     version: 2
     build-and-deploy:
