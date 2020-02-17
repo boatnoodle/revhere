@@ -39,8 +39,8 @@ jobs:
                   name: install netlify cli
                   command: sudo npm install netlify-cli -g
             - run:
-                  name: deploy site to netlify
-                  command: netlify deploy --dir=/home/circleci/project/public -p
+                  name: Netlify Deploy
+                  command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --dir=public
 
 workflows:
     version: 2
