@@ -4,6 +4,8 @@ import Navbar from './Component/Navbar';
 import { Layout, Row, Col } from 'antd';
 import Styled from 'styled-components';
 const { Footer, Content } = Layout;
+import { ProvideAuth } from 'components/Authentication';
+
 type LayoutProps = {
   title?: string;
 };
@@ -16,15 +18,17 @@ const StyledLayout = Styled(Layout)`
 `;
 
 export const Layouts: FunctionComponent<LayoutProps> = ({ children, title }) => (
-  <StyledLayout>
-    <Navbar />
-    <Content>
-      <Row>
-        <Col span={19} offset={3}>
-          {children}
-        </Col>
-      </Row>
-    </Content>
-    <Footer>Copyrights © 2020, RevHere</Footer>
-  </StyledLayout>
+  <ProvideAuth>
+    <StyledLayout>
+      <Navbar />
+      <Content>
+        <Row>
+          <Col span={19} offset={3}>
+            {children}
+          </Col>
+        </Row>
+      </Content>
+      <Footer>Copyrights © 2020, RevHere</Footer>
+    </StyledLayout>
+  </ProvideAuth>
 );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { Modal } from 'antd';
-import { ButtonFacebookAuth } from '../ButtonFacebookAuth';
+import { FacebookUi } from '../FirebaseUi';
 
 interface Iprops {
   visible: boolean;
@@ -10,7 +10,7 @@ interface Iprops {
 export const ModalAuth: React.FunctionComponent<Iprops> = ({ visible, handleCancel }) => {
   return (
     <Modal title="เข้าสู่ระบบ" visible={visible} onCancel={handleCancel} footer={null}>
-      <ButtonFacebookAuth />
+      <FacebookUi />
     </Modal>
   );
 };
