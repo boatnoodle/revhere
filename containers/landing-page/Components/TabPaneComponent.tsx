@@ -5,12 +5,13 @@ import IconTime from '../../../assets/icons/icon-time.svg';
 import IconHashTag from '../../../assets/icons/icon-hastag.svg';
 import IconLike from '../../../assets/icons/icon-like.svg';
 import Styled from 'styled-components';
+import { ItemLists } from './ItemLists';
 
 const { TabPane } = Tabs;
 const tabLists = [
   {
     icon: <IconHot />,
-    content: 'test',
+    content: <ItemLists />,
     title: 'กระแส',
   },
   {

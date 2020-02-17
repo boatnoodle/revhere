@@ -17,15 +17,18 @@ const carouselSettings = {
 };
 const baseButtonStyle = css`
   position: absolute;
-  top: calc(50% + 10px);
+  top: calc(40% + 10px);
 `;
 const PreviousButton = Styled(Button)`
     ${baseButtonStyle}
-    left:20px;
+    left:0px;
 `;
 const NextButton = Styled(Button)`
     ${baseButtonStyle}
-    right:20px;
+    right:0px;
+`;
+const CarouselContainer = Styled.div`
+    position:relative !important;
 `;
 export const Carousel: React.FunctionComponent = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -39,7 +42,7 @@ export const Carousel: React.FunctionComponent = ({ children }) => {
   };
 
   return (
-    <Fragment>
+    <CarouselContainer>
       <AliceCarousel {...carouselSettings} slideToIndex={currentIndex}>
         {children}
       </AliceCarousel>
@@ -49,7 +52,7 @@ export const Carousel: React.FunctionComponent = ({ children }) => {
       <NextButton onClick={slideNext}>
         <Icon type="right" />
       </NextButton>
-    </Fragment>
+    </CarouselContainer>
   );
 };
 <style scoped></style>;
