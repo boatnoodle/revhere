@@ -20,11 +20,11 @@ jobs:
             - ~/.cache/yarn
       - run:
           name: Build Public
-          command: npm run build
+          command: npm run deploy
       - persist_to_workspace:
           root: ./
           paths:
-            - public
+            - out
 
   deploy-prod:
     docker:
@@ -40,7 +40,7 @@ jobs:
           command: sudo npm install netlify-cli -g
       - run:
           name: Netlify Deploy
-          command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=./public -p
+          command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=./out -p
 
 workflows:
   version: 2
