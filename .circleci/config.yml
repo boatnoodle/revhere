@@ -1,56 +1,56 @@
 version: 2.1
 jobs:
-    build:
-        docker:
-            - image: circleci/node:12.14.0
-        steps:
-            - checkout
+  build:
+    docker:
+      - image: circleci/node:12.14.0
+    steps:
+      - checkout
 
-            - restore_cache:
-                  name: Restore Yarn Package Cache
-                  keys:
-                      - yarn-packages-{{ checksum "yarn.lock" }}
-            - run:
-                  name: Install Dependencies
-                  command: yarn install
-            - save_cache:
-                  name: Save Yarn Package Cache
-                  key: yarn-packages-{{ checksum "yarn.lock" }}
-                  paths:
-                      - ~/.cache/yarn
-            - run:
-                  name: Build Public
-                  command: npm run build
-            - persist_to_workspace:
-                  root: /home/circleci/project
-                  paths:
-                      - public
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Build Public
+          command: npm run build
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - public
 
-    deploy-prod:
-        docker:
-            - image: circleci/node:12.14.0
+  deploy-prod:
+    docker:
+      - image: circleci/node:12.14.0
 
-        steps:
-            - checkout
-            - attach_workspace:
-                  at: /home/circleci/project/
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ./
 
-            - run:
-                  name: install netlify cli
-                  command: sudo npm install netlify-cli -g
-            - run:
-                  name: Netlify Deploy
-                  command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=public
+      - run:
+          name: install netlify cli
+          command: sudo npm install netlify-cli -g
+      - run:
+          name: Netlify Deploy
+          command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=./public -p
 
 workflows:
-    version: 2
-    build-and-deploy:
-        jobs:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy-prod:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
             - build
-            - deploy-prod:
-                  filters:
-                      branches:
-                          only:
-                              - master
-                  requires:
-                      - build
