@@ -22,7 +22,10 @@ const carouselSettings = {
 };
 const baseButtonStyle = css`
   position: absolute;
-  top: calc(40% + 10px);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  top: calc(40% + 0px);
 `;
 const PreviousButton = Styled(Button)`
     ${baseButtonStyle}
