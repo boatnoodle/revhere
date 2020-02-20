@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { List, Avatar, Icon } from 'antd';
+import Styled from 'styled-components';
+
 const listData = [];
 for (let i = 0; i < 23; i++) {
   listData.push({
@@ -17,6 +19,25 @@ const IconText = ({ type, text }) => (
     {text}
   </span>
 );
+const StyledListItem = Styled(List.Item)`
+    display:flex !important;
+    flex-direction: row-reverse;
+    & .ant-list-item-extra{
+        margin-left: 0 !important;
+    }
+    & .ant-list-item-meta{
+        margin-bottom: 10px !important;
+    }
+    & .ant-list-item-action{
+        margin-top: 10px !important;
+    }
+    & .ant-list-item-main{
+        margin-left:20px !important;
+    }
+    & img{
+        border-radius:10px;
+    }
+`;
 export const ItemLists: FunctionComponent = () => (
   <React.Fragment>
     <List
@@ -35,7 +56,7 @@ export const ItemLists: FunctionComponent = () => (
       //     </div>
       //   }
       renderItem={item => (
-        <List.Item
+        <StyledListItem
           key={item.title}
           actions={[
             <IconText type="star-o" text="156" key="list-vertical-star-o" />,
@@ -43,16 +64,21 @@ export const ItemLists: FunctionComponent = () => (
             <IconText type="message" text="2" key="list-vertical-message" />,
           ]}
           extra={
-            <img width={272} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />
+            <img
+              width={120}
+              height={120}
+              alt="logo"
+              src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+            />
           }
         >
           <List.Item.Meta
             avatar={<Avatar src={item.avatar} />}
             title={<a href={item.href}>{item.title}</a>}
-            description={item.description}
+            // description={item.description}
           />
           {item.content}
-        </List.Item>
+        </StyledListItem>
       )}
     />
   </React.Fragment>
