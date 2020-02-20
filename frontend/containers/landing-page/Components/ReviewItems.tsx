@@ -5,21 +5,20 @@ import { Carousel } from 'components/Carousel';
 const CardComponent = Styled.div`
     display: flex;
     overflow: hidden;
-    width: 250px;
     height: 180px;
-    text-align: center;
     border: 1.5px solid rgb(210,209,209);
     border-radius: 17px;
-    margin: 0 10px;
     background: #ffffff url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTEa0kE1BQAkvPikex-btLIzZ7UbZZZO0YuvvUbSM7q1tLtGMeR) no-repeat right top;
-    background-size: 250px 180px;
+    background-size: 100%;
     flex-direction: column;
     justify-content: flex-end;
     text-align: left;
-
 `;
 const CardWrapper = Styled.div`
     padding: 20px 0;
+    & ul.alice-carousel__stage li.alice-carousel__stage-item{
+        padding:0 5px;
+    }
 `;
 
 const Title = Styled.div`
@@ -43,6 +42,11 @@ color: white;
         font-size: .7em;
     }
 `;
+const CarouselStyled = Styled(Carousel)`
+    & .alice-carousel__stage-item{
+        padding:0 5px;
+    }
+`;
 interface Props {
   title: string;
   subTitle?: string;
@@ -63,7 +67,7 @@ export const ReviewItems: React.FunctionComponent<Props> = ({
     <CardWrapper>
       <Title>{title}</Title>
       <Subtitle />
-      <Carousel>
+      <CarouselStyled>
         {items.map((item, index) => (
           <CardComponent key={index}>
             <ItemLabel>
@@ -72,7 +76,7 @@ export const ReviewItems: React.FunctionComponent<Props> = ({
             </ItemLabel>
           </CardComponent>
         ))}
-      </Carousel>
+      </CarouselStyled>
     </CardWrapper>
   );
 };
