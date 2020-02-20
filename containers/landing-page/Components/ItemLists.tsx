@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { List, Avatar, Icon } from 'antd';
+import Styled from 'styled-components';
 const listData = [];
 for (let i = 0; i < 23; i++) {
   listData.push({
     href: 'http://ant.design',
     title: `ant design part ${i}`,
     avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
     content:
       'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
   });
@@ -17,6 +17,19 @@ const IconText = ({ type, text }) => (
     {text}
   </span>
 );
+const ListItem = Styled(List.Item)`
+    padding:0 !important;
+    border-bottom:none;
+    border:1px solid #e8e8e8;
+    display: flex !important;
+    flex-direction: row-reverse !important;
+    & .ant-list-item-extra{
+        margin-left:0 !important;
+    }
+    & .ant-list-item-extra img{
+        border-radius:10px;
+    }
+`;
 export const ItemLists: FunctionComponent = () => (
   <React.Fragment>
     <List
@@ -35,7 +48,7 @@ export const ItemLists: FunctionComponent = () => (
       //     </div>
       //   }
       renderItem={item => (
-        <List.Item
+        <ListItem
           key={item.title}
           actions={[
             <IconText type="star-o" text="156" key="list-vertical-star-o" />,
@@ -43,16 +56,17 @@ export const ItemLists: FunctionComponent = () => (
             <IconText type="message" text="2" key="list-vertical-message" />,
           ]}
           extra={
-            <img width={272} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />
+            <img
+              width={120}
+              height={120}
+              alt="logo"
+              src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+            />
           }
         >
-          <List.Item.Meta
-            avatar={<Avatar src={item.avatar} />}
-            title={<a href={item.href}>{item.title}</a>}
-            description={item.description}
-          />
+          <List.Item.Meta avatar={<Avatar src={item.avatar} />} title={<a href={item.href}>{item.title}</a>} />
           {item.content}
-        </List.Item>
+        </ListItem>
       )}
     />
   </React.Fragment>
