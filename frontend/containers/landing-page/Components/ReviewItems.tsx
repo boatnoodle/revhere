@@ -19,7 +19,7 @@ const CardComponent = Styled.div`
 
 `;
 const CardWrapper = Styled.div`
-    padding: 20px;
+    padding: 20px 0;
 `;
 
 const Title = Styled.div`
