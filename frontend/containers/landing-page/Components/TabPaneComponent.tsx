@@ -59,7 +59,7 @@ const TabsStyled = Styled(Tabs)`
 export const TabPaneComponent: FunctionComponent = () => {
   return (
     <React.Fragment>
-      <TabsStyled defaultActiveKey="0">
+      <TabsStyled defaultActiveKey="0" animated={false}>
         {tabLists.map(({ icon, content, title }, index) => (
           <TabPane
             tab={
