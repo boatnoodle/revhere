@@ -15,13 +15,13 @@ const Index: FunctionComponent = () => {
     }
   `;
 
-    // the hook that calls the query.
-    const { data, loading, error } = useQuery(USERS);
-    return (
-        <Layouts>
-            <p>Landing page</p>
-            <LandingPage />
-        </Layouts>
-    );
+  // the hook that calls the query.
+  const { data, loading, error } = useQuery(USERS);
+  return (
+    <Layouts>
+      <p>Landing page(Test deploy with netlify!!!)</p>
+      <LandingPage />
+    </Layouts>
+  );
 };
 export default withApollo(Index, { ssr: true });

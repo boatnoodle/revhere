@@ -17,16 +17,22 @@ const IconText = ({ type, text }) => (
     {text}
   </span>
 );
-const ListItem = Styled(List.Item)`
-    padding:0 !important;
-    border-bottom:none;
-    border:1px solid #e8e8e8;
-    display: flex !important;
-    flex-direction: row-reverse !important;
+const StyledListItem = Styled(List.Item)`
+    display:flex !important;
+    flex-direction: row-reverse;
     & .ant-list-item-extra{
-        margin-left:0 !important;
+        margin-left: 0 !important;
     }
-    & .ant-list-item-extra img{
+    & .ant-list-item-meta{
+        margin-bottom: 10px !important;
+    }
+    & .ant-list-item-action{
+        margin-top: 10px !important;
+    }
+    & .ant-list-item-main{
+        margin-left:20px !important;
+    }
+    & img{
         border-radius:10px;
     }
 `;
@@ -48,7 +54,7 @@ export const ItemLists: FunctionComponent = () => (
       //     </div>
       //   }
       renderItem={item => (
-        <ListItem
+        <StyledListItem
           key={item.title}
           actions={[
             <IconText type="star-o" text="156" key="list-vertical-star-o" />,
@@ -64,9 +70,13 @@ export const ItemLists: FunctionComponent = () => (
             />
           }
         >
-          <List.Item.Meta avatar={<Avatar src={item.avatar} />} title={<a href={item.href}>{item.title}</a>} />
+          <List.Item.Meta
+            avatar={<Avatar src={item.avatar} />}
+            title={<a href={item.href}>{item.title}</a>}
+            // description={item.description}
+          />
           {item.content}
-        </ListItem>
+        </StyledListItem>
       )}
     />
   </React.Fragment>

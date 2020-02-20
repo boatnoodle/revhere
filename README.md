@@ -1,6 +1,2 @@
-# revhere-frontend
+# revhere
 Review here (Revhere)
-
-# Code style fix 
-<br/>
-- yarn code-style-fix
