@@ -1,3 +1,41 @@
+# compiled output
+/dist
+/node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+#env
+.env
+
 
 # Created by https://www.gitignore.io/api/react
 # Edit at https://www.gitignore.io/?templates=react
@@ -19,9 +57,6 @@ thumb
 sketch
 
 .next
-
-#env
-.env
 
 # End of https://www.gitignore.io/api/react
 # Local Netlify folder

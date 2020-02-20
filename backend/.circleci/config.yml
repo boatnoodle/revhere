@@ -1,0 +1,53 @@
+# version: 2
+# jobs:
+#   # build:
+#   #   docker:
+#   #     - image: circleci/node:12.14.0
+#   #   steps:
+#   #     - checkout
+
+#   #     - restore_cache:
+#   #         name: Restore Yarn Package Cache
+#   #         keys:
+#   #           - yarn-packages-{{ checksum "yarn.lock" }}
+#   #     - run:
+#   #         name: Install Dependencies
+#   #         command: yarn install
+#   #     - save_cache:
+#   #         name: Save Yarn Package Cache
+#   #         key: yarn-packages-{{ checksum "yarn.lock" }}
+#   #         paths:
+#   #           - ~/.cache/yarn
+#   #     - run:
+#   #         name: Build Public
+#   #         command: npm run deploy
+
+#   deploy:
+#     docker:
+#       - image: buildpack-deps:trusty
+
+#     steps:
+#       - checkout
+#       # - add_ssh_keys:
+#       #     fingerprints:
+#       #       - "aa:22:6f:b1:ca:79:0a:03:4b:5d:27:11:72:9e:85:13"
+#       - run:
+#           name: Add Dokku to known_hosts
+#           command: ssh-keyscan -H 178.128.86.161 >> ~/.ssh/known_hosts
+
+#       - run:
+#           name: Deploy to dokku
+#           command: git push -f dokku@178.128.86.161:revhere-api master
+
+# workflows:
+#   version: 2
+#   deploy:
+#     jobs:
+#       # - build
+#       - deploy:
+#           filters:
+#             branches:
+#               only:
+#                 - master
+#           # requires:
+#           #   - build
