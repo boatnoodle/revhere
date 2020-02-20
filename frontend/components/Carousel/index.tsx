@@ -14,6 +14,11 @@ const carouselSettings = {
   autoHeight: false,
   buttonsDisabled: true,
   startIndex: 0,
+  stagePadding: {
+    paddingLeft: 0, // in pixels
+    paddingRight: 0,
+  },
+  fadeOutAnimation: true,
 };
 const baseButtonStyle = css`
   position: absolute;
