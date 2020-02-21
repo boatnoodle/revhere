@@ -22,7 +22,7 @@ jobs:
       - checkout
       - run:
           name: Trigger workflows
-          command: chmod +x .circleci/circle_trigger.sh && .circleci/circle_trigger.sh
+          command: chmod +x .circleci/cirlcleci_trigger.sh && .circleci/cirlcleci_trigger.sh
 
   build-frontend:
     docker:
