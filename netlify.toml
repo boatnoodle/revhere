@@ -11,4 +11,4 @@
   publish = "frontend/out"
 
   # Default build command.
-  command = "cd frontend && yarn deploy"
+  command = "cd frontend && yarn install && yarn deploy"
