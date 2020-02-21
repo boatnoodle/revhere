@@ -19,7 +19,7 @@ const Index: FunctionComponent = () => {
   const { data, loading, error } = useQuery(USERS);
   return (
     <Layouts>
-      <div>Deploy production!!!!</div>
+      <div>Deploy production from circle ci</div>
       <LandingPage />
     </Layouts>
   );
