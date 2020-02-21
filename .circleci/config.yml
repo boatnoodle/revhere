@@ -49,7 +49,7 @@ jobs:
           name: Build Public
           command: yarn workspace frontend deploy
       - persist_to_workspace:
-          root: ~/project/frontend
+          root: ./frontend
           paths:
             - out
 
@@ -67,8 +67,8 @@ jobs:
           command: sudo npm install netlify-cli -g
       - run:
           name: Netlify Deploy
-          # command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=frontend/out -p
-          command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN  -p
+          command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=frontend/out -p
+          # command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN  -p
 
 workflows:
   version: 2
