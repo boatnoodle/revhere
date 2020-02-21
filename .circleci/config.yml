@@ -61,7 +61,7 @@ jobs:
       - checkout
 
       - attach_workspace:
-        at: ./frontend
+          at: ./frontend
 
       - run:
           name: install netlify cli
