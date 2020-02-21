@@ -19,7 +19,6 @@ const Index: FunctionComponent = () => {
   const { data, loading, error } = useQuery(USERS);
   return (
     <Layouts>
-      <div>test trigger </div>
       <LandingPage />
     </Layouts>
   );
