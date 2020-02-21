@@ -1,8 +1,34 @@
 version: 2.1
+
+parameters:
+  # This parameter is used to trigger the main workflow
+  trigger:
+    type: boolean
+    default: true
+
+  # A parameter per package
+  frontend:
+    type: boolean
+    default: false
+  backend:
+    type: boolean
+    default: false
+
 jobs:
-  build:
+  trigger-workflows:
+    executor: node
+    steps:
+      - checkout
+      - run:
+          name: Trigger workflows
+          command: chmod +x .circleci/circle_trigger.sh && .circleci/circle_trigger.sh
+
+  build-frontend:
     docker:
       - image: circleci/node:12.14.0
+
+    working_directory: ~/project/frontend
+
     steps:
       - checkout
 
@@ -26,14 +52,14 @@ jobs:
           paths:
             - out
 
-  deploy-prod:
+  deploy-frontend:
     docker:
       - image: circleci/node:12.14.0
 
+    working_directory: ~/project/frontend
+
     steps:
       - checkout
-      - attach_workspace:
-          at: ./
 
       - run:
           name: install netlify cli
@@ -44,13 +70,31 @@ jobs:
 
 workflows:
   version: 2
-  build-and-deploy:
+  # The main workflow responsible for triggering all other workflows
+  # in which changes are detected.
+  ci:
+    when: << pipeline.parameters.trigger >>
     jobs:
-      - build
-      - deploy-prod:
+      - trigger-workflows
+
+  frontend:
+    when: << pipeline.parameters.frontend >>
+    jobs:
+      - build-frontend
+      - deploy-frontend:
           filters:
             branches:
               only:
                 - master
           requires:
             - build
+  # build-and-deploy:
+  #   jobs:
+  #     - build
+  #     - deploy-prod:
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master
+  #         requires:
+  #           - build
