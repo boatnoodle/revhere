@@ -87,7 +87,7 @@ workflows:
               only:
                 - master
           requires:
-            - build
+            - build-frontend
   # build-and-deploy:
   #   jobs:
   #     - build
