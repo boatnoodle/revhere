@@ -50,7 +50,7 @@ jobs:
           name: Build Public
           command: yarn workspace frontend deploy
       - persist_to_workspace:
-          root: ./frontend
+          root: ~/project/frontend
           paths:
             - out
 
