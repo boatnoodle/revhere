@@ -49,9 +49,9 @@ jobs:
           name: Build Public
           command: yarn workspace frontend deploy
       - persist_to_workspace:
-          root: ./frontend
+          root: ./
           paths:
-            - out
+            - frontend/out
 
   deploy-frontend:
     docker:
