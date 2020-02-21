@@ -67,7 +67,7 @@ jobs:
           command: sudo npm install netlify-cli -g
       - run:
           name: Netlify Deploy
-          command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=.frontend/out -p
+          command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=frontend/out -p
 
 workflows:
   version: 2
