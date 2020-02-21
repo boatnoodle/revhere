@@ -37,6 +37,7 @@ jobs:
           name: Restore Yarn Package Cache
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
+      - run
       - run:
           name: Install Dependencies
           command: yarn install
@@ -49,7 +50,7 @@ jobs:
           name: Build Public
           command: yarn workspace frontend deploy
       - persist_to_workspace:
-          root: ./
+          root: ./frontend
           paths:
             - out
 
