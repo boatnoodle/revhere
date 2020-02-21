@@ -19,7 +19,7 @@ const Index: FunctionComponent = () => {
   const { data, loading, error } = useQuery(USERS);
   return (
     <Layouts>
-      <div>Deploy from circleci for yossaporn (Co-founder)</div>
+      <div>Deploy from circleci for yossaporn (Co-founder)!!!</div>
       <LandingPage />
     </Layouts>
   );
