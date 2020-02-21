@@ -19,7 +19,6 @@ const Index: FunctionComponent = () => {
   const { data, loading, error } = useQuery(USERS);
   return (
     <Layouts>
-      <p>Landing page(Test deploy with netlify!!!)</p>
       <LandingPage />
     </Layouts>
   );
