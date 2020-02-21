@@ -47,7 +47,7 @@ jobs:
             - ~/.cache/yarn
       - run:
           name: Build Public
-          command: cd frontend && npm run deploy
+          command: yarn workspace frontend deploy
       - persist_to_workspace:
           root: ./
           paths:
