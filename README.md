@@ -16,11 +16,11 @@ Api production: http://178.128.86.161/graphql
 - เพิ่ม `GRAPHQL_URL=http://localhost:4000/graphql` ลงใน `.env`
 
 # Setup postgres database
-- เปิด database postgres หากยังไม่ติดตั้ง สามารถโหลดได้จากเว็บนี้ https://postgresapp.com/downloads.html
+- สร้าง Database ชื่อ `revhere_development` username: `postgres` password: `password` **(ให้สร้างตามนี้เพราะใน config ใช้ database ,username ,password นี้ ถ้าไม่สร้างตาม จะต้องเปลี่ยนไฟล์ config เองอีกที)** 
 
-- สร้าง Database  โดย run command ด้านล่างนี้ จะทำการสร้าง Database ชื่อ `revhere_development` username: `postgres` password: `password` **(ให้สร้างตามนี้เพราะใน config ใช้ database ,username ,password นี้ ถ้าไม่สร้างตาม จะต้องเปลี่ยนไฟล์ config เองอีกที)** 
+- เปิด `postgres app` หากยังไม่ติดตั้ง สามารถโหลดได้จากเว็บนี้ https://postgresapp.com/downloads.html
 
-- `Database sudo -u postgres psql`
+- เปิด terminal ของ `postgres app` ขึ้นมาและ run คำสั่งด้านล่างนี้
 
 - `postgres=# create database revhere_development;`
 
@@ -37,13 +37,7 @@ Api production: http://178.128.86.161/graphql
 
 - จะทำการ run script dev ทั้ง frontend และ backend ขึ้นมาพร้อมกัน
 
-##### กรณีต้องการ run แยกกัน (สามารถทำได้แต่ไม่แนะนำเสียเวลา)
-##### ขั้นตอนการเปิด server ฝั่ง frontend (สามารถทำได้แต่ไม่แนะนำเสียเวลา)
-- `yarn workspaces frontend dev`
-
-##### ขั้นตอนการเปิด server ฝั่ง backend (สามารถทำได้แต่ไม่แนะนำเสียเวลา)
-
-- run คำสั่งเพื่อเปิด server api development `yarn worksapces backend dev`
+- Let's fun!
 
 # Deployment
 เมื่อ push code ไปที่ branch master ระบบจะ detect ไฟล์ที่เปลี่ยนแปลงและทำการ Deploy ให้อัติโนมัติ
