@@ -6,7 +6,7 @@ FROM node:12 as build
 WORKDIR /usr/src/app
 
 # Installing dependencies
-COPY package*.json yarn.lock ./
+COPY package*.json ./
 
 RUN yarn install
 
