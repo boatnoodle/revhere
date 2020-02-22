@@ -96,7 +96,7 @@ jobs:
       - run:
           name: "Deploy app to Digital Ocean Server via Docker"
           command: |
-            ssh -i ~/.ssh/id_rsa_circleci $DROPLET_USER@$DROPLET_IP "docker pull $IMAGE_NAME:latest && docker tag $IMAGE_NAME:latest dokku/revhere-api:latest && dokku tags:deploy revhere-api latest"
+            ssh -i ~/.ssh/id_rsa $DROPLET_USER@$DROPLET_IP "docker pull $IMAGE_NAME:latest && docker tag $IMAGE_NAME:latest dokku/revhere-api:latest && dokku tags:deploy revhere-api latest"
 
 workflows:
   version: 2
