@@ -5,6 +5,11 @@ Frontend production: https://revhere.com/
 
 Api production: http://178.128.86.161/graphql
 
+# Prerequisite
+- Setup .env ไฟล์ที่ frontend ให้เรียบร้อย
+
+- ติดตั้ง postgres app และ สร้าง database พร้อม user
+
 # สร้าง Env (frontend)
 - สร้าง `.env` ไฟล์ที่ `cd ./frontend`
 
@@ -22,11 +27,6 @@ Api production: http://178.128.86.161/graphql
 - `postgres=# create user postgres with encrypted password 'password';`
 
 - `postgres=# grant all privileges on database revhere_development to postgres;`
- 
-# Prerequisite
-- Setup .env ไฟล์ที่ frontend ให้เรียบร้อย
-
-- ติดตั้ง postgres app และ สร้าง database พร้อม user
 
 # Development
 > ** root path คือ Folder project ไม่ต้องเข้าไปใน subfolder frontend หรือ backend
