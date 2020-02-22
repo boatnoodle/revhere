@@ -80,7 +80,7 @@ jobs:
 
       - add_ssh_keys:
           fingerprints:
-            - "aa:22:6f:b1:ca:79:0a:03:4b:5d:27:11:72:9e:85:13"
+            - "df:7b:27:76:c9:84:6b:2f:ee:45:1f:7b:b7:24:d0:d6"
       - run:
           name: Add Dokku to known_hosts
           command: ssh-keyscan -H $DROPLET_IP >> ~/.ssh/known_hosts
