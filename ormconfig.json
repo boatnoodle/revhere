@@ -3,7 +3,15 @@
     "name": "production",
     "type": "postgres",
     "synchronize": true,
-    "logging": true
+    "logging": true,
+    "entities": ["dist/models/**/*.js"],
+    "migrations": ["dist/migration/**/*.js"],
+    "subscribers": ["dist/subscriber/**/*.js"],
+    "cli": {
+      "entitiesDir": "dist/models",
+      "migrationsDir": "dist/migration",
+      "subscribersDir": "dist/subscriber"
+    }
   },
   {
     "name": "development",
