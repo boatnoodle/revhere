@@ -78,6 +78,13 @@ jobs:
     steps:
       - checkout
 
+      - add_ssh_keys:
+          fingerprints:
+            - "aa:22:6f:b1:ca:79:0a:03:4b:5d:27:11:72:9e:85:13"
+      - run:
+          name: Add Dokku to known_hosts
+          command: ssh-keyscan -H $DROPLET_IP >> ~/.ssh/known_hosts
+
       - run:
           name: Build Docker image
           command: cd backend &&  docker build -t $IMAGE_NAME:latest .
