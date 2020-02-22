@@ -5,7 +5,7 @@ export default {
   //comment
   Query: {
     hello: (root, arg) => {
-      return "hello from automate deploy";
+      return "hello from production!";
     },
     users: async () => {
       const repository = getRepository(User);

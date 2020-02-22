@@ -6,7 +6,8 @@ export const createTypeormConn = async () => {
     console.log(process.env.DATABASE_URL, "database url");
     createConnection({
       ...connectionOptions,
-      url: process.env.DATABASE_URL
+      url: process.env.DATABASE_URL,
+      name: "default"
     } as any);
   } else {
     createConnection({ ...connectionOptions, name: "default" });
