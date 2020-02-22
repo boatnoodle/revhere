@@ -71,7 +71,6 @@ jobs:
           command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=./frontend/out -p
 
   deploy-backend:
-    # && docker tag repo.treescale.com/boatnoodle/revhere:latest dokku/revhere-api:latest && dokku tags:deploy revhere-api latest
     machine: true
 
     working_directory: ~/project
@@ -96,7 +95,7 @@ jobs:
       - run:
           name: "Deploy app to Digital Ocean Server via Docker"
           command: |
-            ssh root@178.128.86.161 "docker pull repo.treescale.com/boatnoodle/revhere:latest"
+            ssh root@178.128.86.161 "docker pull repo.treescale.com/boatnoodle/revhere:latest && docker tag repo.treescale.com/boatnoodle/revhere:latest dokku/revhere-api:latest && dokku tags:deploy revhere-api latest"
 
 workflows:
   version: 2
