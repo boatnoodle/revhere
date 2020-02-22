@@ -86,16 +86,16 @@ jobs:
           command: ssh-keyscan -H 178.128.86.161 >> ~/.ssh/known_hosts
       - run:
           name: Build Docker image
-          command: cd backend &&  docker build -t $IMAGE_NAME:latest .
+          command: cd backend &&  docker build -t repo.treescale.com/boatnoodle/revhere:latest .
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
-            echo "$HUB_PASSWORD" | docker login $HOST_REGISTRY -u "$HUB_USERNAME" --password-stdin
-            docker push $IMAGE_NAME:latest
+            echo "$HUB_PASSWORD" | docker login repo.treescale.com -u "$HUB_USERNAME" --password-stdin
+            docker push repo.treescale.com/boatnoodle/revhere:latest
       - run:
           name: "Deploy app to Digital Ocean Server via Docker"
           command: |
-            ssh root@178.128.86.161 "docker pull $IMAGE_NAME:latest && docker tag $IMAGE_NAME:latest dokku/revhere-api:latest && dokku tags:deploy revhere-api latest"
+            ssh root@178.128.86.161 "docker pull repo.treescale.com/boatnoodle/revhere:latest && docker tag repo.treescale.com/boatnoodle/revhere:latest dokku/revhere-api:latest && dokku tags:deploy revhere-api latest"
 
 workflows:
   version: 2
