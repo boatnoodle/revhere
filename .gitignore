@@ -1,5 +1,5 @@
 # compiled output
-backend/dist
+backend/dist/
 /node_modules
 frontend/out/
 # Logs
