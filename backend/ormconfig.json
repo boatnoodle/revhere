@@ -1,0 +1,17 @@
+{
+  "type": "postgres",
+  "host": "178.128.86.161",
+  "port": 6378,
+  "database": "revhere_production",
+  "username": "postgres",
+  "password": "4d8d2128d9fdd1776ac1490053d836f4",
+  "synchronize": false,
+  "entities": ["src/models/*.ts"],
+  "migrations": ["src/migration/**/*.ts"],
+  "subscribers": ["src/subscriber/**/*.ts"],
+  "cli": {
+    "entitiesDir": "src/models",
+    "migrationsDir": "src/migration",
+    "subscribersDir": "src/subscriber"
+  }
+}
