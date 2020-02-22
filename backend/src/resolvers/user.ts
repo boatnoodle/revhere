@@ -21,15 +21,16 @@ export default {
   },
   Mutation: {
     createOrUpdateUser: async (_, __, context: any) => {
-      // const user = await context.user;
-      // console.log(user);
-      // const repository = getRepository(User);
-      // const user = repository.create({
-      //   email,
-      //   name,
-      //   role
-      // });
-      // console.log(user.uid, "from back");
+      const { uid, name, email } = await context?.user;
+      console.log(uid, name, email, "xx");
+      const repository = getRepository(User);
+      const user = await repository.save({
+        uid,
+        email,
+        name,
+        role: "user"
+      });
+      console.log(user, "resultxxx");
     },
     register: (_, { email, name, role = "user" }) => {
       const repository = getRepository(User);
