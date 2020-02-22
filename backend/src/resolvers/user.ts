@@ -5,7 +5,7 @@ export default {
   //comment
   Query: {
     hello: (root, arg) => {
-      return "hello we deploy to circle ci 6";
+      return "hello we deploy to circle ci 7";
     },
     users: async () => {
       const repository = getRepository(User);
