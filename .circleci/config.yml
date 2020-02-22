@@ -69,7 +69,27 @@ jobs:
       - run:
           name: Netlify Deploy
           command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=./frontend/out -p
-          # command: netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN  -p
+
+  deploy-backend:
+    machine: true
+
+    working_directory: ~/project
+
+    steps:
+      - checkout
+
+      - run:
+          name: Build Docker image
+          command: cd backend &&  docker build -t $IMAGE_NAME:latest .
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$HUB_PASSWORD" | docker login $HOST_REGISTRY -u "$HUB_USERNAME" --password-stdin
+            docker push $IMAGE_NAME:latest
+      - run:
+          name: "Deploy app to Digital Ocean Server via Docker"
+          command: |
+            ssh -i ~/.ssh/id_rsa_circleci $DROPLET_USER@$DROPLET_IP "docker pull $IMAGE_NAME:latest && docker tag $IMAGE_NAME:latest dokku/revhere-api:latest && dokku tags:deploy revhere-api latest"
 
 workflows:
   version: 2
@@ -91,6 +111,15 @@ workflows:
                 - master
           requires:
             - build-frontend
+
+  backend:
+    when: << pipeline.parameters.backend >>
+    jobs:
+      - deploy-backend:
+          filters:
+            branches:
+              only:
+                - master
   # build-and-deploy:
   #   jobs:
   #     - build
