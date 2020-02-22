@@ -7,7 +7,7 @@ import express from "express";
 import typeDefs from "./types";
 import resolvers from "./resolvers";
 
-import { createConnection } from "typeorm";
+import { createTypeormConn } from "./utils/createTypeormConn";
 import { createServer } from "http";
 import { ApolloServer, AuthenticationError } from "apollo-server-express";
 import { firebaseAdmin } from "./utils/firebase";
@@ -19,7 +19,7 @@ const startServer = async () => {
 
   app.use(morgan("dev"));
 
-  await createConnection();
+  await createTypeormConn();
 
   const getMe = async idToken => {
     try {
