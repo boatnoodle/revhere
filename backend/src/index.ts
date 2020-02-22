@@ -21,14 +21,14 @@ const startServer = async () => {
 
   await createTypeormConn();
 
-  const getMe = async idToken => {
-    try {
-      const result = await firebaseAdmin.auth().verifyIdToken(idToken);
-      return result;
-    } catch (error) {
-      console.log(error, "error");
-    }
-  };
+  // const getMe = async idToken => {
+  //   try {
+  //     const result = await firebaseAdmin.auth().verifyIdToken(idToken);
+  //     return result;
+  //   } catch (error) {
+  //     console.log(error, "error");
+  //   }
+  // };
 
   const server = new ApolloServer({
     introspection: true,
@@ -46,15 +46,15 @@ const startServer = async () => {
         ...error,
         message
       };
-    },
-    context: async ({ req }) => {
-      const idToken = req.headers.authorization || "";
-      const noBearer = idToken.replace("Bearer ", "");
-
-      const user = await getMe(noBearer);
-      console.log(user);
-      // return { user };
     }
+    // context: async ({ req }) => {
+    //   const idToken = req.headers.authorization || "";
+    //   const noBearer = idToken.replace("Bearer ", "");
+
+    //   const user = await getMe(noBearer);
+    //   console.log(user);
+    //   // return { user };
+    // }
   });
 
   server.applyMiddleware({ app, path: "/graphql" });
