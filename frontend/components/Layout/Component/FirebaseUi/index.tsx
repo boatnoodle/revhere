@@ -2,17 +2,14 @@ import React, { useContext } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 import { FirebaseContext } from 'components/Firebase';
-import { useSession } from 'hooks/useSession';
 
 export const FacebookUi = () => {
   const firebase = useContext(FirebaseContext);
-  const { createOrUpdateUser } = useSession();
 
   // Configure FirebaseUI.
   const uiConfig = {
     callbacks: {
       signInSuccessWithAuthResult: function() {
-        createOrUpdateUser();
         return true;
       },
     },

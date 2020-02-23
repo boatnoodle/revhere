@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { CREATE_OR_UPDATE_USER } from './graphql';
 
 export const useAuth = () => {
-  const [createOrUpdateUser, { data, loading, error }] = useMutation(CREATE_OR_UPDATE_USER);
+  const [createOrUpdateUser] = useMutation(CREATE_OR_UPDATE_USER);
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
   // const [role, setRole] = useState(null);
@@ -19,7 +19,7 @@ export const useAuth = () => {
   //     },
   // });
 
-  const subscribeAuthChange = (user, isSubscribed) => {
+  const subscribeAuthChange = async (user, isSubscribed) => {
     const authUserJson = user?.toJSON() as any;
     const authProvider = authUserJson?.providerData[0].providerId;
 
@@ -27,6 +27,7 @@ export const useAuth = () => {
       localStorage.setItem('token', authUserJson?.stsTokenManager?.accessToken);
       setUser(authUserJson);
       setInitializing(false);
+      await createOrUpdateUser();
     } else {
       setUser(null);
       setInitializing(false);
@@ -44,5 +45,5 @@ export const useAuth = () => {
     };
   }, []);
 
-  return { user, initializing, createOrUpdateUser };
+  return { user, initializing };
 };
