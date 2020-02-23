@@ -10,7 +10,6 @@ export default gql`
 
   type Mutation {
     createOrUpdateUser: User
-    register(email: String, name: String, role: String): User
   }
 
   type User {
