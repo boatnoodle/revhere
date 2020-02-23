@@ -1,17 +1,27 @@
 {
-    "presets": ["next/babel"],
-    "plugins": [
-        "inline-react-svg",
-        ["babel-plugin-styled-components", { "ssr": true }],
-        ["babel-plugin-root-import"],
-        [
-            "import",
-            {
-                "libraryName": "antd",
-                "style": true,
-                "preprocess": false
-            }
-        ],
-        "lodash"
-    ]
+  "env": {
+    "development": {
+      "plugins": [["styled-components", { "ssr": true, "displayName": true, "preprocess": false }]],
+      "presets": ["next/babel"]
+    },
+    "production": {
+      "plugins": [["styled-components", { "ssr": true, "displayName": true, "preprocess": false }]],
+      "presets": ["next/babel"]
+    }
+  },
+  "presets": ["next/babel"],
+  "plugins": [
+    "inline-react-svg",
+    ["styled-components", { "ssr": true, "displayName": true, "preprocess": false }],
+    ["babel-plugin-root-import"],
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": true,
+        "preprocess": false
+      }
+    ],
+    "lodash"
+  ]
 }
