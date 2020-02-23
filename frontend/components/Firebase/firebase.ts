@@ -116,7 +116,7 @@ class Firebase {
 
   doSignOut = async () => {
     await this.auth.signOut();
-    localStorage.removeItem('pmbtoken');
+    localStorage.removeItem('token');
     const text = 'Successfully logged out.';
     message.success(text);
   };

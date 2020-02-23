@@ -1,8 +1,12 @@
+import 'firebase/auth';
 import React, { useState, useEffect } from 'react';
 import firebase, { User } from 'firebase/app';
-import 'firebase/auth';
+
+import { useMutation } from '@apollo/react-hooks';
+import { CREATE_OR_UPDATE_USER } from './graphql';
 
 export const useAuth = () => {
+  const [createOrUpdateUser, { data, loading, error }] = useMutation(CREATE_OR_UPDATE_USER);
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
   // const [role, setRole] = useState(null);
@@ -18,11 +22,11 @@ export const useAuth = () => {
   const subscribeAuthChange = (user, isSubscribed) => {
     const authUserJson = user?.toJSON() as any;
     const authProvider = authUserJson?.providerData[0].providerId;
-    console.log(authUserJson, 'from firebase');
 
     if (isSubscribed && authUserJson && authProvider === 'facebook.com') {
       localStorage.setItem('token', authUserJson?.stsTokenManager?.accessToken);
       setUser(authUserJson);
+      setInitializing(false);
     } else {
       setUser(null);
       setInitializing(false);
@@ -40,5 +44,5 @@ export const useAuth = () => {
     };
   }, []);
 
-  return { user, initializing };
+  return { user, initializing, createOrUpdateUser };
 };

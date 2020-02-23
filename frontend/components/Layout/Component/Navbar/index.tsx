@@ -1,56 +1,56 @@
 import React, { useState } from 'react';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 import RouterLInk from 'next/router';
 
-import { Menu, Input, Button } from 'antd';
+import { Menu, Input } from 'antd';
 import { ModalAuth } from '../ModaAuth';
+import { AuthLink } from './Components/AuthLink';
 
 const { Search } = Input;
 
-const MenuStyled = Styled(Menu)`
-        text-align: right !important;
+const MenuStyled = styled(Menu)`
+  text-align: right !important;
 `;
 
-const Logo = Styled.div`
-    color: #17BF63;
-    font-size: 2em;
-    font-weight: bold;
-    margin:10px;
-    & span{
-        color: #000000;
-    },
- 
+const Logo = styled.div`
+  color: #17bf63;
+  font-size: 2em;
+  font-weight: bold;
+  margin: 10px;
+  & span {
+    color: #000000;
+  }
 `;
 
-const MenuItem = Styled(Menu.Item)`
-        color:black;
-        padding:10px 5px;
-        border:none !important;
-        &.ant-menu-item-selected,&:hover{
-            color: gray!important;
-        }
-    `;
-
-const Nav = Styled.div`
-    display: flex;
-    background-color: #FFFFFF;
-    align-items: center;
-    justify-content: space-between;
+const MenuItem = styled(Menu.Item)`
+  color: black;
+  padding: 10px 5px;
+  border: none !important;
+  &.ant-menu-item-selected,
+  &:hover {
+    color: gray !important;
+  }
 `;
 
-const SearchBox = Styled.div`
-    width:500px;
-    float:left;
+const Nav = styled.div`
+  display: flex;
+  background-color: #ffffff;
+  align-items: center;
+  justify-content: space-between;
 `;
 
-const SearchInput = Styled(Search)`
-    & input{
-    border-radius:15px !important;
-    padding:20px !important;
-    }
+const SearchBox = styled.div`
+  width: 500px;
+  float: left;
 `;
 
-// Functionality
+const SearchInput = styled(Search)`
+  & input {
+    border-radius: 15px !important;
+    padding: 20px !important;
+  }
+`;
+
 const linkToUrl = url => (url ? RouterLInk.push(url) : null);
 
 const Navbar: React.FunctionComponent = () => {
@@ -63,7 +63,7 @@ const Navbar: React.FunctionComponent = () => {
   const menuList = [
     {
       url: '/',
-      component: <Button onClick={() => setVisible(true)}>เข้าสู่ระบบ</Button>,
+      component: <AuthLink setVisible={setVisible} />,
     },
   ];
 

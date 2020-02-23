@@ -7,17 +7,6 @@ import { gql } from 'apollo-boost';
 import { withApollo } from 'providers/web-client/with-apollo-client';
 
 const Index: FunctionComponent = () => {
-  const USERS = gql`
-    mutation {
-      createOrUpdateUser {
-        name
-      }
-    }
-  `;
-  const [createOrUpdateUser, { data, loading, error }] = useMutation(USERS);
-  useEffect(() => {
-    console.log(createOrUpdateUser());
-  }, []);
   // the hook that calls the query.
   return (
     <Layouts>
