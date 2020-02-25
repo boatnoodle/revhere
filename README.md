@@ -3,17 +3,10 @@
 
 Frontend production: https://revhere.com/
 
-Api production: http://178.128.86.161/graphql
+Api production: https://phukethomevilla.com/graphql
 
 # Prerequisite
-- Setup .env ไฟล์ที่ frontend ให้เรียบร้อย
-
 - ติดตั้ง postgres app และ สร้าง database พร้อม user
-
-# สร้าง Env (frontend)
-- สร้าง `.env` ไฟล์ที่ `cd ./frontend`
-
-- เพิ่ม `GRAPHQL_URL=http://localhost:4000/graphql` ลงใน `.env`
 
 # Setup postgres database
 - สร้าง Database ชื่อ `revhere_development` username: `postgres` password: `password` **(ให้สร้างตามนี้เพราะใน config ใช้ database ,username ,password นี้ ถ้าไม่สร้างตาม จะต้องเปลี่ยนไฟล์ config เองอีกที)** 
