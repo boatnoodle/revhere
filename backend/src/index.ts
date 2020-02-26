@@ -7,7 +7,7 @@ import express from "express";
 import typeDefs from "./types";
 import resolvers from "./resolvers";
 
-import { createTypeormConn } from "./utils/createTypeormConn";
+import connectDb from "./utils/connectDb";
 import { createServer } from "http";
 import { ApolloServer, AuthenticationError } from "apollo-server-express";
 import { firebaseAdmin } from "./utils/firebase";
@@ -18,8 +18,6 @@ const startServer = async () => {
   app.use(cors());
 
   app.use(morgan("dev"));
-
-  await createTypeormConn();
 
   const getMe = async idToken => {
     try {
@@ -61,10 +59,19 @@ const startServer = async () => {
   const isProduction = !!process.env.DATABASE_URL;
   const port = process.env.PORT || 4000;
 
-  const httpServer = createServer(app);
-  httpServer.listen({ port }, (): void =>
-    console.log(`🚀 GraphQL is now running on http://localhost:${port}/graphql`)
-  );
+  try {
+    await connectDb();
+    console.log("mongoose connected...");
+
+    const httpServer = createServer(app);
+    httpServer.listen({ port }, (): void =>
+      console.log(
+        `🚀 GraphQL is now running on http://localhost:${port}/graphql`
+      )
+    );
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 startServer();

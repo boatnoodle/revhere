@@ -1,5 +1,5 @@
-import { getRepository } from "typeorm";
-import { User } from "../models/user.entity";
+import { ObjectId } from "bson";
+import User from "../models/User";
 
 export default {
   Query: {
@@ -8,37 +8,25 @@ export default {
     },
     me: async (_, __, context) => {
       const { uid } = await context?.user;
-      const repository = getRepository(User);
-      let user = await repository.findOne({ uid });
-
-      return user;
+      return await User.find({ uid });
     },
     users: async () => {
-      const repository = getRepository(User);
-      const users = await repository.find({});
-
-      return users;
+      return [];
     },
     user: async (_, { id }) => {
-      const repository = getRepository(User);
-      const user = await repository.findOne({ id });
-      return user;
+      return await User.find({ _id: new ObjectId(id) });
     }
   },
   Mutation: {
-    createOrUpdateUser: async (_, __, context: any) => {
-      const { uid, name, email } = await context?.user;
-      const repository = getRepository(User);
-      let user = await repository.findOne({ uid });
-
-      user = await repository.save({
-        id: user?.id,
-        email,
-        name,
-        uid
-      });
+    register: async (_, { uid, email, name, role = "user" }) => {
+      const user = new User({ uid, email, name, role });
+      await user.save();
 
       return user;
+    },
+    createOrUpdateUser: async (_, __, context: any) => {
+      const { uid, name, email } = await context?.user;
+      return [];
     }
   }
 };
