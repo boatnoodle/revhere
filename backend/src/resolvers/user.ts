@@ -6,6 +6,13 @@ export default {
     hello: (root, arg) => {
       return "hello from production!";
     },
+    me: async (_, __, context) => {
+      const { uid } = await context?.user;
+      const repository = getRepository(User);
+      let user = await repository.findOne({ uid });
+
+      return user;
+    },
     users: async () => {
       const repository = getRepository(User);
       const users = await repository.find({});
