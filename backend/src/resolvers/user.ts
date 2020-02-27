@@ -26,7 +26,17 @@ export default {
     },
     createOrUpdateUser: async (_, __, context: any) => {
       const { uid, name, email } = await context?.user;
-      return [];
+
+      const user = await User.findOneAndUpdate(
+        { uid },
+        { $set: { uid, name, email } },
+        {
+          upsert: true,
+          new: true
+        }
+      );
+
+      return user;
     }
   }
 };
