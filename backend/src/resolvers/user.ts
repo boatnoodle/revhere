@@ -29,7 +29,7 @@ export default {
 
       const user = await User.findOneAndUpdate(
         { uid },
-        { $set: { uid, name, email } },
+        { $set: { uid, name, email, role: "user" } },
         {
           upsert: true,
           new: true

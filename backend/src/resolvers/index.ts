@@ -1,3 +1,4 @@
 import userResolver from "./user";
+import reviewResolver from "./review";
 
-export default [userResolver];
+export default [userResolver, reviewResolver];
