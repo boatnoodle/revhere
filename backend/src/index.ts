@@ -8,7 +8,6 @@ import typeDefs from "./types";
 import resolvers from "./resolvers";
 
 import connectDb from "./utils/connectDb";
-import { createServer } from "http";
 import { ApolloServer, AuthenticationError } from "apollo-server-express";
 import { firebaseAdmin } from "./utils/firebase";
 
@@ -59,19 +58,12 @@ const startServer = async () => {
   const isProduction = !!process.env.DATABASE_URL;
   const port = process.env.PORT || 4000;
 
-  try {
-    await connectDb();
-    console.log("mongoose connected...");
+  await connectDb();
+  console.log("mongoose connected...");
 
-    const httpServer = createServer(app);
-    httpServer.listen({ port }, (): void =>
-      console.log(
-        `🚀 GraphQL is now running on http://localhost:${port}/graphql`
-      )
-    );
-  } catch (error) {
-    console.log(error);
-  }
+  await app.listen({ port }, (): void =>
+    console.log(`🚀 GraphQL is now running on http://localhost:${port}/graphql`)
+  );
 };
 
 startServer();
