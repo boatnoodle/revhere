@@ -6,7 +6,7 @@ import { CreateReview } from 'containers/create-review';
 const page: FunctionComponent = () => {
   return (
     <Layouts>
-      <CreateReview></CreateReview>
+      <CreateReview />
     </Layouts>
   );
 };
