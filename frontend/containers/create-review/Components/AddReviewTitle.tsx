@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import BreadCrumb from 'components/ฺBreadcrumb';
 
 import { EditOutlined } from '@ant-design/icons';
-
-import { Form as FormAnt } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
-
-import { Input, Button, Row, Col } from 'antd';
+import { Form as FormAnt, Input, Button, Row, Col } from 'antd';
 import { Formik, Field } from 'formik';
 
 const Container = styled.div`

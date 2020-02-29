@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons';
 import { List, Avatar } from 'antd';
 import Styled from 'styled-components';
 const listData = [];
@@ -12,12 +12,6 @@ for (let i = 0; i < 23; i++) {
       'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
   });
 }
-const IconText = ({ type, text }) => (
-  <span>
-    <LegacyIcon type={type} style={{ marginRight: 8 }} />
-    {text}
-  </span>
-);
 const StyledListItem = Styled(List.Item)`
     display:flex !important;
     flex-direction: row-reverse;
@@ -57,11 +51,7 @@ export const ItemLists: FunctionComponent = () => (
       renderItem={item => (
         <StyledListItem
           key={item.title}
-          actions={[
-            <IconText type="star-o" text="156" key="list-vertical-star-o" />,
-            <IconText type="like-o" text="156" key="list-vertical-like-o" />,
-            <IconText type="message" text="2" key="list-vertical-message" />,
-          ]}
+          actions={[<StarOutlined key="star" />, <LikeOutlined key="like" />, <MessageOutlined key="message" />]}
           extra={
             <img
               width={120}
