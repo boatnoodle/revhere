@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { List, Avatar, Icon } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { List, Avatar } from 'antd';
 import Styled from 'styled-components';
 const listData = [];
 for (let i = 0; i < 23; i++) {
@@ -13,7 +14,7 @@ for (let i = 0; i < 23; i++) {
 }
 const IconText = ({ type, text }) => (
   <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
+    <LegacyIcon type={type} style={{ marginRight: 8 }} />
     {text}
   </span>
 );

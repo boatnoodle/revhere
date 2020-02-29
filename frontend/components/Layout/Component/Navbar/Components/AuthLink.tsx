@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-import { Menu, Dropdown, Button, Icon } from 'antd';
+import { DownOutlined, LoadingOutlined } from '@ant-design/icons';
+
+import { Menu, Dropdown, Button } from 'antd';
 import { useSession } from 'hooks/useSession';
 import { useFirebase } from 'hooks/useFirebase';
 
@@ -19,12 +21,12 @@ export const AuthLink = ({ setVisible }) => {
   );
 
   if (initializing) {
-    return <Icon type="loading" style={{ fontSize: 24 }} spin />;
+    return <LoadingOutlined style={{ fontSize: 24 }} spin />;
   } else if (user) {
     return (
       <Dropdown overlay={menu} trigger={['click']}>
         <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-          {user?.displayName} <Icon type="down" />
+          {user?.displayName} <DownOutlined />
         </a>
       </Dropdown>
     );

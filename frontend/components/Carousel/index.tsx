@@ -2,7 +2,8 @@ import React, { useState, Fragment } from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import Styled, { css } from 'styled-components';
-import { Icon, Button } from 'antd';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 const carouselSettings = {
   responsive: {
     0: { items: 1 },
@@ -55,10 +56,10 @@ export const Carousel: React.FunctionComponent = ({ children }) => {
         {children}
       </AliceCarousel>
       <PreviousButton onClick={slidePrev}>
-        <Icon type="left" />
+        <LeftOutlined />
       </PreviousButton>
       <NextButton onClick={slideNext}>
-        <Icon type="right" />
+        <RightOutlined />
       </NextButton>
     </CarouselContainer>
   );

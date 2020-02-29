@@ -45,10 +45,10 @@ const SearchBox = styled.div`
 `;
 
 const SearchInput = styled(Search)`
-  & input {
+  /* & input {
     border-radius: 15px !important;
     padding: 20px !important;
-  }
+  } */
 `;
 
 const linkToUrl = url => (url ? RouterLInk.push(url) : null);

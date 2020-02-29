@@ -2,7 +2,12 @@ import React, { FunctionComponent, Fragment } from 'react';
 import styled from 'styled-components';
 import BreadCrumb from 'components/ฺBreadcrumb';
 
-import { Form as FormAnt, Icon, Input, Button, Row, Col } from 'antd';
+import { EditOutlined } from '@ant-design/icons';
+
+import { Form as FormAnt } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+
+import { Input, Button, Row, Col } from 'antd';
 import { Formik, Field } from 'formik';
 
 const Container = styled.div`
@@ -64,7 +69,7 @@ export const AddReviewTitle: FunctionComponent = () => {
                   <h1>เพิ่มหัวข้อรีวิว</h1>
                   {
                     <Input
-                      prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                      prefix={<EditOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                       placeholder="เช่น คีย์บอร์ด ยี่ห้อ ... ใช้ดีมาก"
                     />
                   }
