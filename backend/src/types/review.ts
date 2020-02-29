@@ -7,6 +7,8 @@ export default gql`
       introReview: String
       imageCover: String
     ): Review
+
+    updateDetailReview(reviewId: ID!, body: String): Review
   }
 
   type Review {
@@ -14,6 +16,7 @@ export default gql`
     titleReview: String
     introReview: String
     imageCover: String
+    body: String
     status: String
   }
 `;

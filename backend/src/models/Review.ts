@@ -24,6 +24,9 @@ const ReviewSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User"
     },
+    body: {
+      type: String
+    },
     status: {
       type: String
     }

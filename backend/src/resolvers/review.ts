@@ -6,12 +6,11 @@ const resolver = {
   Mutation: {
     createReview: async (_, arg, context) => {
       const { uid } = await context?.user;
-      const userId = await User.find({ uid }).select("_id");
-      console.log(userId, "xx");
+      const userId = await User.findOne({ uid }).select("_id");
       const review = await Review.create({
-        user: ObjectId(userId),
-        status: "draft",
-        ...arg
+        ...arg,
+        user: userId,
+        status: "draft"
       });
 
       return review;

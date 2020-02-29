@@ -2,8 +2,8 @@ import mongoose, { Schema, Document } from "mongoose";
 import { ReviewDb } from "./Review";
 
 enum SECTION_TYPE {
-  MAIN_TITLE = "main_title",
-  SUB_TITLE = "sub_title",
+  MAIN_TITLE = "mainTitle",
+  SUB_TITLE = "subTitle",
   CONTENT = "content",
   IMAGE = "image"
 }
