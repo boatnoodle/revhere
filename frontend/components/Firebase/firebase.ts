@@ -5,12 +5,14 @@ import 'firebase/auth';
 import { message } from 'antd';
 
 const config = {
-  apiKey: 'AIzaSyCf-zMEDcKa8nFOn96jNm-0mmcPlcpABBs',
-  authDomain: 'revhere-51751.firebaseapp.com',
-  databaseURL: 'https://revhere-51751.firebaseio.com',
-  projectId: 'revhere-51751',
-  storageBucket: 'revhere-51751.appspot.com',
-  messagingSenderId: 'G-442W9NDKZE',
+  apiKey: 'AIzaSyCMVhKpFK7Ar8uKCEtfnJ2AvNLseeROxFM',
+  authDomain: 'revhere-1b66c.firebaseapp.com',
+  databaseURL: 'https://revhere-1b66c.firebaseio.com',
+  projectId: 'revhere-1b66c',
+  storageBucket: 'gs://revhere-1b66c.appspot.com/',
+  messagingSenderId: '167860634731',
+  appId: '1:167860634731:web:95cded8814c4854d5b9d2e',
+  measurementId: 'G-2SQQLGQF0Y',
 };
 
 class Firebase {

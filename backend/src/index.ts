@@ -9,7 +9,7 @@ import resolvers from "./resolvers";
 
 import connectDb from "./utils/connectDb";
 import { ApolloServer, AuthenticationError } from "apollo-server-express";
-import { firebaseAdmin } from "./utils/firebase";
+import admin from "./utils/firebase";
 
 const startServer = async () => {
   const app = express();
@@ -20,7 +20,7 @@ const startServer = async () => {
 
   const getMe = async idToken => {
     try {
-      const result = await firebaseAdmin.auth().verifyIdToken(idToken);
+      const result = await admin.auth().verifyIdToken(idToken);
       return result;
     } catch (error) {
       console.log(error, "error");
