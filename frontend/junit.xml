@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="1" failures="0" time="0.323">
+  <testsuite name="Pages" errors="0" failures="0" skipped="0" timestamp="2020-02-29T13:55:57" time="0.315" tests="1">
+    <testcase classname="Pages Index should render without throwing an error" name="Pages Index should render without throwing an error" time="0">
+    </testcase>
+  </testsuite>
+</testsuites>
