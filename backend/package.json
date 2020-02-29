@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "NODE_ENV=production ts-node dist/index.js",
-    "dev": " NODE_ENV=development tsnd --respawn src/index.ts",
+    "dev": " NODE_ENV=development tsnd --respawn --no-notify  src/index.ts",
     "build": "rimraf dist && tsc",
     "test": "NODE_ENV=test jest --watch",
     "start:db": "./src/scripts/db.sh"
