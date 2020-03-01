@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "next build",
-    "dev": "NODE_ENV=development next",
+    "dev": "next",
     "start": "NODE_ENV=production next start",
     "export": "next export",
     "deploy": "npm run build && npm run export",
