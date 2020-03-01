@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import RouterLInk from 'next/router';
+import Link from 'next/link';
 
 import { Menu, Input } from 'antd';
 import { ModalAuth } from '../ModaAuth';
@@ -12,13 +13,17 @@ const MenuStyled = styled(Menu)`
   text-align: right !important;
 `;
 
-const Logo = styled.div`
+const Logo = styled.a`
   color: #17bf63;
   font-size: 2em;
   font-weight: bold;
   margin: 10px;
   & span {
     color: #000000;
+  }
+
+  :hover {
+    color: #17bf63;
   }
 `;
 
@@ -69,9 +74,11 @@ const Navbar: React.FunctionComponent = () => {
 
   return (
     <Nav>
-      <Logo>
-        <span>Rev</span>here
-      </Logo>
+      <Link href="/">
+        <Logo>
+          <span>Rev</span>here
+        </Logo>
+      </Link>
       <SearchBox>
         <SearchInput placeholder="ค้นหาบน Revhere" onSearch={value => console.log(value)} />
       </SearchBox>

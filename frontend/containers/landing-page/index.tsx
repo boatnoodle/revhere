@@ -12,10 +12,10 @@ export const LandingPage: FunctionComponent = () => {
       <ReviewItems title="สำหรับคุณ" items={items}></ReviewItems>
       <Row gutter={[16, 16]}>
         <Col span={7} push={17}>
-          <ListComponent></ListComponent>
+          <ListComponent />
         </Col>
         <Col span={17} pull={7}>
-          <TabPaneComponent></TabPaneComponent>
+          <TabPaneComponent />
         </Col>
       </Row>
     </Fragment>

@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from 'react';
-import { Tabs } from 'antd';
+import Link from 'next/link';
 import IconHot from '../../../assets/icons/icon-hot.svg';
 import IconTime from '../../../assets/icons/icon-time.svg';
 import IconHashTag from '../../../assets/icons/icon-hastag.svg';
 import IconLike from '../../../assets/icons/icon-like.svg';
 import Styled from 'styled-components';
+
 import { ItemLists } from './ItemLists';
+import { Tabs } from 'antd';
 
 const { TabPane } = Tabs;
 const tabLists = [
@@ -31,7 +33,7 @@ const tabLists = [
   },
 ];
 const Span = Styled.span`
-    
+
     & path.a,& path.b{
         fill: #657786;
     },
@@ -40,7 +42,7 @@ const Span = Styled.span`
         display:flex;
     }
 `;
-const AddReviewBtn = Styled.button`
+const AddReviewBtn = Styled.a`
     position: absolute;
     top: 0;
     right: 10px;
@@ -74,7 +76,10 @@ export const TabPaneComponent: FunctionComponent = () => {
           </TabPane>
         ))}
       </TabsStyled>
-      <AddReviewBtn>เขียนรีวิว</AddReviewBtn>
+      <Link href="/create-review">
+        <AddReviewBtn>เขียนรีวิว</AddReviewBtn>
+      </Link>
+      ()
     </React.Fragment>
   );
 };
