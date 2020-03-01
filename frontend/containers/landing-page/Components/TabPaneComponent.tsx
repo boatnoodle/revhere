@@ -79,7 +79,6 @@ export const TabPaneComponent: FunctionComponent = () => {
       <Link href="/create-review">
         <AddReviewBtn>เขียนรีวิว</AddReviewBtn>
       </Link>
-      ()
     </React.Fragment>
   );
 };

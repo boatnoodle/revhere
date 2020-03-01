@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { FunctionComponent, Fragment, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import BreadCrumb from 'components/ฺBreadcrumb';
@@ -8,6 +9,8 @@ import { EditOutlined } from '@ant-design/icons';
 import { Form as FormAnt, Input, Button, Row, Col } from 'antd';
 import { Formik, Field } from 'formik';
 import { IAllProps } from '@tinymce/tinymce-react';
+import { useFirebase } from 'hooks/useFirebase';
+import firebase from 'firebase';
 
 const Editor = dynamic<IAllProps>(() => import('@tinymce/tinymce-react').then(mod => mod.Editor) as any, {
   ssr: false,
@@ -41,17 +44,13 @@ const FormItem = styled(FormAnt.Item)`
 `;
 
 export const AddReviewTitle: FunctionComponent = () => {
-  const [isClientSide, setIsClientSide] = useState(false);
+  const firebaseAuth = useFirebase();
   const [editorState, setEditorState] = useState();
   const initialValues = {
     titleReview: '',
     introReview: '',
     imageCover: '',
     body: '',
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
   };
 
   const onSubmit = () => {
@@ -61,11 +60,6 @@ export const AddReviewTitle: FunctionComponent = () => {
   const handleEditorChange = (content, editor) => {
     console.log('Content was updated:', content);
   };
-
-  useEffect(() => {
-    setIsClientSide(true);
-    console.log('window.innerHeight', window.innerHeight);
-  }, []);
 
   return (
     <Fragment>
@@ -91,7 +85,7 @@ export const AddReviewTitle: FunctionComponent = () => {
                 <FormItem>
                   <Editor
                     apiKey="l521ol91f9n8nq7xqws25ffwjk6co687wtgf604pkxrbfyx9"
-                    initialValue="<p>This is the initial content of the editor</p>"
+                    initialValue=""
                     init={{
                       height: 1000,
                       menubar: false,
@@ -106,8 +100,30 @@ export const AddReviewTitle: FunctionComponent = () => {
              bullist numlist outdent indent | removeformat | help',
                       branding: false,
                       // eslint-disable-next-line @typescript-eslint/camelcase
-                      images_upload_handler: (blobInfo, success, failure) => {
-                        console.log(blobInfo, success);
+                      images_upload_handler: async (blobInfo, success, failure) => {
+                        const storageRef = firebaseAuth.storage.ref();
+                        const uploadTask = storageRef.child(`reviews/${Date.now()}`).put(blobInfo.blob());
+                        uploadTask.on(
+                          'state_changed',
+                          snapshot => {
+                            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            switch (snapshot.state) {
+                              case firebase.storage.TaskState.PAUSED:
+                                break;
+                              case firebase.storage.TaskState.RUNNING:
+                                break;
+                            }
+                          },
+                          error => {
+                            console.log(error);
+                            failure(error);
+                          },
+                          () => {
+                            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                              success(downloadURL);
+                            });
+                          },
+                        );
                       },
                     }}
                     onEditorChange={handleEditorChange}

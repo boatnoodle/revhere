@@ -1,7 +1,9 @@
 import 'react';
 import Router from 'next/router';
-import firebase from 'firebase/app';
+import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/storage';
+import 'firebase/firestore';
 import { message } from 'antd';
 
 const config = {
@@ -18,12 +20,13 @@ const config = {
 class Firebase {
   auth: firebase.auth.Auth;
   facebookAuthProvider: {};
+  storage: {};
   constructor() {
     const app = !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
     this.auth = app.auth();
+    this.storage = app.storage();
     this.facebookAuthProvider = firebase.auth.FacebookAuthProvider.PROVIDER_ID;
   }
-
   createUserWithEmailAndPassword = async ({ email, password, firstName, lastName }, rootUrl: string) => {
     const actionCodeSettings = {
       url: `${rootUrl}/auth`,
