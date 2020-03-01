@@ -1,14 +1,20 @@
-import React, { FunctionComponent, Fragment } from 'react';
+import React, { FunctionComponent, Fragment, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import BreadCrumb from 'components/ฺBreadcrumb';
+import dynamic from 'next/dynamic';
 
+// import { Editor } from '@tinymce/tinymce-react';
 import { EditOutlined } from '@ant-design/icons';
 import { Form as FormAnt, Input, Button, Row, Col } from 'antd';
 import { Formik, Field } from 'formik';
+import { IAllProps } from '@tinymce/tinymce-react';
+
+const Editor = dynamic<IAllProps>(() => import('@tinymce/tinymce-react').then(mod => mod.Editor) as any, {
+  ssr: false,
+});
 
 const Container = styled.div`
   width: 1000px;
-  height: 500px;
   border-radius: 50px;
   background-color: rgba(0, 0, 0, 0.06);
   margin: 15px auto;
@@ -18,9 +24,6 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const StyledForm = styled(FormAnt.Item)`
-  width: 500px;
-`;
 const StyledButton = styled(Button)`
   background-color: #17bf63;
   border-color: #17bf63;
@@ -38,6 +41,8 @@ const FormItem = styled(FormAnt.Item)`
 `;
 
 export const AddReviewTitle: FunctionComponent = () => {
+  const [isClientSide, setIsClientSide] = useState(false);
+  const [editorState, setEditorState] = useState();
   const initialValues = {
     titleReview: '',
     introReview: '',
@@ -53,6 +58,15 @@ export const AddReviewTitle: FunctionComponent = () => {
     console.log('onSubmit');
   };
 
+  const handleEditorChange = (content, editor) => {
+    console.log('Content was updated:', content);
+  };
+
+  useEffect(() => {
+    setIsClientSide(true);
+    console.log('window.innerHeight', window.innerHeight);
+  }, []);
+
   return (
     <Fragment>
       <BreadCrumb />
@@ -60,7 +74,7 @@ export const AddReviewTitle: FunctionComponent = () => {
         <Formik initialValues={initialValues} onSubmit={onSubmit}>
           {({ handleSubmit, errors }) => {
             return (
-              <StyledForm onSubmit={handleSubmit}>
+              <FormAnt>
                 <FormItem>
                   <h1>เพิ่มหัวข้อรีวิว</h1>
                   {
@@ -74,7 +88,32 @@ export const AddReviewTitle: FunctionComponent = () => {
                 <FormItem>
                   <StyledButton htmlType="submit">เริ่มต้นเขียนรีวิว</StyledButton>
                 </FormItem>
-              </StyledForm>
+                <FormItem>
+                  <Editor
+                    apiKey="l521ol91f9n8nq7xqws25ffwjk6co687wtgf604pkxrbfyx9"
+                    initialValue="<p>This is the initial content of the editor</p>"
+                    init={{
+                      height: 1000,
+                      menubar: false,
+                      plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount',
+                      ],
+                      toolbar:
+                        'undo redo | image code | formatselect | bold italic backcolor | \
+             alignleft aligncenter alignright alignjustify | \
+             bullist numlist outdent indent | removeformat | help',
+                      branding: false,
+                      // eslint-disable-next-line @typescript-eslint/camelcase
+                      images_upload_handler: (blobInfo, success, failure) => {
+                        console.log(blobInfo, success);
+                      },
+                    }}
+                    onEditorChange={handleEditorChange}
+                  />
+                </FormItem>
+              </FormAnt>
             );
           }}
         </Formik>
