@@ -59,7 +59,7 @@ const SearchInput = styled(Search)`
 const linkToUrl = url => (url ? RouterLInk.push(url) : null);
 
 const Navbar: React.FunctionComponent = () => {
-  const [visible, setVisible] = useState();
+  const [visible, setVisible] = useState(false);
 
   const handleCancel = e => {
     setVisible(!visible);

@@ -1,16 +1,17 @@
+/* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable indent */
 import React, { FunctionComponent, Fragment, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import BreadCrumb from 'components/ฺBreadcrumb';
 import dynamic from 'next/dynamic';
+import firebase from 'firebase';
 
-// import { Editor } from '@tinymce/tinymce-react';
 import { EditOutlined } from '@ant-design/icons';
 import { Form as FormAnt, Input, Button, Row, Col } from 'antd';
 import { Formik, Field } from 'formik';
 import { IAllProps } from '@tinymce/tinymce-react';
 import { useFirebase } from 'hooks/useFirebase';
-import firebase from 'firebase';
+import { useDebounce } from 'hooks/useDebounce';
 
 const Editor = dynamic<IAllProps>(() => import('@tinymce/tinymce-react').then(mod => mod.Editor) as any, {
   ssr: false,
@@ -58,6 +59,7 @@ export const AddReviewTitle: FunctionComponent = () => {
   };
 
   const handleEditorChange = (content, editor) => {
+    const debounceValue = useState();
     console.log('Content was updated:', content);
   };
 
@@ -87,7 +89,7 @@ export const AddReviewTitle: FunctionComponent = () => {
                     apiKey="l521ol91f9n8nq7xqws25ffwjk6co687wtgf604pkxrbfyx9"
                     initialValue=""
                     init={{
-                      height: 1000,
+                      min_height: 1000,
                       menubar: false,
                       plugins: [
                         'advlist autolink lists link image charmap print preview anchor',
@@ -95,11 +97,8 @@ export const AddReviewTitle: FunctionComponent = () => {
                         'insertdatetime media table paste code help wordcount',
                       ],
                       toolbar:
-                        'undo redo | image code | formatselect | bold italic backcolor | \
-             alignleft aligncenter alignright alignjustify | \
-             bullist numlist outdent indent | removeformat | help',
+                        'undo redo | image code | formatselect | bold italic backcolor |  alignleft aligncenter alignright alignjustify |  bullist numlist outdent indent | removeformat | help',
                       branding: false,
-                      // eslint-disable-next-line @typescript-eslint/camelcase
                       images_upload_handler: async (blobInfo, success, failure) => {
                         const storageRef = firebaseAuth.storage.ref();
                         const uploadTask = storageRef.child(`reviews/${Date.now()}`).put(blobInfo.blob());

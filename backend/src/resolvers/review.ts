@@ -7,13 +7,15 @@ const resolver = {
     createReview: async (_, arg, context) => {
       const { uid } = await context?.user;
       const userId = await User.findOne({ uid }).select("_id");
-      const review = await Review.create({
-        ...arg,
-        user: userId,
-        status: "draft"
-      });
+      const file = await arg.imageCover;
+      console.log(file);
+      // const review = await Review.create({
+      //   ...arg,
+      //   user: userId,
+      //   status: "draft"
+      // });
 
-      return review;
+      // return review;
     }
   }
 };

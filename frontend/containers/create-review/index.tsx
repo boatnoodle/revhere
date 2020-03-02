@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { AddReviewTitle } from './Components/AddReviewTitle';
+import { FormCreateReview } from './Components/FormCreateReview';
 
 export const CreateReview: FunctionComponent = () => {
-  return <AddReviewTitle />;
+  return <FormCreateReview />;
 };
