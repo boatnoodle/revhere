@@ -1,8 +1,13 @@
+import fetch from 'isomorphic-unfetch';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createLinks } from './apollo-link';
 
 let apolloClient = null;
+
+if (!process.browser) {
+  global.fetch = fetch;
+}
 
 const createApolloClient = (cache = {}, headers?) => {
   return new ApolloClient({
