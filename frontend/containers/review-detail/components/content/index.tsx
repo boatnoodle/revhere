@@ -1,4 +1,4 @@
-import React, { FunctionComponent, Fragment } from 'react';
+import React, { FunctionComponent } from 'react';
 import GroupLists from 'components/group-lists';
 
 const data = [
@@ -28,11 +28,7 @@ const data = [
   },
 ];
 export const Component: FunctionComponent = () => {
-  return (
-    <Fragment>
-      <GroupLists data={data} />
-    </Fragment>
-  );
+  return <GroupLists data={data} />;
 };
 
 export default Component;

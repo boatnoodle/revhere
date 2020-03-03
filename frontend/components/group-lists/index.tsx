@@ -1,6 +1,7 @@
-import React, { FunctionComponent, Fragment } from 'react';
-import { List } from 'antd';
+import React, { FunctionComponent } from 'react';
 import Styled from 'styled-components';
+
+import { List } from 'antd';
 
 const StyledListItem = Styled(List.Item)`
     & div {display:flex;}
@@ -29,37 +30,35 @@ const LookMore = Styled.div`
 `;
 interface Props {
   data: Array<{
-    imageUrl: string;
+    imageUrl?: string;
     name: string;
     memberCount: string;
   }>;
 }
 const GroupLists: FunctionComponent<Props> = ({ data }) => {
   return (
-    <Fragment>
-      <List
-        size="large"
-        footer={
-          <LookMore>
-            <a href="#">ดูทั้งหมด</a>
-          </LookMore>
-        }
-        bordered
-        dataSource={data}
-        renderItem={item => (
-          <StyledListItem>
-            <div>
-              <img src={item.imageUrl} width={32} height={32} />
-              <div className="with-new-line">
-                <span>{item.name}</span>
-                <span className="txt-muted">{item.memberCount}</span>
-              </div>
-              <StyledButton>เข้าร่วม</StyledButton>
+    <List
+      size="large"
+      footer={
+        <LookMore>
+          <a href="#">ดูทั้งหมด</a>
+        </LookMore>
+      }
+      bordered
+      dataSource={data}
+      renderItem={item => (
+        <StyledListItem>
+          <div>
+            <img src={item.imageUrl} width={32} height={32} />
+            <div className="with-new-line">
+              <span>{item.name}</span>
+              <span className="txt-muted">{item.memberCount}</span>
             </div>
-          </StyledListItem>
-        )}
-      />
-    </Fragment>
+            <StyledButton>เข้าร่วม</StyledButton>
+          </div>
+        </StyledListItem>
+      )}
+    />
   );
 };
 export default GroupLists;

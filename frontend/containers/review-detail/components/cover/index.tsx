@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, Fragment } from 'react';
 import styled from 'styled-components';
 
 const ReviewCover = styled.div`
@@ -17,9 +17,9 @@ interface Props {
 }
 export const Cover: FunctionComponent<Props> = ({ title }) => {
   return (
-    <React.Fragment>
+    <Fragment>
       <Title>{title}</Title>
-      <ReviewCover></ReviewCover>
-    </React.Fragment>
+      <ReviewCover />
+    </Fragment>
   );
 };
