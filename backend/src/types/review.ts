@@ -5,7 +5,7 @@ export default gql`
     createReview(
       titleReview: String
       introReview: String
-      imageCover: String
+      imageCover: Upload
     ): Review
 
     updateDetailReview(reviewId: ID!, body: String): Review
