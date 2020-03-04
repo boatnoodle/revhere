@@ -4,7 +4,7 @@ import { Breadcrumb } from 'antd';
 
 const routes = [
   {
-    path: 'index',
+    path: '/',
     breadcrumbName: 'หน้าหลัก',
   },
   //   {

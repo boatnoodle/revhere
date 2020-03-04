@@ -31,6 +31,12 @@ const upload = (file, uid) => {
 };
 
 const resolver = {
+  Query: {
+    getReview: async (_, { _id }, context) => {
+      const review = await Review.findById(_id);
+      return review;
+    }
+  },
   Mutation: {
     createReview: async (_, args, context) => {
       const { uid } = await context?.user;
@@ -45,6 +51,14 @@ const resolver = {
         imageCover: downloadUrl
       });
 
+      return review;
+    },
+    updateReviewDetail: async (_, { _id, body }, context) => {
+      const review = await Review.findOneAndUpdate(
+        { _id },
+        { $set: { body } },
+        { new: true }
+      );
       return review;
     }
   }

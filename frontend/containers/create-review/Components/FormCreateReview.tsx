@@ -2,6 +2,7 @@ import React, { FunctionComponent, Fragment, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import BreadCrumb from 'components/ฺBreadcrumb';
 
+import { useRouter } from 'next/router';
 import { useMutation } from '@apollo/react-hooks';
 import { EditOutlined } from '@ant-design/icons';
 import { Form as FormAnt, Input, Button, Upload, Divider } from 'antd';
@@ -57,6 +58,7 @@ function getBase64(img, callback) {
 }
 
 export const FormCreateReview: FunctionComponent = () => {
+  const router = useRouter();
   const [createReview, { data, loading, error }] = useMutation(CREATE_REVIEW);
   const [imageUrl, setImageUrl] = useState();
   const initialValues = {
@@ -66,11 +68,12 @@ export const FormCreateReview: FunctionComponent = () => {
   };
 
   const onSubmit = async values => {
-    await createReview({ variables: { ...values } });
+    const result = await createReview({ variables: { ...values } });
+    const reviewId = result?.data?.createReview?._id;
+    router.push(`/create-review-detail/${reviewId}`);
   };
 
   const customUpload = (file, setFieldValue) => {
-    console.log(file, 'xx');
     getBase64(file, imageUrl => setImageUrl(imageUrl));
     setFieldValue('imageCover', file);
   };

@@ -12606,6 +12606,11 @@ react-alice-carousel@^1.17.3:
     prop-types "^15.5.10"
     vanilla-swipe "^1.0.0"
 
+react-content-loader@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-5.0.2.tgz#f4d417ac2b3a913a4b5e406b8b36ff724bcfe15b"
+  integrity sha512-d9+/FX640VXyO+9dBgMWaHD5IL0+tGsCAFBhYPGNziPx2abTMUBXL1+oIlenOTYlxuOWDcUcpmgjj4Ws+0xdhA==
+
 react-dom@^16.12.0:
   version "16.13.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.0.tgz#cdde54b48eb9e8a0ca1b3dc9943d9bb409b81866"

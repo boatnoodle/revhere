@@ -1,6 +1,10 @@
 import { gql } from "apollo-server";
 
 export default gql`
+  type Query {
+    getReview(_id: ID): Review
+  }
+
   type Mutation {
     createReview(
       titleReview: String
@@ -8,7 +12,7 @@ export default gql`
       imageCover: Upload
     ): Review
 
-    updateDetailReview(reviewId: ID!, body: String): Review
+    updateReviewDetail(_id: ID!, body: String): Review
   }
 
   type Review {
