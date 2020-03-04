@@ -8,4 +8,6 @@ const firebaseAdmin = admin.initializeApp({
   storageBucket: "revhere-1b66c.appspot.com"
 });
 
+export const bucket = firebaseAdmin.storage().bucket();
+
 export default firebaseAdmin;
