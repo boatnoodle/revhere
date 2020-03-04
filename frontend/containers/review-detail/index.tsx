@@ -9,7 +9,7 @@ export const ReviewDetail: FunctionComponent = () => {
   return (
     <Fragment>
       <Cover title="สำหรับคุณ" />
-      <BasicGrid content={<Content />} left={<SideBar />}></BasicGrid>
+      <BasicGrid left={<Content />} content={<SideBar />} />
     </Fragment>
   );
 };

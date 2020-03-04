@@ -9,8 +9,8 @@ const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 export const LandingPage: FunctionComponent = () => {
   return (
     <Fragment>
-      <ReviewItems title="สำหรับคุณ" items={items}></ReviewItems>
-      <StandardGrid content={<ListComponent />} left={<TabPaneComponent />} />>
+      <ReviewItems title="สำหรับคุณ" items={items} />
+      <StandardGrid content={<ListComponent />} left={<TabPaneComponent />} />
     </Fragment>
   );
 };

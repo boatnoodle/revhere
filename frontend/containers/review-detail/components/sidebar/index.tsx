@@ -1,5 +1,56 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, Fragment } from 'react';
 import GroupLists from 'components/group-lists';
+import styled from 'styled-components';
+import IconHeart from '../../../../assets/icons/icon-24-heart.svg';
+import IconFacebook from '../../../../assets/icons/icon-24-facebook.svg';
+import IconTwitter from '../../../../assets/icons/icon-24-twitter.svg';
+import IconCommunication from '../../../../assets/icons/icon-24-communication.svg';
+import IconBookmark from '../../../../assets/icons/icon-24-bookmark.svg';
+
+const ReviewMenu = styled.div`
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccd6dd;
+  & div.item {
+    &.highlight {
+      font-size: 1.3em;
+      font-weight: 500;
+      svg path {
+        fill: red !important;
+      }
+    }
+    i {
+      margin-right: 5px;
+    }
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+`;
+
+const menuLists = [
+  {
+    icon: <IconHeart />,
+    isHighlight: true,
+    label: 'ถูกใจรีวิวนี้',
+  },
+  {
+    icon: <IconFacebook />,
+    label: 'แชร์รีวิวนี้ไปยัง Facebook',
+  },
+  {
+    icon: <IconTwitter />,
+    label: 'ทวีตรีวิวนี้ไปยัง Twitter',
+  },
+  {
+    icon: <IconBookmark />,
+    label: 'เก็บไว้ดูภายหลัง',
+  },
+  {
+    icon: <IconCommunication />,
+    label: '20 การแสดงความคิดเห็น',
+  },
+];
 
 const data = [
   {
@@ -10,7 +61,19 @@ const data = [
   },
 ];
 export const Component: FunctionComponent = () => {
-  return <GroupLists data={data} />;
+  return (
+    <Fragment>
+      <GroupLists data={data} />
+      <ReviewMenu>
+        {menuLists.map(({ icon, label, isHighlight = false }, index) => (
+          <div className={'item ' + (isHighlight ? 'highlight' : '')} key={index}>
+            <i>{icon}</i>
+            {label}
+          </div>
+        ))}
+      </ReviewMenu>
+    </Fragment>
+  );
 };
 
 export default Component;
