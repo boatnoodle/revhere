@@ -52,6 +52,7 @@
     "react": "^16.12.0",
     "react-admin": "^3.2.3",
     "react-alice-carousel": "^1.17.3",
+    "react-content-loader": "^5.0.2",
     "react-dom": "^16.12.0",
     "react-firebaseui": "^4.1.0",
     "styled-components": "^5.0.1",
