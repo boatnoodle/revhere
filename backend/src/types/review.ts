@@ -12,7 +12,13 @@ export default gql`
       imageCover: Upload
     ): Review
 
+    uploadImageReviewDetail(file: Upload): ImageUrl!
+
     updateReviewDetail(_id: ID!, body: String): Review
+  }
+
+  type ImageUrl {
+    urlImage: String
   }
 
   type Review {
