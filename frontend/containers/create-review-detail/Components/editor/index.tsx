@@ -2,8 +2,9 @@
 /* eslint-disable indent */
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-// import firebase from 'firebase';
 
+import { useMutation } from '@apollo/react-hooks';
+import { UPLOAD_IMAGE_REVIEW_DETAIL } from '../../graphql';
 import { IAllProps } from '@tinymce/tinymce-react';
 import { useFirebase } from 'hooks/useFirebase';
 import { useDebounce } from 'hooks/useDebounce';
@@ -22,6 +23,7 @@ export const Editor: React.FC<Props> = ({ setFieldValue, values, body }) => {
   const firebaseAuth = useFirebase();
   const [content, setContent] = useState();
   const debounceValue = useDebounce(content, 300);
+  const [uploadImageReviewDetail] = useMutation(UPLOAD_IMAGE_REVIEW_DETAIL);
 
   const handleEditorChange = (content, editor) => {
     setContent(content);
@@ -48,23 +50,10 @@ export const Editor: React.FC<Props> = ({ setFieldValue, values, body }) => {
           'undo redo | image code | formatselect | bold italic backcolor |  alignleft aligncenter alignright alignjustify |  bullist numlist outdent indent | removeformat | help',
         branding: false,
         images_upload_handler: async (blobInfo, success, failure) => {
-          const storageRef = firebaseAuth.storage.ref();
-          const uploadTask = storageRef.child(`reviews/${Date.now()}`).put(blobInfo.blob());
-          uploadTask.on(
-            'state_changed',
-            snapshot => {
-              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            },
-            error => {
-              console.log(error);
-              failure(error);
-            },
-            () => {
-              uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-                success(downloadURL);
-              });
-            },
-          );
+          const { data } = await uploadImageReviewDetail({ variables: { file: blobInfo.blob() } });
+          const { imageReviewDetail } = data;
+
+          success(imageReviewDetail.urlImage);
         },
       }}
       onEditorChange={handleEditorChange}
