@@ -17,7 +17,7 @@ module.exports = {
   rules: {
     semi: [1, 'always'],
     quotes: ['error', 'single'],
-    indent: ['error', 2],
+    indent: 'off',
     'max-len': 'off',
     'require-jsdoc': 'off',
     'valid-jsdoc': 'off',

@@ -2,6 +2,7 @@ import { gql } from "apollo-server";
 
 export default gql`
   type Query {
+    getMyReview: [Review]
     getReview(_id: ID): Review
   }
 
@@ -14,7 +15,12 @@ export default gql`
 
     uploadImageReviewDetail(file: Upload): ImageUrl!
 
-    updateReviewDetail(_id: ID!, body: String): Review
+    updateReviewDetail(
+      _id: ID!
+      titleReview: String
+      introReview: String
+      body: String
+    ): Review
   }
 
   type ImageUrl {

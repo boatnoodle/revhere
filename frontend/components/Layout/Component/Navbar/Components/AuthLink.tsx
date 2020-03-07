@@ -1,22 +1,34 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useRouter } from 'next/router';
 
 import { DownOutlined, LoadingOutlined } from '@ant-design/icons';
-
 import { Menu, Dropdown, Button } from 'antd';
 import { useSession } from 'hooks/useSession';
 import { useFirebase } from 'hooks/useFirebase';
 
 export const AuthLink = ({ setVisible }) => {
+  const router = useRouter();
   const { user, initializing } = useSession();
   const firebase = useFirebase();
 
+  const onClick = ({ key }) => {
+    switch (key) {
+      case 'signOut':
+        firebase.doSignOut();
+        break;
+      case 'reviewLists':
+        router.push('/review-lists');
+        break;
+      default:
+        false;
+        break;
+    }
+  };
+
   const menu = (
-    <Menu>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" onClick={() => firebase.doSignOut()}>
-          ออกจากระบบ
-        </a>
-      </Menu.Item>
+    <Menu onClick={onClick}>
+      <Menu.Item key="reviewLists">รีวิวของคุณ</Menu.Item>
+      <Menu.Item key="signOut"> ออกจากระบบ </Menu.Item>
     </Menu>
   );
 

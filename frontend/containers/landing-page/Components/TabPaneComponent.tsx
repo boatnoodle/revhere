@@ -4,10 +4,11 @@ import IconHot from '../../../assets/icons/icon-hot.svg';
 import IconTime from '../../../assets/icons/icon-time.svg';
 import IconHashTag from '../../../assets/icons/icon-hastag.svg';
 import IconLike from '../../../assets/icons/icon-like.svg';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 
 import { ItemLists } from './ItemLists';
 import { Tabs } from 'antd';
+import { PrimaryButton } from '~/components/Button';
 
 const { TabPane } = Tabs;
 const tabLists = [
@@ -32,32 +33,25 @@ const tabLists = [
     title: 'แนะนำสำหรับคุณ',
   },
 ];
-const Span = Styled.span`
 
-    & path.a,& path.b{
-        fill: #657786;
-    },
-    & svg{
-        color:#657786;
-        display:flex;
-    }
-`;
-const AddReviewBtn = Styled.a`
-    position: absolute;
-    top: 0;
-    right: 10px;
-    border-radius: 21px;
-    border: 0;
-    background: #17BF63;
-    color: white;
-    padding: 8px 35px;
+const Span = styled.span`
+  & path.a,
+  & path.b {
+    fill: #657786;
+  }
+  ,
+  & svg {
+    color: #657786;
+    display: flex;
+  }
 `;
 
-const TabsStyled = Styled(Tabs)`
-    .ant-tabs-tab-active span  path{
-        fill: #17BF63 !important;
-    }
+const TabsStyled = styled(Tabs)`
+  .ant-tabs-tab-active span path {
+    fill: #17bf63 !important;
+  }
 `;
+
 export const TabPaneComponent: FunctionComponent = () => {
   return (
     <React.Fragment>
@@ -77,7 +71,7 @@ export const TabPaneComponent: FunctionComponent = () => {
         ))}
       </TabsStyled>
       <Link href="/create-review">
-        <AddReviewBtn>เขียนรีวิว</AddReviewBtn>
+        <PrimaryButton as="a">เขียนรีวิว</PrimaryButton>
       </Link>
     </React.Fragment>
   );

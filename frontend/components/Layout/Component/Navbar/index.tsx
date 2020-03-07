@@ -65,13 +65,6 @@ const Navbar: React.FunctionComponent = () => {
     setVisible(!visible);
   };
 
-  const menuList = [
-    {
-      url: '/',
-      component: <AuthLink setVisible={setVisible} />,
-    },
-  ];
-
   return (
     <Nav>
       <Link href="/">
@@ -83,11 +76,9 @@ const Navbar: React.FunctionComponent = () => {
         <SearchInput placeholder="ค้นหาบน Revhere" onSearch={value => console.log(value)} />
       </SearchBox>
       <MenuStyled mode="horizontal" defaultSelectedKeys={['0']}>
-        {menuList.map((item, index) => (
-          <MenuItem onClick={() => linkToUrl(item.url)} key={index}>
-            {item.component}
-          </MenuItem>
-        ))}
+        <MenuItem>
+          <AuthLink setVisible={setVisible} />
+        </MenuItem>
       </MenuStyled>
       <ModalAuth handleCancel={handleCancel} visible={visible} />
     </Nav>

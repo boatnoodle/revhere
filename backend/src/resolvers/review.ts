@@ -28,8 +28,17 @@ const upload = (file, path) => {
 
 const resolver = {
   Query: {
+    getMyReview: async (_, __, context) => {
+      const { uid } = await context?.user;
+      const userId = await User.findOne({ uid }).select("_id");
+
+      const reviews = await Review.find({ user: userId });
+
+      return reviews;
+    },
     getReview: async (_, { _id }, context) => {
       const review = await Review.findById(_id);
+
       return review;
     }
   },
@@ -49,10 +58,14 @@ const resolver = {
 
       return review;
     },
-    updateReviewDetail: async (_, { _id, body }, context) => {
+    updateReviewDetail: async (
+      _,
+      { _id, titleReview, introReview, body },
+      context
+    ) => {
       const review = await Review.findOneAndUpdate(
         { _id },
-        { $set: { body } },
+        { $set: { titleReview, introReview, body } },
         { new: true }
       );
 

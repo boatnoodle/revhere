@@ -1,11 +1,11 @@
 import React, { FunctionComponent, Fragment } from 'react';
 import GroupLists from 'components/group-lists';
 import styled from 'styled-components';
-import IconHeart from '../../../../assets/icons/icon-24-heart.svg';
-import IconFacebook from '../../../../assets/icons/icon-24-facebook.svg';
-import IconTwitter from '../../../../assets/icons/icon-24-twitter.svg';
-import IconCommunication from '../../../../assets/icons/icon-24-communication.svg';
-import IconBookmark from '../../../../assets/icons/icon-24-bookmark.svg';
+import IconHeart from '../../assets/icons/icon-24-heart.svg';
+import IconFacebook from '../../assets/icons/icon-24-facebook.svg';
+import IconTwitter from '../../assets/icons/icon-24-twitter.svg';
+import IconCommunication from '../../assets/icons/icon-24-communication.svg';
+import IconBookmark from '../../assets/icons/icon-24-bookmark.svg';
 
 const ReviewMenu = styled.div`
   padding: 10px;
@@ -60,7 +60,7 @@ const data = [
       'https://scontent.furt3-1.fna.fbcdn.net/v/t1.0-9/s960x960/74396069_2594174023999170_8719079083155128320_o.jpg?_nc_cat=102&_nc_oc=AQlutKLKb3uNoRq709fD6_1rLDbaTcEIneNb1Srk4016I6lI9IlwFSHJ06jCVeymodc&_nc_ht=scontent.furt3-1.fna&_nc_tp=7&oh=dd756c038d1b68c9bac24b5fe85a4cdd&oe=5EFDF82A',
   },
 ];
-export const Component: FunctionComponent = () => {
+export const SideBar: FunctionComponent = () => {
   return (
     <Fragment>
       <GroupLists data={data} />
@@ -75,5 +75,3 @@ export const Component: FunctionComponent = () => {
     </Fragment>
   );
 };
-
-export default Component;
