@@ -37,6 +37,22 @@ export default class MyDocument extends Document<any> {
           <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png" />
           <meta name="msapplication-TileColor" content="#cdaa04" />
           <meta name="theme-color" content="#ffffff" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.GUMLET_CONFIG = {
+                  hosts: [{
+                      current: "storage.googleapis.com",
+                      gumlet: "revhere.gumlet.com"
+                  }],
+                  lazy_load: true,
+                  proxy: true,
+                  auto_webp: true
+                };
+                `,
+            }}
+          />
+          <script async src="https://cdn.gumlet.com/gumlet.js/2.0/gumlet.min.js"></script>
         </Head>
         <body>
           <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />

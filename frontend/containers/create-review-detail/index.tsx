@@ -1,4 +1,4 @@
-import React, { FunctionComponent, Fragment, useState, useEffect } from 'react';
+import React, { FunctionComponent, Fragment, useState } from 'react';
 import styled from 'styled-components';
 import BreadCrumb from 'components/ฺBreadcrumb';
 
@@ -8,6 +8,7 @@ import { Formik, Field } from 'formik';
 import { Editor } from './Components/editor';
 import { GET_REVIEW, UPDATE_REVIEW_DETAIL } from './graphql';
 import { useQuery, useMutation } from '@apollo/react-hooks';
+import { ImageOptimized } from 'components/ImageOptimized';
 
 const Container = styled.div`
   width: 1000px;
@@ -100,7 +101,7 @@ export const CreateReviewDetail: FunctionComponent<Props> = ({ reviewId }) => {
                 <Row gutter={16}>
                   <Col className="gutter-row">
                     <FormItem label="รูปภาพปก">
-                      <img src={data?.review?.imageCover} alt="imageCover" width="200" />
+                      <ImageOptimized imgPath={data?.review?.imageCover} width={200} height={200} alt="imageCover" />
                     </FormItem>
                   </Col>
                   <Col className="gutter-row" flex="auto">

@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic';
 import { useMutation } from '@apollo/react-hooks';
 import { UPLOAD_IMAGE_REVIEW_DETAIL } from '../../graphql';
 import { IAllProps } from '@tinymce/tinymce-react';
-import { useFirebase } from 'hooks/useFirebase';
 import { useDebounce } from 'hooks/useDebounce';
 
 const TinyMceEditor = dynamic<IAllProps>(() => import('@tinymce/tinymce-react').then(mod => mod.Editor) as any, {
@@ -20,7 +19,6 @@ interface Props {
 }
 
 export const Editor: React.FC<Props> = ({ setFieldValue, values, body }) => {
-  const firebaseAuth = useFirebase();
   const [content, setContent] = useState();
   const debounceValue = useDebounce(content, 300);
   const [uploadImageReviewDetail] = useMutation(UPLOAD_IMAGE_REVIEW_DETAIL);
