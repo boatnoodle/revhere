@@ -16,6 +16,9 @@ export const AuthLink = ({ setVisible }) => {
       case 'signOut':
         firebase.doSignOut();
         break;
+      case 'createReview':
+        router.push('/create-review');
+        break;
       case 'reviewLists':
         router.push('/review-lists');
         break;
@@ -27,6 +30,7 @@ export const AuthLink = ({ setVisible }) => {
 
   const menu = (
     <Menu onClick={onClick}>
+      <Menu.Item key="createReview">เขียนรีวิว</Menu.Item>
       <Menu.Item key="reviewLists">รีวิวของคุณ</Menu.Item>
       <Menu.Item key="signOut"> ออกจากระบบ </Menu.Item>
     </Menu>

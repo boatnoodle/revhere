@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "regions": ["sin1"],
+  "builds": [
+    { "src": "backend/src/index.ts", "use": "@now/node" },
+    { "src": "frontend/package.json", "use": "@now/next" }
+  ],
+  "routes": [
+    { "src": "/graphql", "dest": "backend/src/index.ts" },
+    { "src": "/(.*)", "dest": "frontend/$1", "continue": true }
+  ],
+  "env": {
+    "DB_URL": "@db_revhere_production",
+    "PORT": "@port",
+    "NODE_ENV": "@node_env"
+  }
+}

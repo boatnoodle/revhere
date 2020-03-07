@@ -1,12 +1,7 @@
 import mongoose from "mongoose";
 
 export default async () => {
-  const url =
-    process.env.NODE_ENV === "production"
-      ? process.env.DB_URL
-      : process.env.DB_URL_DEV;
-
-  const db = await mongoose.connect(url, {
+  const db = await mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,

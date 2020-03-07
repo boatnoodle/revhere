@@ -14,7 +14,7 @@ const createApolloClient = (cache = {}, headers?) => {
     // connectToDevTools: process.browser,
     ssrMode: typeof window !== 'undefined',
     cache: new InMemoryCache(),
-    link: createLinks(),
+    link: createLinks(headers),
   });
 };
 

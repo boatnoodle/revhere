@@ -16,4 +16,4 @@ const page: FunctionComponent = () => {
   );
 };
 
-export default withApollo(page, { ssr: false });
+export default withApollo(page, { ssr: true });

@@ -70,7 +70,7 @@ export const FormCreateReview: FunctionComponent = () => {
   const onSubmit = async values => {
     const result = await createReview({ variables: { ...values } });
     const reviewId = result?.data?.createReview?._id;
-    router.push(`/create-review-detail/${reviewId}`);
+    router.push(`/update-review/${reviewId}`);
   };
 
   const customUpload = (file, setFieldValue) => {
