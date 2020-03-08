@@ -2,10 +2,10 @@ import React, { FunctionComponent, Fragment, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import BreadCrumb from 'components/ฺBreadcrumb';
 
+import { Form as FormAnt, Input, Button, Upload, message } from 'antd';
 import { useRouter } from 'next/router';
 import { useMutation } from '@apollo/react-hooks';
 import { EditOutlined } from '@ant-design/icons';
-import { Form as FormAnt, Input, Button, Upload, Divider } from 'antd';
 import { Formik, Field } from 'formik';
 import { CREATE_REVIEW } from '../graphql';
 
@@ -69,6 +69,7 @@ export const FormCreateReview: FunctionComponent = () => {
 
   const onSubmit = async values => {
     const result = await createReview({ variables: { ...values } });
+    message.success('บันทึกรีิวิวสำเร็จ');
     const reviewId = result?.data?.createReview?._id;
     router.push(`/update-review/${reviewId}`);
   };
