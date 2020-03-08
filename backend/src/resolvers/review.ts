@@ -3,6 +3,7 @@ import Review from "../models/Review";
 
 import { bucket } from "../utils/firebase";
 import { ObjectId } from "bson";
+import { ReviewStatus } from "../../types/review";
 
 const upload = (file, path) => {
   const { createReadStream, mimetype } = file;
@@ -40,6 +41,18 @@ const resolver = {
       const review = await Review.findById(_id);
 
       return review;
+    },
+    getReviews: async (_, { status = "publish", page, perPage = 10 }) => {
+      const reviews = await Review.find({ status: ReviewStatus[status] })
+        .skip(page * perPage)
+        .limit(perPage);
+
+      return reviews;
+    },
+    getReviewsMeta: async (_, { status = "publish" }) => {
+      const countQuery = await Review.where({ status }).countDocuments();
+
+      return { count: countQuery };
     }
   },
   Mutation: {
