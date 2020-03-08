@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 import { ItemLists } from './ItemLists';
 import { Tabs } from 'antd';
-import { PrimaryButton } from '~/components/Button';
+import { PrimaryButton } from 'components/Button';
 
 const { TabPane } = Tabs;
 const tabLists = [
