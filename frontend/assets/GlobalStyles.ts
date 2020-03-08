@@ -3,10 +3,10 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
 @font-face {
 font-family:"anuphan";
-src: url("fonts/Anuphan-Bold.otf");
-src: url("fonts/Anuphan-Light.otf");
-src: url("fonts/Anuphan-Medium.otf");
-src: url("fonts/Anuphan-Regular.otf");
+src: url("/static/fonts/Anuphan-Bold.otf");
+src: url("/static/fonts/Anuphan-Light.otf");
+src: url("/static/fonts/Anuphan-Medium.otf");
+src: url("/static/fonts/Anuphan-Regular.otf");
 font-display:swap;font-style:normal;font-weight:400;
 }
 
