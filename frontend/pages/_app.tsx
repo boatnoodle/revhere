@@ -3,6 +3,8 @@ import React, { Fragment } from 'react';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyle } from 'assets/GlobalStyles';
 import { DefaultSeo } from 'next-seo';
 import { Firebase, FirebaseContext } from 'components/Firebase';
 
@@ -48,6 +50,7 @@ const MyApp = props => {
         }}
       />
       <FirebaseContext.Provider value={new Firebase()}>
+        <GlobalStyle />
         <Component {...pageProps} />
       </FirebaseContext.Provider>
     </Fragment>
