@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useRouter } from 'next/router';
 
 import { DownOutlined, LoadingOutlined } from '@ant-design/icons';
-import { Menu, Dropdown, Button } from 'antd';
+import { Menu, Dropdown } from 'antd';
+import { PrimaryButton, OutlinePrimaryButton } from 'components/Button';
 import { useSession } from 'hooks/useSession';
 import { useFirebase } from 'hooks/useFirebase';
+import styled from 'styled-components';
 
 export const AuthLink = ({ setVisible }) => {
   const router = useRouter();
@@ -36,6 +38,14 @@ export const AuthLink = ({ setVisible }) => {
     </Menu>
   );
 
+  const ButtonList = styled.div`
+    display: flex;
+    & div {
+      margin: 0 10px;
+      display: flex;
+    }
+  `;
+
   if (initializing) {
     return <LoadingOutlined style={{ fontSize: 24 }} spin />;
   } else if (user) {
@@ -47,6 +57,15 @@ export const AuthLink = ({ setVisible }) => {
       </Dropdown>
     );
   } else {
-    return <Button onClick={() => setVisible(true)}>เข้าสู่ระบบ</Button>;
+    return (
+      <ButtonList>
+        <div>
+          <OutlinePrimaryButton onClick={() => setVisible(true)}>เข้าสู่ระบบ</OutlinePrimaryButton>
+        </div>
+        <div>
+          <PrimaryButton onClick={() => setVisible(true)}>สมัครสมาชิก</PrimaryButton>
+        </div>
+      </ButtonList>
+    );
   }
 };

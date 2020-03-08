@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons';
-import { List, Avatar } from 'antd';
-import Styled from 'styled-components';
+import { List } from 'antd';
+import styled from 'styled-components';
 const listData = [];
 for (let i = 0; i < 23; i++) {
   listData.push({
@@ -12,25 +12,37 @@ for (let i = 0; i < 23; i++) {
       'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
   });
 }
-const StyledListItem = Styled(List.Item)`
-    display:flex !important;
-    flex-direction: row-reverse;
-    & .ant-list-item-extra{
-        margin-left: 0 !important;
-    }
-    & .ant-list-item-meta{
-        margin-bottom: 10px !important;
-    }
-    & .ant-list-item-action{
-        margin-top: 10px !important;
-    }
-    & .ant-list-item-main{
-        margin-left:20px !important;
-    }
-    & img{
-        border-radius:10px;
-    }
+const StyledListItem = styled(List.Item)`
+  background: white;
+  border-radius: 13px;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  & .ant-list-item-extra {
+    margin-left: 0 !important;
+  }
+  & .ant-list-item-meta {
+    margin-bottom: 10px !important;
+  }
+  & .ant-list-item-action {
+    margin-top: 10px !important;
+  }
+  & .ant-list-item-main {
+    /* margin-left: 20px !important; */
+  }
+  & img {
+    border-radius: 10px;
+  }
 `;
+const Title = styled.a`
+  font-size: 1.3em;
+  font-weight: bolder;
+`;
+const AuthorName = styled.div`
+  color: #17bf63;
+  font-size: 1em;
+  font-weight: 700;
+`;
+const ListItem = styled(List.Item.Meta)``;
 export const ItemLists: FunctionComponent = () => (
   <React.Fragment>
     <List
@@ -51,22 +63,24 @@ export const ItemLists: FunctionComponent = () => (
       renderItem={item => (
         <StyledListItem
           key={item.title}
-          actions={[<StarOutlined key="star" />, <LikeOutlined key="like" />, <MessageOutlined key="message" />]}
+          //   actions={[<StarOutlined key="star" />, <LikeOutlined key="like" />, <MessageOutlined key="message" />]}
           extra={
             <img
-              width={120}
-              height={120}
+              width={144}
+              height={144}
               alt="logo"
               src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
             />
           }
         >
-          <List.Item.Meta
-            avatar={<Avatar src={item.avatar} />}
-            title={<a href={item.href}>{item.title}</a>}
+          <ListItem
+            // avatar={<Avatar src={item.avatar} />}
+            title={<Title href={item.href}>{item.title}</Title>}
             // description={item.description}
           />
           {item.content}
+          <AuthorName>Nattasit Moonchanabaht</AuthorName>
+          หนังสือ - 6 มีนาคม
         </StyledListItem>
       )}
     />
