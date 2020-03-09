@@ -43,8 +43,9 @@ export const Editor: React.FC<Props> = ({ setFieldValue, values, body }) => {
         images_upload_handler: async (blobInfo, success, failure) => {
           const { data } = await uploadImageReviewDetail({ variables: { file: blobInfo.blob() } });
           const { imageReviewDetail } = data;
+          const gumletImagePath = `https://revhere.gumlet.com/${imageReviewDetail.urlImage}`;
 
-          success(imageReviewDetail.urlImage);
+          success(gumletImagePath);
         },
       }}
       onEditorChange={handleEditorChange}

@@ -46,7 +46,6 @@ export default class MyDocument extends Document<any> {
                       gumlet: "revhere.gumlet.com"
                   }],
                   lazy_load: true,
-                  proxy: true,
                   auto_webp: true
                 };
                 `,
