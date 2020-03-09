@@ -1,4 +1,4 @@
-import React, { FunctionComponent, Fragment, useState, useEffect } from 'react';
+import React, { FunctionComponent, Fragment, useState } from 'react';
 import styled from 'styled-components';
 import BreadCrumb from 'components/ฺBreadcrumb';
 
@@ -86,8 +86,7 @@ export const FormCreateReview: FunctionComponent = () => {
       <BreadCrumb />
       <Container>
         <Formik initialValues={initialValues} onSubmit={onSubmit}>
-          {({ values, handleSubmit, errors }) => {
-            console.log(values, 'values');
+          {({ values, handleSubmit }) => {
             return (
               <FormAntStyled onFinish={handleSubmit} layout="vertical">
                 <h1>เพิ่มหัวข้อรีวิว</h1>

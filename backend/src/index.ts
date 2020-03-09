@@ -2,14 +2,13 @@ import "reflect-metadata";
 import "dotenv/config";
 import cors from "cors";
 import morgan from "morgan";
-import jwt from "jsonwebtoken";
 import express from "express";
 import typeDefs from "./types";
 import resolvers from "./resolvers";
-
 import connectDb from "./utils/connectDb";
-import { ApolloServer, AuthenticationError } from "apollo-server-express";
 import admin from "./utils/firebase";
+
+import { ApolloServer } from "apollo-server-express";
 
 const startServer = async () => {
   const app = express();
@@ -54,8 +53,6 @@ const startServer = async () => {
 
   server.applyMiddleware({ app, path: "/graphql" });
 
-  const isTest = !!process.env.TEST_DATABASE;
-  const isProduction = !!process.env.DATABASE_URL;
   const port = process.env.PORT || 4000;
 
   await connectDb();
