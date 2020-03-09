@@ -1,17 +1,22 @@
 import React, { FunctionComponent } from 'react';
-import { StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons';
-import { List } from 'antd';
 import styled from 'styled-components';
-const listData = [];
-for (let i = 0; i < 23; i++) {
-  listData.push({
-    href: 'http://ant.design',
-    title: `ant design part ${i}`,
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    content:
-      'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-  });
-}
+import Loader from './Loader';
+// import { StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons';
+import { List } from 'antd';
+
+import { useQuery } from '@apollo/react-hooks';
+import { GET_MY_REVIEWS } from '../graphql';
+import { Review } from 'types/review';
+
+const status = {
+  PUBLISH: 'PUBLISH',
+  DRAFT: 'DRAFT',
+};
+const params = {
+  variables: {
+    status: status.DRAFT,
+  },
+};
 const StyledListItem = styled(List.Item)`
   background: white;
   border-radius: 13px;
@@ -42,9 +47,15 @@ const AuthorName = styled.div`
   font-size: 1em;
   font-weight: 700;
 `;
-const ListItem = styled(List.Item.Meta)``;
-export const ItemLists: FunctionComponent = () => (
-  <React.Fragment>
+
+interface PropsReview {
+  data: {
+    reviews: Review[];
+  };
+}
+
+const ListUi: React.FC<PropsReview> = ({ data: { reviews } }) => {
+  return (
     <List
       itemLayout="vertical"
       size="large"
@@ -54,35 +65,23 @@ export const ItemLists: FunctionComponent = () => (
         },
         pageSize: 5,
       }}
-      dataSource={listData}
-      //   footer={
-      //     <div>
-      //       <b>ant design</b> footer part
-      //     </div>
-      //   }
+      dataSource={reviews}
       renderItem={item => (
-        <StyledListItem
-          key={item.title}
-          //   actions={[<StarOutlined key="star" />, <LikeOutlined key="like" />, <MessageOutlined key="message" />]}
-          extra={
-            <img
-              width={144}
-              height={144}
-              alt="logo"
-              src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-            />
-          }
-        >
-          <ListItem
-            // avatar={<Avatar src={item.avatar} />}
-            title={<Title href={item.href}>{item.title}</Title>}
-            // description={item.description}
-          />
-          {item.content}
+        <StyledListItem extra={<img width={144} height={144} alt="logo" src={item.imageCover} />}>
+          <ListItem title={<Title href={`/review/${item._id}`}>{item.titleReview}</Title>} />
+          {item.introReview}
           <AuthorName>Nattasit Moonchanabaht</AuthorName>
           หนังสือ - 6 มีนาคม
         </StyledListItem>
       )}
     />
-  </React.Fragment>
-);
+  );
+};
+const ListItem = styled(List.Item.Meta)``;
+export const ItemLists: FunctionComponent = () => {
+  const { data, loading, error } = useQuery(GET_MY_REVIEWS, params);
+  if (loading) {
+    return <Loader qty={Array(6).fill(null)} />;
+  }
+  return <ListUi data={data} />;
+};
