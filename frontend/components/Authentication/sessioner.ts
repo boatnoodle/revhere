@@ -1,12 +1,13 @@
 import 'firebase/auth';
 import React, { useState, useEffect } from 'react';
-import firebase, { User } from 'firebase/app';
+import firebase from 'firebase/app';
+import cookie from 'js-cookie';
 
-import { useMutation, useLazyQuery } from '@apollo/react-hooks';
-import { CREATE_OR_UPDATE_USER, GET_USER_ROLE } from './graphql';
+import { useRouter } from 'next/router';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { GET_USER_ROLE } from './graphql';
 
 export const useAuth = () => {
-  const [createOrUpdateUser] = useMutation(CREATE_OR_UPDATE_USER);
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
   const [role, setRole] = useState(null);
@@ -24,11 +25,13 @@ export const useAuth = () => {
     const authProvider = authUserJson?.providerData[0].providerId;
 
     if (isSubscribed && authUserJson && authProvider === 'facebook.com') {
-      localStorage.setItem('token', authUserJson?.stsTokenManager?.accessToken);
+      const token = authUserJson?.stsTokenManager?.accessToken;
+      localStorage.setItem('token', token);
+      cookie.set('token', token, { expires: 1 });
       setUser(authUserJson);
       setInitializing(false);
-      await createOrUpdateUser();
     } else {
+      cookie.remove('token');
       setUser(null);
       setInitializing(false);
     }
@@ -44,6 +47,5 @@ export const useAuth = () => {
       unsubscribe();
     };
   }, []);
-
   return { user, initializing, role };
 };
