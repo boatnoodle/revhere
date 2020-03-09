@@ -1,9 +1,12 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
+
+import { NextPage } from 'next';
 import { withApollo } from 'providers/web-client/with-apollo-client';
 import { Layouts } from 'components/Layout';
 import { ReviewLists } from 'containers/review-lists';
+import { auth } from 'utils/auth';
 
-const ReviewList: FunctionComponent = () => {
+const ReviewList: NextPage = () => {
   return (
     <Layouts>
       <ReviewLists />
@@ -11,4 +14,8 @@ const ReviewList: FunctionComponent = () => {
   );
 };
 
-export default withApollo(ReviewList, { ssr: true });
+ReviewList.getInitialProps = async ctx => {
+  auth(ctx);
+};
+
+export default withApollo(ReviewList, { ssr: false });
