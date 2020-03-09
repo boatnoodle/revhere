@@ -1,78 +1,74 @@
 import React, { FunctionComponent } from 'react';
-import Link from 'next/link';
-import IconHot from '../../../assets/icons/icon-hot.svg';
-import IconTime from '../../../assets/icons/icon-time.svg';
-import IconHashTag from '../../../assets/icons/icon-hastag.svg';
-import IconLike from '../../../assets/icons/icon-like.svg';
 import styled from 'styled-components';
 
 import { ItemLists } from './ItemLists';
 import { Tabs } from 'antd';
-import { PrimaryButton } from 'components/Button';
 
 const { TabPane } = Tabs;
 const tabLists = [
   {
-    icon: <IconHot />,
-    content: <ItemLists />,
-    title: 'กระแส',
+    title: 'สำรวจ',
   },
   {
-    icon: <IconTime />,
-    content: 'test',
-    title: 'ล่าสุด',
+    title: 'หนังสือ',
   },
   {
-    icon: <IconHashTag />,
-    content: 'test',
-    title: 'มาแรง',
+    title: 'ภาพยนต์',
   },
   {
-    icon: <IconLike />,
-    content: 'test',
-    title: 'แนะนำสำหรับคุณ',
+    title: 'ดนตรี',
+  },
+  {
+    title: 'คอร์ส',
+  },
+  {
+    title: 'สถานที่',
   },
 ];
 
 const Span = styled.span`
-  & path.a,
-  & path.b {
-    fill: #657786;
-  }
-  ,
-  & svg {
-    color: #657786;
-    display: flex;
-  }
+  color: white;
+  font-size: 16px;
+  justify-content: center;
+  display: flex;
 `;
 
 const TabsStyled = styled(Tabs)`
-  .ant-tabs-tab-active span path {
-    fill: #17bf63 !important;
+  .ant-tabs-tab:first-child {
+    margin-left: 0px;
+  }
+  .ant-tabs-tab {
+    margin-left: 10px;
+    margin-right: 0px;
+    background: #90a4ae 0% 0% no-repeat padding-box;
+    width: 124px;
+    border-radius: 12px;
+    opacity: 1;
+    height: 51px;
+  }
+  .ant-tabs-tab-active {
+    span {
+      color: #17bf63 !important;
+      font-weight: bolder;
+      path {
+        fill: #17bf63 !important;
+      }
+    }
+    border: 1px solid #17bf63;
+    background: #ffffff;
   }
 `;
 
+const TabPaneStyled = styled(TabPane)``;
+
 export const TabPaneComponent: FunctionComponent = () => {
   return (
-    <React.Fragment>
-      <TabsStyled defaultActiveKey="0" animated={false}>
-        {tabLists.map(({ icon, content, title }, index) => (
-          <TabPane
-            tab={
-              <Span>
-                {icon}
-                {title}
-              </Span>
-            }
-            key={String(index)}
-          >
-            {content}
-          </TabPane>
-        ))}
-      </TabsStyled>
-      <Link href="/create-review">
-        <PrimaryButton as="a">เขียนรีวิว</PrimaryButton>
-      </Link>
-    </React.Fragment>
+    <TabsStyled defaultActiveKey="0" animated={false}>
+      {tabLists.map(({ title }, index) => (
+        <TabPaneStyled tab={<Span>{title}</Span>} key={String(index)}>
+          <ItemLists />
+        </TabPaneStyled>
+      ))}
+    </TabsStyled>
   );
 };

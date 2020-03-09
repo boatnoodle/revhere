@@ -19,7 +19,7 @@ const Container = styled.div`
 `;
 
 const StyledLayout = styled(Layout)`
-  background-color: white !important;
+  background-color: #f1f2f2 !important;
   & footer {
     text-align: center !important;
   }

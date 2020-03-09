@@ -11,6 +11,7 @@ const { Search } = Input;
 
 const MenuStyled = styled(Menu)`
   text-align: right !important;
+  border: none;
 `;
 
 const Logo = styled.a`
