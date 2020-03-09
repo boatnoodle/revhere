@@ -3,7 +3,6 @@ import { TabPaneComponent } from './Components/TabPaneComponent';
 import { ListComponent } from './Components/List';
 import StandardGrid from 'components/Standard-grid';
 import Notification from 'components/Notification';
-
 export const LandingPage: FunctionComponent = () => {
   return (
     <Fragment>

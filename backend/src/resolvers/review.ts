@@ -42,15 +42,17 @@ const resolver = {
 
       return review;
     },
-    getReviews: async (_, { status = "publish", page, perPage = 10 }) => {
+    getReviews: async (_, { status = "PUBLISH", page, perPage = 10 }) => {
       const reviews = await Review.find({ status: ReviewStatus[status] })
         .skip(page * perPage)
         .limit(perPage);
 
       return reviews;
     },
-    getReviewsMeta: async (_, { status = "publish" }) => {
-      const countQuery = await Review.where({ status }).countDocuments();
+    getReviewsMeta: async (_, { status = "PUBLISH" }) => {
+      const countQuery = await Review.where({
+        status: ReviewStatus[status]
+      }).countDocuments();
 
       return { count: countQuery };
     }
