@@ -26,7 +26,7 @@ font-display:auto;font-style:normal;font-weight:400;
 }
 
 .tk-ibm-plex-thai { font-family: "ibm-plex-thai",sans-serif; }
-.tk-ibm-plex-thai-looped { font-family: "ibm-plex-thai-looped",sans-serif;font-size: 2rem; }
+.tk-ibm-plex-thai-looped { font-family: "ibm-plex-thai-looped",sans-serif; }
 
 
 /* .tox-fullscreen .tox.tox-tinymce.tox-fullscreen{
