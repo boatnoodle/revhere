@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import Loader from './Loader';
-// import { StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons';
 import { List } from 'antd';
 
 import { useQuery } from '@apollo/react-hooks';
 import { GET_MY_REVIEWS } from '../graphql';
 import { Review } from 'types/review';
+import { ImageOptimized } from 'components/ImageOptimized';
 
 const status = {
   PUBLISH: 'PUBLISH',
@@ -67,7 +67,7 @@ const ListUi: React.FC<PropsReview> = ({ data: { reviews } }) => {
       }}
       dataSource={reviews}
       renderItem={item => (
-        <StyledListItem extra={<img width={144} height={144} alt="logo" src={item.imageCover} />}>
+        <StyledListItem extra={<ImageOptimized width={144} height={144} alt="logo" imgPath={item.imageCover} />}>
           <ListItem title={<Title href={`/review/${item._id}`}>{item.titleReview}</Title>} />
           {item.introReview}
           <AuthorName>Nattasit Moonchanabaht</AuthorName>
