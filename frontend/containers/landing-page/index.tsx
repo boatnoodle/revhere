@@ -1,6 +1,6 @@
 import React, { FunctionComponent, Fragment } from 'react';
 import { TabPaneComponent } from './Components/TabPaneComponent';
-import { ListComponent } from './Components/List';
+import { ListComponent } from './Components/ListComponent';
 import StandardGrid from 'components/Standard-grid';
 import Notification from 'components/Notification';
 export const LandingPage: FunctionComponent = () => {
