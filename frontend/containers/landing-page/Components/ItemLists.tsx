@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Loader from './Loader';
 // import { StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons';
 import { List } from 'antd';
-
 import { useQuery } from '@apollo/react-hooks';
 import { GET_MY_REVIEWS } from '../graphql';
 import { Review } from 'types/review';
