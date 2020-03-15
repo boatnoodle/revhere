@@ -76,11 +76,13 @@ export const FormCreateReview: FunctionComponent = () => {
         </Field>
       </FormItem>
       <FormItem>
-        <Field name="titleReview">{({ field }) => <InputText suffix="0/80" placeholder="หัวข้อ" {...field} />}</Field>
+        <Field name="titleReview">
+          {({ field }) => <InputText limitCharactor={10} placeholder="หัวข้อ" {...field} />}
+        </Field>
       </FormItem>
       <FormItem>
         <Field name="introReview">
-          {({ field }) => <InputText suffix="0/120" placeholder="เกริ่นนำ" {...field} />}
+          {({ field }) => <InputText limitCharactor={120} placeholder="เกริ่นนำ" {...field} />}
         </Field>
       </FormItem>
       <FormItem>
