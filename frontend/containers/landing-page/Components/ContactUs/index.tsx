@@ -42,24 +42,22 @@ const TextAreaStyled = styled(TextArea)`
 
 export const ContactUs: FunctionComponent = () => {
   return (
-    <div>
-      <Container>
-        <BoxRow>
-          <IconFeedback />
-          <TitleText>ส่งความเห็นถึงเรา</TitleText>
-        </BoxRow>
-        <HrStyled />
-        <Box>
-          <div>
-            เรามีความยินดีอย่างยิ่ง ที่จะให้คุณมีส่วนร่วมใน การพัฒนาสถานที่แห่งนี้ และขอบคุณล่วงหน้า
-            สำหรับข้อเสนอแนะหรือความคิดเห็นของคุณ
-          </div>
-          <TextAreaStyled allowClear rows={5} placeholder="กรุณาเข้าสู่ระบบ"></TextAreaStyled>
-          <div style={{ marginTop: '10px', textAlign: 'right' }}>
-            <OutlinePrimaryButton>ส่งข้อความ</OutlinePrimaryButton>
-          </div>
-        </Box>
-      </Container>
-    </div>
+    <Container>
+      <BoxRow>
+        <IconFeedback />
+        <TitleText>ส่งความเห็นถึงเรา</TitleText>
+      </BoxRow>
+      <HrStyled />
+      <Box>
+        <div>
+          เรามีความยินดีอย่างยิ่ง ที่จะให้คุณมีส่วนร่วมใน การพัฒนาสถานที่แห่งนี้ และขอบคุณล่วงหน้า
+          สำหรับข้อเสนอแนะหรือความคิดเห็นของคุณ
+        </div>
+        <TextAreaStyled allowClear rows={5} placeholder="กรุณาเข้าสู่ระบบ" />
+        <div style={{ marginTop: '10px', textAlign: 'right' }}>
+          <OutlinePrimaryButton>ส่งข้อความ</OutlinePrimaryButton>
+        </div>
+      </Box>
+    </Container>
   );
 };
