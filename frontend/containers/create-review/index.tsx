@@ -9,7 +9,6 @@ import { CREATE_REVIEW } from './graphql';
 import { FormCreateReview } from './Components/FormCreateReview';
 import { UtilityBar } from 'components/UtilityBar';
 import { PrimaryButton } from 'components/Button';
-import { MenuCategory } from './Components/MenuCategory';
 
 const Wrapper = styled.div`
   display: grid;
@@ -52,14 +51,14 @@ export const CreateReview: FunctionComponent = () => {
     tags: [],
   };
 
-  const onSubmit = async values => {
+  const onSubmit = async (values): Promise<any> => {
     const result = await createReview({ variables: { ...values } });
     message.success('บันทึกรีิวิวสำเร็จ');
     const reviewId = result?.data?.createReview?._id;
     router.push(`/update-review/${reviewId}`);
   };
 
-  const TopBar = () => {
+  const TopBar = (): JSX.Element => {
     return (
       <TopBarStyled>
         <ButtonAbsolute>เผยแพร่</ButtonAbsolute>
@@ -73,10 +72,9 @@ export const CreateReview: FunctionComponent = () => {
       <UtilityBar content={<TopBar />} />
       <Wrapper>
         <Formik initialValues={initialValues} onSubmit={onSubmit}>
-          {() => {
+          {(): JSX.Element => {
             return (
               <Container>
-                <MenuCategory />
                 <FormCreateReview />
               </Container>
             );

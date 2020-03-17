@@ -12,20 +12,29 @@ const InputTextStyled = styled(Input)`
   align-items: center;
 `;
 
-export const InputText = ({ placeholder, limitCharactor = 10 }) => {
+interface Props {
+  placeholder: string;
+  limitCharactor: number;
+  name: string;
+  onChange: (e: React.ChangeEvent<any>) => void;
+  value: any;
+}
+
+export const InputText: React.FC<Props> = ({ placeholder, limitCharactor = 10, ...rest }) => {
   const [limitSuffix, setLimitSuffix] = useState(null);
 
-  const limitText = e => {
-    const value = e.target.value?.length;
+  const limitText = (e: React.FormEvent<HTMLInputElement>): void => {
+    const value = e.currentTarget.value?.length;
     setLimitSuffix(`${value}/${limitCharactor}`);
   };
 
   return (
     <InputTextStyled
       placeholder={placeholder}
-      onChange={limitText}
+      onKeyUp={limitText}
       maxLength={limitCharactor}
       suffix={limitSuffix || `0/${limitCharactor}`}
+      {...rest}
     />
   );
 };

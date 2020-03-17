@@ -6,3 +6,10 @@ export interface Review {
   body: string;
   status: string;
 }
+export interface NewReview {
+  titleReview: string;
+  introReview: string;
+  imageCover: string;
+  reviewCategory: string;
+  tags: string[];
+}

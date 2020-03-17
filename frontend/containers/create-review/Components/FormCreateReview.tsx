@@ -6,6 +6,7 @@ import { EditOutlined } from '@ant-design/icons';
 import { useFormikContext, Field } from 'formik';
 import { InputText } from 'components/Input/InputText';
 import { Editor } from './Editor';
+import { MenuCategory } from './MenuCategory';
 
 const StyledButton = styled(Button)`
   background-color: #17bf63;
@@ -52,23 +53,37 @@ export const FormCreateReview: FunctionComponent = () => {
   const { submitForm } = useFormikContext();
   const [imageUrl, setImageUrl] = useState();
 
-  const customUpload = (file, setFieldValue) => {
+  const customUpload = (
+    file: object,
+    setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void,
+  ): void => {
     getBase64(file, imageUrl => setImageUrl(imageUrl));
     setFieldValue('imageCover', file);
   };
 
   const uploadButton = <ButtonUpload className="ant-upload-text">อัพโหลดรูป</ButtonUpload>;
 
+  const handleChange = values => {
+    console.log(values, 'handle change');
+  };
+
   return (
-    <FormAnt onFinish={submitForm} layout="vertical">
+    <FormAnt onFinish={submitForm} onChange={handleChange} layout="vertical">
+      <FormItem>
+        <Field name="reviewCategory">
+          {({ field, form: { setFieldValue } }): JSX.Element => {
+            return <MenuCategory {...field} setFieldValue={setFieldValue} />;
+          }}
+        </Field>
+      </FormItem>
       <FormItem>
         <Field name="imageCover">
-          {({ form: { setFieldValue } }) => (
+          {({ form: { setFieldValue } }): JSX.Element => (
             <UploadStyled
               name="avatar"
               listType="picture-card"
               showUploadList={false}
-              customRequest={({ file }) => customUpload(file, setFieldValue)}
+              customRequest={({ file }: { file: object }): void => customUpload(file, setFieldValue)}
             >
               {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
             </UploadStyled>
@@ -77,23 +92,20 @@ export const FormCreateReview: FunctionComponent = () => {
       </FormItem>
       <FormItem>
         <Field name="titleReview">
-          {({ field }) => <InputText limitCharactor={10} placeholder="หัวข้อ" {...field} />}
+          {({ field }): JSX.Element => <InputText limitCharactor={10} placeholder="หัวข้อ" {...field} />}
         </Field>
       </FormItem>
       <FormItem>
         <Field name="introReview">
-          {({ field }) => <InputText limitCharactor={120} placeholder="เกริ่นนำ" {...field} />}
+          {({ field }): JSX.Element => <InputText limitCharactor={120} placeholder="เกริ่นนำ" {...field} />}
         </Field>
       </FormItem>
       <FormItem>
         <Field name="body">
-          {({ field, form: { setFieldValue } }) => {
+          {({ field, form: { setFieldValue } }): JSX.Element => {
             return <Editor {...field} setFieldValue={setFieldValue} body="" />;
           }}
         </Field>
-      </FormItem>
-      <FormItem>
-        <StyledButton htmlType="submit">เริ่มต้นเขียนรีวิว</StyledButton>
       </FormItem>
     </FormAnt>
   );
