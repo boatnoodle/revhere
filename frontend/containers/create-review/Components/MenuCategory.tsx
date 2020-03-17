@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Row, Col, Button } from 'antd';
 import IconHeart from '../../../assets/icons/icons8-ok.svg';
+
+import { Row, Col, Button } from 'antd';
+import { NewReview } from 'types/review';
 
 const ButtonMenuCategory = styled(Button)`
   display: flex;
@@ -40,29 +42,58 @@ const IconCircle = styled.svg`
   border-radius: 50%;
 `;
 
-export const MenuCategory = () => {
+const reviewCategories = [
+  {
+    name: 'หนังสือ',
+  },
+  {
+    name: 'ภาพยนต์',
+  },
+  {
+    name: 'ดนตรี',
+  },
+  {
+    name: 'คอร์ส',
+  },
+  {
+    name: 'สถานที่',
+  },
+  {
+    name: 'อื่นๆ',
+  },
+];
+
+interface Props {
+  name: string;
+  setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
+  values: NewReview;
+}
+
+export const MenuCategory: React.FC<Props> = ({ name, setFieldValue }) => {
+  const [category, setCategory] = useState('');
+
+  const handleOnChange = (value: string): void => {
+    setFieldValue(name, value);
+    setCategory(value);
+  };
+
   return (
     <Row style={{ marginTop: '40px', marginBottom: '20px' }} gutter={16}>
-      <Col className="gutter-row">
-        <ButtonMenuCategory className="active" type="primary" shape="round" icon={<IconHeart />}>
-          หนังสือ
-        </ButtonMenuCategory>
-      </Col>
-      <Col className="gutter-row">
-        <ButtonMenuCategory type="primary" shape="round" icon={true ? <IconCircle /> : <IconHeart />}>
-          พ่อกับลูก
-        </ButtonMenuCategory>
-      </Col>
-      <Col className="gutter-row">
-        <ButtonMenuCategory type="primary" shape="round" icon={true ? <IconCircle /> : <IconHeart />}>
-          แนวสัตว์
-        </ButtonMenuCategory>
-      </Col>
-      <Col className="gutter-row">
-        <ButtonMenuCategory type="primary" shape="round" icon={true ? <IconCircle /> : <IconHeart />}>
-          เพื่อนมาบ้าน
-        </ButtonMenuCategory>
-      </Col>
+      {reviewCategories.map((item, index) => {
+        return (
+          <Col key={index} className="gutter-row">
+            <ButtonMenuCategory
+              className={category === item.name ? 'active' : ''}
+              onClick={(): void => handleOnChange(item.name)}
+              type="primary"
+              shape="round"
+              icon={category === item.name ? <IconHeart /> : <IconCircle />}
+            >
+              {item.name}
+            </ButtonMenuCategory>
+          </Col>
+        );
+      })}
     </Row>
   );
 };
