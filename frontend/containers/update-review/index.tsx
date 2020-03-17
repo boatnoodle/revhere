@@ -10,7 +10,6 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { FormUpdateReview } from './Components/FormUpdateReview';
 
 const Container = styled.div`
-  width: 1000px;
   border-radius: 50px;
   background-color: rgba(0, 0, 0, 0.06);
   margin: 15px auto;

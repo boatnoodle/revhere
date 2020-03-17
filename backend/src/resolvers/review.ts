@@ -21,7 +21,7 @@ const upload = (file, path) => {
       )
       .on("error", reject)
       .on("finish", () => {
-        const url = `https://storage.googleapis.com/${bucket.name}/${newFileName}`; //image url from firebase server
+        const url = newFileName; //image url from firebase server
         resolve(url);
       });
   });

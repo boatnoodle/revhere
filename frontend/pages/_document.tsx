@@ -35,6 +35,7 @@ export default class MyDocument extends Document<any> {
           <meta charSet="utf-8" />
           <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-icon-57x57.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png" />
+          <link rel="stylesheet" href="https://use.typekit.net/vkl7rto.css" />
           <meta name="msapplication-TileColor" content="#cdaa04" />
           <meta name="theme-color" content="#ffffff" />
           <script
@@ -46,7 +47,6 @@ export default class MyDocument extends Document<any> {
                       gumlet: "revhere.gumlet.com"
                   }],
                   lazy_load: true,
-                  proxy: true,
                   auto_webp: true
                 };
                 `,

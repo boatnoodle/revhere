@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuth } from './useAuth';
+import { useAuth } from './sessioner';
 import { UserContext } from './context';
 
 export const ProvideAuth = ({ children }) => {

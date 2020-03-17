@@ -11,7 +11,7 @@ if (!process.browser) {
 
 const createApolloClient = (cache = {}, headers?) => {
   return new ApolloClient({
-    // connectToDevTools: process.browser,
+    connectToDevTools: process.browser,
     ssrMode: typeof window !== 'undefined',
     cache: new InMemoryCache(),
     link: createLinks(headers),

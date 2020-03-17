@@ -14,7 +14,7 @@ const Container = styled.div`
   padding: 20px 30px;
   margin: 10px auto;
   border-radius: 12px;
-  background: white url('images/image-reviewer.png');
+  background: white url('/images/image-reviewer.png');
   background-size: 520px 200px;
   background-repeat: no-repeat;
   background-position: top right;

@@ -7,7 +7,7 @@ export default {
       return "hello from production!";
     },
     me: async (_, __, context) => {
-      const { uid } = await context?.user;
+      const uid = await context?.user?.uid;
       return await User.find({ uid });
     },
     users: async () => {
