@@ -42,7 +42,7 @@ export const Editor: React.FC<Props> = ({ setFieldValue, values, body }) => {
           'insertdatetime media table paste code wordcount',
         ],
         toolbar:
-          'fullscreen undo redo | image code | formatselect | bold italic backcolor |  alignleft aligncenter alignright alignjustify |  bullist numlist outdent indent | removeformat',
+          'fullscreen undo redo | image code | formatselect | bold italic backcolor |  bullist numlist outdent indent | removeformat',
         branding: false,
         images_upload_handler: async (blobInfo, success, failure) => {
           const { data } = await uploadImageReviewDetail({ variables: { file: blobInfo.blob() } });
