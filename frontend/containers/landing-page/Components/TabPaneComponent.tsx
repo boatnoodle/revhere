@@ -57,6 +57,9 @@ const TabsStyled = styled(Tabs)`
     border: 1px solid #17bf63;
     background: #ffffff;
   }
+  div.ant-tabs-ink-bar {
+    display: none !important;
+  }
 `;
 
 const TabPaneStyled = styled(TabPane)``;

@@ -1,12 +1,25 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 import { useRouter } from 'next/router';
-
 import { DownOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Menu, Dropdown } from 'antd';
 import { PrimaryButton, OutlinePrimaryButton } from 'components/Button';
 import { useSession } from 'hooks/useSession';
 import { useFirebase } from 'hooks/useFirebase';
-import styled from 'styled-components';
+import IconMyBlog from '../../../../../assets/icons/icon-my-blog.svg';
+import IconSignOut from '../../../../../assets/icons/icon-sign-out.svg';
+
+const MenuStyled = styled(Menu)`
+  top: 10px;
+  border-radius: 7px;
+`;
+const MenuItem = styled(Menu.Item)`
+  margin-bottom: 5px;
+  display: flex;
+  & svg {
+    margin-right: 10px;
+  }
+`;
 
 export const AuthLink = ({ setVisible }) => {
   const router = useRouter();
@@ -29,13 +42,28 @@ export const AuthLink = ({ setVisible }) => {
         break;
     }
   };
+  const menuLists = [
+    {
+      key: 'reviewLists',
+      icon: <IconMyBlog />,
+      label: 'บทความของฉัน',
+    },
+    {
+      key: 'signOut',
+      icon: <IconSignOut />,
+      label: 'ออกจากระบบ',
+    },
+  ];
 
   const menu = (
-    <Menu onClick={onClick}>
-      <Menu.Item key="createReview">เขียนรีวิว</Menu.Item>
-      <Menu.Item key="reviewLists">รีวิวของคุณ</Menu.Item>
-      <Menu.Item key="signOut"> ออกจากระบบ </Menu.Item>
-    </Menu>
+    <MenuStyled onClick={onClick}>
+      {menuLists.map(({ key, icon, label }) => (
+        <MenuItem key={key}>
+          {icon}
+          {label}
+        </MenuItem>
+      ))}
+    </MenuStyled>
   );
 
   const ButtonList = styled.div`

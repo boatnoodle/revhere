@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import Loader from './Loader';
 import { List } from 'antd';
-
 import { useQuery } from '@apollo/react-hooks';
 import { GET_MY_REVIEWS } from '../graphql';
 import { Review } from 'types/review';
