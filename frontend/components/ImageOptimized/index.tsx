@@ -8,6 +8,9 @@ interface Props {
 }
 
 export const ImageOptimized: React.FC<Props> = ({ imgPath, width, height, alt = '' }) => {
+  if (!imgPath) {
+    return <img src="/static/logo/logo.png" alt="image-fallback" width={width} height={height} />;
+  }
   const imageSplit = imgPath.split('/');
   const path = imageSplit[0];
   const nameImage = imageSplit[1];
@@ -25,5 +28,5 @@ export const ImageOptimized: React.FC<Props> = ({ imgPath, width, height, alt = 
     }
   }
 
-  return <img data-src={dataSrc} alt={alt} />;
+  return <img src={dataSrc} alt={alt} />;
 };

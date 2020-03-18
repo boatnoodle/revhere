@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import IconHeart from '../../../assets/icons/icons8-ok.svg';
+import IconHeart from '../../assets/icons/icons8-ok.svg';
 
+import { useQuery } from '@apollo/react-hooks';
 import { Row, Col, Button } from 'antd';
 import { NewReview } from 'types/review';
+import { GET_CATEGORY_REVIEW } from './graphql';
+import { CategoryReview } from 'types/categoryReview';
 
 const ButtonMenuCategory = styled(Button)`
   display: flex;
@@ -42,52 +45,32 @@ const IconCircle = styled.svg`
   border-radius: 50%;
 `;
 
-const reviewCategories = [
-  {
-    name: 'หนังสือ',
-  },
-  {
-    name: 'ภาพยนต์',
-  },
-  {
-    name: 'ดนตรี',
-  },
-  {
-    name: 'คอร์ส',
-  },
-  {
-    name: 'สถานที่',
-  },
-  {
-    name: 'อื่นๆ',
-  },
-];
-
 interface Props {
   name: string;
   setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
-  values: NewReview;
+  value: string;
 }
 
-export const MenuCategory: React.FC<Props> = ({ name, setFieldValue }) => {
-  const [category, setCategory] = useState('');
+export const MenuCategory: React.FC<Props> = ({ name, setFieldValue, value }) => {
+  const { data, loading, error } = useQuery(GET_CATEGORY_REVIEW);
+  const [categoryId, setCategoryId] = useState(null);
 
   const handleOnChange = (value: string): void => {
     setFieldValue(name, value);
-    setCategory(value);
+    setCategoryId(value);
   };
 
   return (
     <Row style={{ marginTop: '40px', marginBottom: '20px' }} gutter={16}>
-      {reviewCategories.map((item, index) => {
+      {data?.categoryReview.map((item, index) => {
         return (
           <Col key={index} className="gutter-row">
             <ButtonMenuCategory
-              className={category === item.name ? 'active' : ''}
-              onClick={(): void => handleOnChange(item.name)}
+              className={categoryId === item?._id || value === item?._id ? 'active' : ''}
+              onClick={(): void => handleOnChange(item._id)}
               type="primary"
               shape="round"
-              icon={category === item.name ? <IconHeart /> : <IconCircle />}
+              icon={categoryId === item?._id || value === item?._id ? <IconHeart /> : <IconCircle />}
             >
               {item.name}
             </ButtonMenuCategory>

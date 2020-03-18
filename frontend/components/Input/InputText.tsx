@@ -20,8 +20,9 @@ interface Props {
   value: any;
 }
 
-export const InputText: React.FC<Props> = ({ placeholder, limitCharactor = 10, ...rest }) => {
-  const [limitSuffix, setLimitSuffix] = useState(null);
+export const InputText: React.FC<Props> = ({ placeholder, limitCharactor = 10, value, ...rest }) => {
+  const defaultLimitSuffix = `${value?.length}/${limitCharactor}`;
+  const [limitSuffix, setLimitSuffix] = useState(defaultLimitSuffix);
 
   const limitText = (e: React.FormEvent<HTMLInputElement>): void => {
     const value = e.currentTarget.value?.length;
@@ -33,6 +34,7 @@ export const InputText: React.FC<Props> = ({ placeholder, limitCharactor = 10, .
       placeholder={placeholder}
       onKeyUp={limitText}
       maxLength={limitCharactor}
+      value={value}
       suffix={limitSuffix || `0/${limitCharactor}`}
       {...rest}
     />

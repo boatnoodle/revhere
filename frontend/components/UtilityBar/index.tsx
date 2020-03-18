@@ -3,13 +3,14 @@ import { CloseOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  position: absolute;
+  position: sticky;
   top: 0;
   display: grid;
   grid-template-columns: 1fr;
   width: 100%;
   padding: 15px;
   color: #fff;
+  z-index: 999;
   background: #263238 0% 0% no-repeat padding-box;
 `;
 

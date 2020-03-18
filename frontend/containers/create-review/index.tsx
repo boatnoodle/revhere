@@ -6,9 +6,8 @@ import { useRouter } from 'next/router';
 import { useMutation } from '@apollo/react-hooks';
 import { Formik } from 'formik';
 import { CREATE_REVIEW } from './graphql';
-import { FormCreateReview } from './Components/FormCreateReview';
+import { FormReview } from 'components/FormReview';
 import { UtilityBar } from 'components/UtilityBar';
-import { PrimaryButton } from 'components/Button';
 
 const Wrapper = styled.div`
   display: grid;
@@ -33,36 +32,28 @@ const TopBarStyled = styled.div`
   justify-content: center;
 `;
 
-const ButtonAbsolute = styled(PrimaryButton)`
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translate(0, -50%);
-`;
-
 export const CreateReview: FunctionComponent = () => {
   const router = useRouter();
-  const [createReview] = useMutation(CREATE_REVIEW);
+  const [createReview, { loading }] = useMutation(CREATE_REVIEW);
   const initialValues = {
     titleReview: '',
     introReview: '',
     imageCover: null,
-    reviewCategory: null,
+    categoryReview: null,
+    body: null,
     tags: [],
   };
 
   const onSubmit = async (values): Promise<any> => {
-    const result = await createReview({ variables: { ...values } });
-    message.success('บันทึกรีิวิวสำเร็จ');
+    const result = await createReview({ variables: { payload: { ...values } } });
     const reviewId = result?.data?.createReview?._id;
-    router.push(`/update-review/${reviewId}`);
+    router.push(`/update-review?reviewId=${reviewId}`);
   };
 
   const TopBar = (): JSX.Element => {
     return (
       <TopBarStyled>
-        <ButtonAbsolute>เผยแพร่</ButtonAbsolute>
-        <div>บันทึก Draft แล้ว</div>
+        <div>Draft {loading && 'saving...'}</div>
       </TopBarStyled>
     );
   };
@@ -75,7 +66,7 @@ export const CreateReview: FunctionComponent = () => {
           {(): JSX.Element => {
             return (
               <Container>
-                <FormCreateReview />
+                <FormReview />
               </Container>
             );
           }}

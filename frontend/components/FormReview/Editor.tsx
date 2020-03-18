@@ -13,11 +13,10 @@ const TinyMceEditor = dynamic<IAllProps>(() => import('@tinymce/tinymce-react').
 
 interface Props {
   setFieldValue: any;
-  values: any;
-  body: string;
+  value: string;
 }
 
-export const Editor: React.FC<Props> = ({ setFieldValue, values, body }) => {
+export const Editor: React.FC<Props> = ({ setFieldValue, value }) => {
   const [uploadImageReviewDetail] = useMutation(UPLOAD_IMAGE_REVIEW_DETAIL);
 
   const handleEditorChange = (content, editor) => {
@@ -27,7 +26,7 @@ export const Editor: React.FC<Props> = ({ setFieldValue, values, body }) => {
   return (
     <TinyMceEditor
       apiKey="l521ol91f9n8nq7xqws25ffwjk6co687wtgf604pkxrbfyx9"
-      initialValue={body}
+      initialValue={value}
       init={{
         body_class: 'tk-ibm-plex-thai-looped',
         content_css: 'https://use.typekit.net/vkl7rto.css',
