@@ -38,8 +38,7 @@ const resolver = {
       return reviews;
     },
     getReview: async (_, { _id }, context) => {
-      const review = await Review.findById(_id);
-
+      const review = await Review.findById(_id).populate("categoryReview");
       return review;
     },
     getReviews: async (_, { status = "PUBLISH", page, perPage = 10 }) => {
@@ -59,36 +58,48 @@ const resolver = {
   },
   Mutation: {
     createReview: async (_, args, context) => {
+      const { status = "DRAFT", ...rest } = args?.payload;
       const { uid } = await context?.user;
       const userId = await User.findOne({ uid }).select("_id");
-      const file = await args.imageCover;
-      const downloadUrl = await upload(file, "review-image-cover");
 
       const review = await Review.create({
-        ...args,
+        ...rest,
         user: userId,
-        status: "draft",
-        imageCover: downloadUrl
+        status: ReviewStatus[status]
       });
 
       return review;
     },
-    updateReviewDetail: async (
-      _,
-      { _id, titleReview, introReview, body },
-      context
-    ) => {
+    updateReview: async (_, args, context) => {
+      const {
+        _id,
+        titleReview,
+        introReview,
+        body,
+        imageCover,
+        categoryReview,
+        tags
+      } = args?.payload;
       const review = await Review.findOneAndUpdate(
         { _id },
-        { $set: { titleReview, introReview, body } },
+        {
+          $set: {
+            titleReview,
+            introReview,
+            body,
+            imageCover,
+            categoryReview,
+            tags
+          }
+        },
         { new: true }
       );
 
       return review;
     },
-    uploadImageReviewDetail: async (_, { file: imageReviewDetail }) => {
+    uploadImageReview: async (_, { file: imageReviewDetail, path }) => {
       const file = await imageReviewDetail;
-      const urlImage = await upload(file, "review-image-detail");
+      const urlImage = await upload(file, path);
 
       return { urlImage };
     }

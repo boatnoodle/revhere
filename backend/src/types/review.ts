@@ -5,23 +5,13 @@ export default gql`
     getMyReview: [Review]
     getReviews(status: Status, page: Int, perPage: Int): [Review]
     getReview(_id: ID): Review
-
     getReviewsMeta(status: Status): ListMetadata
   }
 
   type Mutation {
-    createReview(
-      titleReview: String
-      introReview: String
-      imageCover: Upload
-    ): Review
-    uploadImageReviewDetail(file: Upload): ImageUrl!
-    updateReviewDetail(
-      _id: ID!
-      titleReview: String
-      introReview: String
-      body: String
-    ): Review
+    createReview(payload: ReviewInput): Review
+    updateReview(payload: ReviewInput): ReviewUpdated
+    uploadImageReview(file: Upload, path: String): ImageUrl!
   }
 
   type ImageUrl {
@@ -35,7 +25,29 @@ export default gql`
     imageCover: String
     body: String
     categoryReview: CategoryReview
-    tag: [Tag]
+    tags: [Tag]
+    status: String
+  }
+
+  type ReviewUpdated {
+    _id: String!
+    titleReview: String
+    introReview: String
+    imageCover: String
+    body: String
+    categoryReview: String
+    tags: [Tag]
+    status: String
+  }
+
+  input ReviewInput {
+    _id: ID
+    titleReview: String
+    introReview: String
+    imageCover: String
+    body: String
+    categoryReview: ID
+    tags: [ID]
     status: String
   }
 
