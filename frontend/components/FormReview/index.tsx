@@ -119,7 +119,7 @@ export const FormReview: FunctionComponent<Props> = ({ typeForm = 'create' }) =>
       </FormItem>
       <FormItem>
         <Field name="introReview">
-          {({ field }): JSX.Element => <InputText limitCharactor={120} placeholder="เกริ่นนำ" {...field} />}
+          {({ field }): JSX.Element => <InputText limitCharactor={200} placeholder="เกริ่นนำ" {...field} />}
         </Field>
       </FormItem>
       <FormItem>
