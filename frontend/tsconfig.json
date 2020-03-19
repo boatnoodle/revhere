@@ -4,19 +4,14 @@
     "target": "es2019",
     "jsx": "preserve",
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "sourceMap": false,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "outDir": "tsoutput",
     "allowJs": true,
-    "typeRoots": [
-      "frontend/@types"
-    ],
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "typeRoots": ["frontend/@types"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "skipLibCheck": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
@@ -27,15 +22,6 @@
       "~/*": ["*"] // resolve any `~/foo/bar` to `<baseUrl>/foo/bar`
     }
   },
-  "exclude": [
-    "frontend/out",
-    "frontend/.next",
-    "tsoutput",
-    "node_modules/**"
-  ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "exclude": ["frontend/out", "frontend/.next", "tsoutput", "node_modules/**"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }
