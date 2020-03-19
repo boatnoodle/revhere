@@ -16,6 +16,7 @@ const CategoryReview = styled.div`
   color: #607d8b;
   font-size: 17px;
   letter-spacing: 0.2px;
+  margin-bottom: 5px;
 `;
 
 const TitleReview = styled.div`
