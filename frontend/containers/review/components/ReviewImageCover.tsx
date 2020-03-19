@@ -10,15 +10,13 @@ const Container = styled.div`
   display: grid;
   justify-content: center;
   width: 100%;
-  background: #f0f0f0;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  margin: 32px auto;
 `;
 
-export const ReviewCover: FunctionComponent<Props> = ({ imageCover }) => {
+export const ReviewImageCover: FunctionComponent<Props> = ({ imageCover }) => {
   return (
     <Container>
-      <ImageOptimized imgPath={imageCover} width={1200} height={500} alt="imageCover" />
+      <ImageOptimized imgPath={imageCover} width={700} height={300} alt="imageCover" style={{ borderRadius: '12px' }} />
     </Container>
   );
 };

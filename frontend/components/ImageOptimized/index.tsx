@@ -5,11 +5,12 @@ interface Props {
   width?: number;
   height?: number;
   alt?: string;
+  style?: {};
 }
 
-export const ImageOptimized: React.FC<Props> = ({ imgPath, width, height, alt = '' }) => {
+export const ImageOptimized: React.FC<Props> = ({ imgPath, width, height, alt = '', style = {} }) => {
   if (!imgPath) {
-    return <img src="/static/logo/logo.png" alt="image-fallback" width={width} height={height} />;
+    return <img src="/static/logo/logo.png" alt="image-fallback" width={width} height={height} style={{ ...style }} />;
   }
   const imageSplit = imgPath.split('/');
   const path = imageSplit[0];
@@ -28,5 +29,5 @@ export const ImageOptimized: React.FC<Props> = ({ imgPath, width, height, alt = 
     }
   }
 
-  return <img src={dataSrc} alt={alt} />;
+  return <img src={dataSrc} alt={alt} style={{ ...style }} />;
 };
