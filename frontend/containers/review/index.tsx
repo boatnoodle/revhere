@@ -65,6 +65,8 @@ const TopBarStyled = styled.div`
 
 const ContentBox = styled.div`
   font-size: 1.2em;
+  font-family: Helvetica Neue, Arial, sans-serif;
+  line-height: 2rem;
 `;
 
 export const Review: FunctionComponent<Props> = ({ reviewId }) => {
