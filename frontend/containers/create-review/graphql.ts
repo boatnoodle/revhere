@@ -21,6 +21,8 @@ export const GET_REVIEW = gql`
         name
       }
       status
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -37,6 +39,8 @@ export const UPDATE_REVIEW = gql`
   mutation UpdateReview($payload: ReviewInput) {
     updateReview(payload: $payload) {
       _id
+      createdAt
+      updatedAt
     }
   }
 `;

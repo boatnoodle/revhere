@@ -1,16 +1,18 @@
 import { mergeTypes } from "merge-graphql-schemas";
-import userSchema from "./user";
-import reviewSchema from "./review";
-import categoryReviewSchema from "./categoryReview";
-import tagSchema from "./tag";
-import metaDataSchema from "./metaData";
+import GraphqlDate from "./Date";
+import UserSchema from "./user";
+import ReviewSchema from "./review";
+import CategoryReviewSchema from "./categoryReview";
+import TagSchema from "./tag";
+import MetaDataSchema from "./metaData";
 
 const types = [
-  userSchema,
-  reviewSchema,
-  categoryReviewSchema,
-  tagSchema,
-  metaDataSchema
+  GraphqlDate,
+  UserSchema,
+  ReviewSchema,
+  CategoryReviewSchema,
+  TagSchema,
+  MetaDataSchema
 ];
 
 export default mergeTypes(types, { all: true });

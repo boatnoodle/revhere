@@ -27,6 +27,8 @@ export default gql`
     categoryReview: CategoryReview
     tags: [Tag]
     status: String
+    createdAt: Date
+    updatedAt: Date
   }
 
   type ReviewUpdated {
@@ -38,6 +40,8 @@ export default gql`
     categoryReview: String
     tags: [Tag]
     status: String
+    createdAt: Date
+    updatedAt: Date
   }
 
   input ReviewInput {
