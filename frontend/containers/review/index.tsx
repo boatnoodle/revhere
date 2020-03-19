@@ -65,7 +65,8 @@ const TopBarStyled = styled.div`
 
 const ContentBox = styled.div`
   font-size: 1.2em;
-  font-family: Helvetica Neue, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
   line-height: 2rem;
 `;
 

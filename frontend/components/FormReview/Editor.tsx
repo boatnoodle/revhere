@@ -28,8 +28,8 @@ export const Editor: React.FC<Props> = ({ setFieldValue, value }) => {
       apiKey="l521ol91f9n8nq7xqws25ffwjk6co687wtgf604pkxrbfyx9"
       initialValue={value}
       init={{
-        body_class: 'tk-ibm-plex-thai-looped',
-        content_css: 'https://use.typekit.net/vkl7rto.css',
+        // body_class: 'tk-ibm-plex-thai-looped',
+        // content_css: 'https://use.typekit.net/vkl7rto.css',
         content_style: 'body{font-size: 1.2rem; padding: 20px;}',
         width: 700,
         min_height: 10000,
