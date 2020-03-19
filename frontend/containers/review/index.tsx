@@ -69,6 +69,7 @@ const ContentBox = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
     'Helvetica Neue', sans-serif;
   line-height: 2rem;
+  color: #263238;
 `;
 
 export const Review: FunctionComponent<Props> = ({ reviewId }) => {
