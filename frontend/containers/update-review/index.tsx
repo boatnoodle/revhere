@@ -1,7 +1,10 @@
 import React, { FunctionComponent, Fragment } from 'react';
 import styled from 'styled-components';
-import BreadCrumb from 'components/ฺBreadcrumb';
+import BreadCrumb from 'components/Breadcrumb';
 import ContentLoader from 'react-content-loader';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import 'dayjs/locale/th';
 
 import { Formik } from 'formik';
 import { GET_REVIEW, UPDATE_REVIEW } from 'containers/create-review/graphql';
@@ -9,6 +12,9 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { FormReview } from 'components/FormReview';
 import { UtilityBar } from 'components/UtilityBar';
 import { PrimaryButton } from 'components/Button';
+
+dayjs.extend(relativeTime);
+dayjs.locale('th');
 
 const Wrapper = styled.div`
   display: grid;
@@ -95,7 +101,10 @@ export const UpdateReview: FunctionComponent<Props> = ({ reviewId }) => {
     return (
       <TopBarStyled>
         <ButtonAbsolute>เผยแพร่</ButtonAbsolute>
-        <div>Draft {loadingUpdateReview && 'saving...'}</div>
+        <div>
+          <b>บันทึกแบบร่างแล้ว</b> - {dayjs().to(dayjs(data?.review?.updatedAt))}{' '}
+          {loadingUpdateReview && 'กำลังบันทึก...'}
+        </div>
       </TopBarStyled>
     );
   };
