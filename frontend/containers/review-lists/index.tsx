@@ -1,6 +1,6 @@
 import React, { FunctionComponent, Fragment } from 'react';
 import ContentLoader from 'react-content-loader';
-import BasicGrid from 'components/Standard-grid';
+import { StandardGrid } from 'components/StandardGrid';
 
 import { useQuery } from '@apollo/react-hooks';
 import { GET_MY_REVIEW } from './graphql';
@@ -37,7 +37,7 @@ export const ReviewLists: FunctionComponent = () => {
 
   return (
     <Fragment>
-      <BasicGrid left={<ReviewListMain data={data} />} content={<SideBar />} />
+      <StandardGrid left={<ReviewListMain data={data} />} content={<SideBar />} />
     </Fragment>
   );
 };

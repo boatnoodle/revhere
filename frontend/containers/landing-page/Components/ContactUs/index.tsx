@@ -10,7 +10,6 @@ const BaseBoxCss = css`
 `;
 
 const Container = styled.div`
-  margin-top: 10px;
   background: white;
   border-radius: 13px;
 `;

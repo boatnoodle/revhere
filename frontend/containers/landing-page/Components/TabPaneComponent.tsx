@@ -1,7 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-
-import { ItemLists } from './ItemLists';
 import { Tabs } from 'antd';
 
 const { TabPane } = Tabs;
@@ -34,6 +32,7 @@ const Span = styled.span`
 `;
 
 const TabsStyled = styled(Tabs)`
+  margin-top: 10px;
   .ant-tabs-tab:first-child {
     margin-left: 0px;
   }
@@ -68,9 +67,7 @@ export const TabPaneComponent: FunctionComponent = () => {
   return (
     <TabsStyled defaultActiveKey="0" animated={false}>
       {tabLists.map(({ title }, index) => (
-        <TabPaneStyled tab={<Span>{title}</Span>} key={String(index)}>
-          <ItemLists />
-        </TabPaneStyled>
+        <TabPaneStyled tab={<Span>{title}</Span>} key={String(index)} />
       ))}
     </TabsStyled>
   );
