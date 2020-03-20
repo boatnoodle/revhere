@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
 
 // Props
@@ -12,7 +12,7 @@ const Container = styled.div`
   width: 100%;
   height: 200px;
   padding: 20px 30px;
-  margin: 32px auto 32px auto;
+  margin: 32px auto 0 auto;
   border-radius: 12px;
   background: white url('/images/image-reviewer.png');
   background-size: 520px 200px;
@@ -30,10 +30,23 @@ const Description = styled.div`
   font-weight: 200;
   width: 700px;
 `;
+const CloseBtn = styled.div`
+  &:after {
+    content: 'x';
+    color: #90a4ae;
+  }
+  position: absolute;
+  top: 4px;
+  right: 15px;
+  font-size: 1.5em;
+  cursor: pointer;
+`;
 
 const index: FunctionComponent<Props> = ({ title, description }) => {
+  const [isShowingNotification, setIsShowingNotification] = useState(true);
   return (
-    <Container>
+    <Container style={{ display: !isShowingNotification ? 'none' : 'inherit' }}>
+      <CloseBtn onClick={() => setIsShowingNotification(false)} />
       <Title>{title}</Title>
       <Description>{description}</Description>
     </Container>
