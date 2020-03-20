@@ -16,38 +16,23 @@ function ReviewPage(props) {
 
   return (
     <Layouts>
-      {/* // site_name: 'SiteName', */}
       <NextSeo
-        title={`${data?.review?.titleReview} | Revhere`}
-        description={data?.review?.introReview}
+        title={`${review?.titleReview} | Revhere`}
+        description={review?.introReview}
         canonical="https://revhere.com"
         openGraph={{
           url: 'https://revhere.com',
-          title: `${data?.review?.titleReview} | Revhere`,
-          description: data?.review?.introReview,
+          title: `${review?.titleReview} | Revhere`,
+          description: review?.introReview,
           images: [
             {
-              url: data?.review?.imageCover && optimizedImgSrc({ imgPath: data?.review?.imageCover, width: 320 }),
+              url: review?.imageCover && optimizedImgSrc({ imgPath: review?.imageCover, width: 320 }),
               width: 320,
               alt: 'image-cover',
             },
           ],
         }}
       />
-      {/* twitter={{
-           handle: '@handle',
-           site: '@site',
-           cardType: 'summary_large_image',
-         }} */}
-      {/* <Head>
-        <meta property="og:title" content={`${review?.titleReview} | Revhere`} />
-        <meta name="og:description" content={review?.introReview} />
-        <title>{`${review?.titleReview} | Revhere`}</title>
-        <meta name="description" content={review?.introReview} />
-        {review?.imageCover && (
-          <meta property="og:image" content={optimizedImgSrc({ imgPath: review?.imageCover, width: 320 })} />
-        )}
-      </Head> */}
       <Review reviewId={reviewId} />
     </Layouts>
   );
