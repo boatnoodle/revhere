@@ -20,7 +20,9 @@ function ReviewPage(props) {
         <meta name="og:description" content={review?.introReview} />
         <title>{`${review?.titleReview} | Revhere`}</title>
         <meta name="description" content={review?.introReview} />
-        <meta property="og:image" content={optimizedImgSrc({ imgPath: review?.imageCover, width: 320 })} />
+        {review?.imageCover && (
+          <meta property="og:image" content={optimizedImgSrc({ imgPath: review?.imageCover, width: 320 })} />
+        )}
       </Head>
       <Review reviewId={reviewId} />
     </Layouts>
