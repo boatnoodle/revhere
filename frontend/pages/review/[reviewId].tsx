@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { NextPage } from 'next';
+import { NextSeo } from 'next-seo';
 import Head from 'next/head';
 
 import { useRouter } from 'next/router';
@@ -9,13 +10,13 @@ import { Review } from 'containers/review';
 import { GET_REVIEW } from 'containers/review/graphql';
 import { optimizedImgSrc } from 'components/ImageOptimized';
 
-function ReviewPage(props) {
-  const { reviewId, data } = props;
-  const { review } = data;
+function ReviewPage() {
+  const router = useRouter();
+  const { reviewId } = router.query;
 
   return (
     <Layouts>
-      <Head>
+      {/* <Head>
         <meta property="og:title" content={`${review?.titleReview} | Revhere`} />
         <meta name="og:description" content={review?.introReview} />
         <title>{`${review?.titleReview} | Revhere`}</title>
@@ -23,21 +24,21 @@ function ReviewPage(props) {
         {review?.imageCover && (
           <meta property="og:image" content={optimizedImgSrc({ imgPath: review?.imageCover, width: 320 })} />
         )}
-      </Head>
+      </Head> */}
       <Review reviewId={reviewId} />
     </Layouts>
   );
 }
 
-ReviewPage.getInitialProps = async ctx => {
-  const { query, apolloClient } = ctx;
-  const { reviewId } = query;
-  const queries = await apolloClient.query({
-    query: GET_REVIEW,
-    variables: { _id: reviewId, forceQuery: false },
-    skip: !reviewId,
-  });
-  return { ...queries, reviewId };
-};
+// ReviewPage.getInitialProps = async ctx => {
+//   const { query, apolloClient } = ctx;
+//   const { reviewId } = query;
+//   const queries = await apolloClient.query({
+//     query: GET_REVIEW,
+//     variables: { _id: reviewId, forceQuery: false },
+//     skip: !reviewId,
+//   });
+//   return { ...queries, reviewId };
+// };
 
 export default withApollo(ReviewPage, { ssr: true });
