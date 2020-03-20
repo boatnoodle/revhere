@@ -16,7 +16,16 @@ function ReviewPage(props) {
 
   return (
     <Layouts>
-      <NextSeo
+      <Head>
+        <meta property="og:title" content={`${review?.titleReview} | Revhere`} />
+        <meta name="og:description" content={review?.introReview} />
+        <title>{`${review?.titleReview} | Revhere`}</title>
+        <meta name="description" content={review?.introReview} />
+        {review?.imageCover && (
+          <meta property="og:image" content={optimizedImgSrc({ imgPath: review?.imageCover, width: 320 })} />
+        )}
+      </Head>
+      {/* <NextSeo
         title={`${review?.titleReview} | Revhere`}
         description={review?.introReview}
         facebook={{
@@ -38,7 +47,7 @@ function ReviewPage(props) {
           // eslint-disable-next-line @typescript-eslint/camelcase
           site_name: 'Revhere',
         }}
-      />
+      /> */}
       <Review reviewId={reviewId} />
     </Layouts>
   );
