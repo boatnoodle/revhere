@@ -42,7 +42,7 @@ const CloseBtn = styled.div`
   cursor: pointer;
 `;
 
-const index: FunctionComponent<Props> = ({ title, description }) => {
+export const Notification: FunctionComponent<Props> = ({ title, description }) => {
   const [isShowingNotification, setIsShowingNotification] = useState(true);
   return (
     <Container style={{ display: !isShowingNotification ? 'none' : 'inherit' }}>
@@ -52,5 +52,3 @@ const index: FunctionComponent<Props> = ({ title, description }) => {
     </Container>
   );
 };
-
-export default index;

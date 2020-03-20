@@ -1,7 +1,7 @@
 import React, { FunctionComponent, Fragment } from 'react';
 import { TabPaneComponent } from './Components/TabPaneComponent';
-import StandardGrid from 'components/Standard-grid';
-import Notification from 'components/Notification';
+import { StandardGrid } from 'components/StandardGrid';
+import { Notification } from 'components/Notification';
 import { ContactUs } from './Components/ContactUs';
 import { ItemLists } from './Components/ItemLists';
 
