@@ -9,6 +9,10 @@ export const GET_REVIEW = gql`
       imageCover
       body
       status
+      categoryReview {
+        _id
+        name
+      }
     }
   }
 `;

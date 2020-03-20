@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+  :root {
+  --desktop-container-width: 1280px;
+  }
 @font-face {
 font-family:"ibm-plex-thai";
 src:url("https://use.typekit.net/af/1bad7a/00000000000000003b9b3253/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/1bad7a/00000000000000003b9b3253/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/1bad7a/00000000000000003b9b3253/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
@@ -40,8 +43,8 @@ font-display:auto;font-style:normal;font-weight:400;
 } */
 
 .mce-content-body img {
-max-width: 100% !important;
-height: auto;
+  max-width: 100% !important;
+  height: auto;
 }
 
 

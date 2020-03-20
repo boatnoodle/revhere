@@ -9,8 +9,7 @@ export interface CategoryReviewDb extends Document {
 const CategoryReviewSchema = new Schema(
   {
     name: {
-      type: String,
-      required: true
+      type: String
     },
     tags: [
       {

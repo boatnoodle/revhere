@@ -27,7 +27,7 @@ export const ReviewListMain: FunctionComponent<Props> = ({ data }) => {
         renderItem={item => (
           <List.Item key={item._id}>
             <List.Item.Meta
-              avatar={<Avatar src={`https://revhere.gumlet.com/fetch/${item.imageCover}`} />}
+              avatar={<Avatar src={`https://revhere.gumlet.com/${item.imageCover}`} />}
               title={
                 <Link href={`/review/${item._id}`}>
                   <a>{item.titleReview}</a>
@@ -36,7 +36,7 @@ export const ReviewListMain: FunctionComponent<Props> = ({ data }) => {
               description={item.introReview}
             />
             <Tag color="orange">{item.status}</Tag>
-            <Link href={`/update-review/${item._id}`}>
+            <Link href={`/update-review?reviewId=${item._id}`}>
               <OutlinePrimaryButton as="a">แก้ไข</OutlinePrimaryButton>
             </Link>
           </List.Item>

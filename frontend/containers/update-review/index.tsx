@@ -1,22 +1,49 @@
 import React, { FunctionComponent, Fragment } from 'react';
 import styled from 'styled-components';
-import BreadCrumb from 'components/ฺBreadcrumb';
+import BreadCrumb from 'components/Breadcrumb';
 import ContentLoader from 'react-content-loader';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import 'dayjs/locale/th';
 
-import { message } from 'antd';
 import { Formik } from 'formik';
-import { GET_REVIEW, UPDATE_REVIEW_DETAIL } from './graphql';
+import { GET_REVIEW, UPDATE_REVIEW } from 'containers/create-review/graphql';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { FormUpdateReview } from './Components/FormUpdateReview';
+import { FormReview } from 'components/FormReview';
+import { UtilityBar } from 'components/UtilityBar';
+import { PrimaryButton } from 'components/Button';
+
+dayjs.extend(relativeTime);
+dayjs.locale('th');
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+  box-shadow: 0px 2px 4px #0000000a;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  padding-top: 40px;
+`;
 
 const Container = styled.div`
-  border-radius: 50px;
-  background-color: rgba(0, 0, 0, 0.06);
-  margin: 15px auto;
-  padding: 40px;
-  display: flex;
+  display: grid;
+  width: 700px;
+`;
+
+const ButtonAbsolute = styled(PrimaryButton)`
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+`;
+
+const TopBarStyled = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  position: relative;
+  text-align: center;
   justify-content: center;
-  align-items: center;
 `;
 
 type Props = {
@@ -25,18 +52,21 @@ type Props = {
 
 export const UpdateReview: FunctionComponent<Props> = ({ reviewId }) => {
   const { data, loading, error } = useQuery(GET_REVIEW, { variables: { _id: reviewId } });
-  const [updateReviewDetail] = useMutation(UPDATE_REVIEW_DETAIL);
+  const [updateReview, { loading: loadingUpdateReview }] = useMutation(UPDATE_REVIEW);
 
   const initialValues = {
+    _id: data?.review?._id,
     titleReview: '' || data?.review?.titleReview,
     introReview: '' || data?.review?.introReview,
     body: '' || data?.review?.body,
+    imageCover: '' || data?.review?.imageCover,
+    tags: '' || data?.review?.tags,
+    categoryReview: '' || data?.review?.categoryReview?._id,
+    status: '' || data?.review?.status,
   };
 
-  const onSubmit = async values => {
-    await updateReviewDetail({ variables: { _id: reviewId, ...values } });
-    message.success('Saved!');
-    // window.scrollTo({ top: 0, behavior: 'smooth' });
+  const onSubmit = async (values): Promise<any> => {
+    updateReview({ variables: { payload: { ...values } } });
   };
 
   if (error) {
@@ -67,16 +97,32 @@ export const UpdateReview: FunctionComponent<Props> = ({ reviewId }) => {
     );
   }
 
+  const TopBar = (): JSX.Element => {
+    return (
+      <TopBarStyled>
+        <ButtonAbsolute>เผยแพร่</ButtonAbsolute>
+        <div>
+          <b>บันทึกแบบร่างแล้ว</b> - {dayjs().to(dayjs(data?.review?.updatedAt))}{' '}
+          {loadingUpdateReview && 'กำลังบันทึก...'}
+        </div>
+      </TopBarStyled>
+    );
+  };
+
   return (
-    <Fragment>
-      <BreadCrumb />
-      <Container>
-        <Formik enableReinitialize initialValues={initialValues} onSubmit={onSubmit}>
-          {props => {
-            return <FormUpdateReview data={data} {...props} />;
+    <>
+      <UtilityBar content={<TopBar />} />
+      <Wrapper>
+        <Formik initialValues={initialValues} onSubmit={onSubmit}>
+          {(): JSX.Element => {
+            return (
+              <Container>
+                <FormReview />
+              </Container>
+            );
           }}
         </Formik>
-      </Container>
-    </Fragment>
+      </Wrapper>
+    </>
   );
 };

@@ -16,6 +16,7 @@ const Container = styled.div`
   width: calc(100vw - 6rem);
   margin: 0 auto;
   min-height: 100vh;
+  position: relative;
 `;
 
 const StyledLayout = styled(Layout)`

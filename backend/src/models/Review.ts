@@ -22,8 +22,7 @@ const ReviewSchema = new Schema(
       ref: "CategoryReview"
     },
     titleReview: {
-      type: String,
-      required: true
+      type: String
     },
     introReview: {
       type: String
