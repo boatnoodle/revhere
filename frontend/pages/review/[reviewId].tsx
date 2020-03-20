@@ -16,24 +16,15 @@ function ReviewPage(props) {
 
   return (
     <Layouts>
-      <Head>
-        <meta property="og:title" content={`${review?.titleReview} | Revhere`} />
-        <meta name="og:description" content={review?.introReview} />
-        <title>{`${review?.titleReview} | Revhere`}</title>
-        <meta name="description" content={review?.introReview} />
-        {review?.imageCover && (
-          <meta property="og:image" content={optimizedImgSrc({ imgPath: review?.imageCover, width: 320 })} />
-        )}
-      </Head>
-      {/* <NextSeo
+      <NextSeo
         title={`${review?.titleReview} | Revhere`}
         description={review?.introReview}
         facebook={{
           appId: '219527889221901',
         }}
-        canonical="https://revhere.com"
+        canonical={`https://revhere.com/review/${reviewId}`}
         openGraph={{
-          url: 'https://revhere.com',
+          url: `https://revhere.com/review/${reviewId}`,
           title: `${review?.titleReview} | Revhere`,
           description: review?.introReview,
           images: [
@@ -47,7 +38,7 @@ function ReviewPage(props) {
           // eslint-disable-next-line @typescript-eslint/camelcase
           site_name: 'Revhere',
         }}
-      /> */}
+      />
       <Review reviewId={reviewId} />
     </Layouts>
   );
