@@ -39,7 +39,7 @@ function ReviewPage(props) {
            site: '@site',
            cardType: 'summary_large_image',
          }} */}
-      <Head>
+      {/* <Head>
         <meta property="og:title" content={`${review?.titleReview} | Revhere`} />
         <meta name="og:description" content={review?.introReview} />
         <title>{`${review?.titleReview} | Revhere`}</title>
@@ -47,7 +47,7 @@ function ReviewPage(props) {
         {review?.imageCover && (
           <meta property="og:image" content={optimizedImgSrc({ imgPath: review?.imageCover, width: 320 })} />
         )}
-      </Head>
+      </Head> */}
       <Review reviewId={reviewId} />
     </Layouts>
   );
