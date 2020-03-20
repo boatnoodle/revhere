@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import Loader from './Loader';
+import Link from 'next/link';
+
 import { List } from 'antd';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_MY_REVIEWS } from '../graphql';
@@ -67,7 +69,13 @@ const ListUi: React.FC<PropsReview> = ({ data: { reviews } }) => {
       dataSource={reviews}
       renderItem={item => (
         <StyledListItem extra={<ImageOptimized width={144} height={144} alt="logo" imgPath={item.imageCover} />}>
-          <ListItem title={<Title href={`/review/${item._id}`}>{item.titleReview}</Title>} />
+          <ListItem
+            title={
+              <Link href="/review/[reviewId]" as={`/review/${item._id}`}>
+                <Title>{item.titleReview}</Title>
+              </Link>
+            }
+          />
           {item.introReview}
           <AuthorName>Nattasit Moonchanabaht</AuthorName>
           หนังสือ - 6 มีนาคม
