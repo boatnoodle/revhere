@@ -105,29 +105,6 @@ export const Review: FunctionComponent<Props> = ({ reviewId }) => {
 
   return (
     <>
-      <NextSeo
-        title={`${data?.review?.titleReview} | Revhere`}
-        description={data?.review?.introReview}
-        canonical="https://revhere.com"
-        openGraph={{
-          url: 'https://revhere.com',
-          title: `${data?.review?.titleReview} | Revhere`,
-          description: data?.review?.introReview,
-          images: [
-            {
-              url: data?.review?.imageCover && optimizedImgSrc({ imgPath: data?.review?.imageCover, width: 320 }),
-              width: 320,
-              alt: 'image-cover',
-            },
-          ],
-          // site_name: 'SiteName',
-        }}
-        // twitter={{
-        //   handle: '@handle',
-        //   site: '@site',
-        //   cardType: 'summary_large_image',
-        // }}
-      />
       <UtilityBar content={<TopBar />} />
       <Wrapper>
         <Container>
