@@ -30,9 +30,9 @@ const MyApp = props => {
       <DefaultSeo
         title={title}
         description={description}
-        // facebook={{
-        //   appId: "1010210579171890"
-        // }}
+        facebook={{
+          appId: '219527889221901',
+        }}
         openGraph={{
           url: 'https://revhere.com',
           title,

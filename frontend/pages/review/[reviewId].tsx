@@ -19,6 +19,9 @@ function ReviewPage(props) {
       <NextSeo
         title={`${review?.titleReview} | Revhere`}
         description={review?.introReview}
+        facebook={{
+          appId: '219527889221901',
+        }}
         canonical="https://revhere.com"
         openGraph={{
           url: 'https://revhere.com',
@@ -31,6 +34,9 @@ function ReviewPage(props) {
               alt: 'image-cover',
             },
           ],
+          type: 'website',
+          // eslint-disable-next-line @typescript-eslint/camelcase
+          site_name: 'Revhere',
         }}
       />
       <Review reviewId={reviewId} />
