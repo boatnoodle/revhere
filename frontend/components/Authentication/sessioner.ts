@@ -1,6 +1,6 @@
 import 'firebase/auth';
 import React, { useState, useEffect } from 'react';
-import firebase from 'firebase/app';
+import firebase, { auth } from 'firebase/app';
 import cookie from 'js-cookie';
 
 import { useRouter } from 'next/router';
@@ -21,13 +21,16 @@ export const useAuth = () => {
   });
 
   const subscribeAuthChange = async (user, isSubscribed) => {
-    const authUserJson = user?.toJSON() as any;
+    let authUserJson = user?.toJSON() as any;
     const authProvider = authUserJson?.providerData[0].providerId;
 
     if (isSubscribed && authUserJson && authProvider === 'facebook.com') {
       const token = authUserJson?.stsTokenManager?.accessToken;
       localStorage.setItem('token', token);
       cookie.set('token', token, { expires: 1 });
+      if (!authUserJson?.photoURL) {
+        authUserJson = { photoURL: '/static/logo/logo.png', ...authUserJson };
+      }
       setUser(authUserJson);
       setInitializing(false);
     } else {
