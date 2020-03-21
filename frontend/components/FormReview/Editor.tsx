@@ -42,7 +42,9 @@ export const Editor: React.FC<Props> = ({ setFieldValue, value }) => {
           'fullscreen undo redo | image code | formatselect | bold italic backcolor |  bullist numlist outdent indent | removeformat',
         branding: false,
         images_upload_handler: async (blobInfo, success, failure) => {
-          const { data } = await uploadImageReviewDetail({ variables: { file: blobInfo.blob() } });
+          const { data } = await uploadImageReviewDetail({
+            variables: { file: blobInfo.blob(), path: 'review-image-detail' },
+          });
           const { imageReviewDetail } = data;
           const gumletImagePath = `https://revhere.gumlet.com/${imageReviewDetail.urlImage}`;
 
