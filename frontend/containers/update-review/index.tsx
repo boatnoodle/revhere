@@ -7,11 +7,15 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/th';
 
 import { Formik } from 'formik';
+import { message } from 'antd';
 import { GET_REVIEW, UPDATE_REVIEW } from 'containers/create-review/graphql';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { FormReview } from 'components/FormReview';
 import { UtilityBar } from 'components/UtilityBar';
 import { PrimaryButton } from 'components/Button';
+import { REVIEW_STATUS_ENUM, REVIEW_STATUS_TEXT } from 'utils/revewStatus';
+import { UPDATE_STATUS_REVIEW } from './graphql';
+import { useRouter } from 'next/router';
 
 dayjs.extend(relativeTime);
 dayjs.locale('th');
@@ -46,6 +50,14 @@ const TopBarStyled = styled.div`
   justify-content: center;
 `;
 
+const Publish = styled.div`
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  color: #17bf63;
+`;
+
 type Props = {
   reviewId: {};
 };
@@ -53,6 +65,8 @@ type Props = {
 export const UpdateReview: FunctionComponent<Props> = ({ reviewId }) => {
   const { data, loading, error } = useQuery(GET_REVIEW, { variables: { _id: reviewId } });
   const [updateReview, { loading: loadingUpdateReview }] = useMutation(UPDATE_REVIEW);
+  const [updateStatusReview] = useMutation(UPDATE_STATUS_REVIEW);
+  const router = useRouter();
 
   const initialValues = {
     _id: data?.review?._id,
@@ -67,6 +81,12 @@ export const UpdateReview: FunctionComponent<Props> = ({ reviewId }) => {
 
   const onSubmit = async (values): Promise<any> => {
     updateReview({ variables: { payload: { ...values } } });
+  };
+
+  const publishReview = async () => {
+    await updateStatusReview({ variables: { _id: data?.review?._id, status: 'PUBLISH' } });
+    message.success('บทความของคุณถูกเผยแพร่เรียบร้อยแล้ว');
+    router.push('/review-lists');
   };
 
   if (error) {
@@ -100,10 +120,15 @@ export const UpdateReview: FunctionComponent<Props> = ({ reviewId }) => {
   const TopBar = (): JSX.Element => {
     return (
       <TopBarStyled>
-        <ButtonAbsolute>เผยแพร่</ButtonAbsolute>
+        {data?.review?.status === REVIEW_STATUS_ENUM.DRAFT ? (
+          <ButtonAbsolute onClick={publishReview}>เผยแพร่</ButtonAbsolute>
+        ) : (
+          <Publish>{REVIEW_STATUS_TEXT.PUBLISH}</Publish>
+        )}
+
         <div>
-          <b>บันทึกแบบร่างแล้ว</b> - {dayjs().to(dayjs(data?.review?.updatedAt))}{' '}
-          {loadingUpdateReview && 'กำลังบันทึก...'}
+          <b>{data?.review?.status === REVIEW_STATUS_ENUM.DRAFT ? 'บันทึกแบบร่างแล้ว' : 'บันทึกบทความแล้ว'}</b> -{' '}
+          {dayjs().to(dayjs(data?.review?.updatedAt))} {loadingUpdateReview && 'กำลังบันทึก...'}
         </div>
       </TopBarStyled>
     );

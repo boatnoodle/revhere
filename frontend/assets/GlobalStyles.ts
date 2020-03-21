@@ -42,12 +42,6 @@ font-display:auto;font-style:normal;font-weight:400;
   transform: translate(-50%, 0);
 } */
 
-.mce-content-body img {
-  max-width: 100% !important;
-  height: auto;
-}
-
-
 body {
   font-family: ibm-plex-thai, sans-serif;
   font-weight: 400;

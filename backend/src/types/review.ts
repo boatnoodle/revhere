@@ -10,13 +10,15 @@ export default gql`
       perPage: Int
     ): [Review]
     getReview(_id: ID): Review
-    getReviewsMeta(status: Status): ListMetadata
+    getReviewsMeta(categoryReview: ID, status: Status): ListMetadata
   }
 
   type Mutation {
     createReview(payload: ReviewInput): Review
     updateReview(payload: ReviewInput): ReviewUpdated
     uploadImageReview(file: Upload, path: String): ImageUrl!
+    updateStatusReview(_id: ID, status: Status): Review
+    deleteReview(_id: ID): Review
   }
 
   type ImageUrl {
