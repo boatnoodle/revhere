@@ -4,7 +4,17 @@ export interface Review {
   introReview: string;
   imageCover: string;
   body: string;
+  categoryReview: {
+    _id: string;
+    name: string;
+  };
+  tags: {
+    _id: string;
+    name: string;
+  };
   status: string;
+  created: Date;
+  updated: Date;
 }
 export interface NewReview {
   titleReview: string;

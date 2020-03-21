@@ -13,7 +13,7 @@ export const LandingPage: FunctionComponent = () => {
         description="Revhere เป็นเว็บบอร์ดน้องใหม่ ที่มีการจัดหมวดหมู่ตามความสนใจนั้นๆ คุณสามารถเขียน และแบ่งปันประสบการณ์ คำวิจารณ์ และบอกต่อสิ่งๆนั้น ให้กับชุมชนที่มีความสนใจเดียวกัน"
       />
       <TabPaneComponent />
-      <StandardGrid content={<ContactUs />} left={<ItemLists />} />
+      <StandardGrid left={<ItemLists />} content={<ContactUs />} />
     </Fragment>
   );
 };

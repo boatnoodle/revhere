@@ -112,7 +112,7 @@ export const Review: FunctionComponent<Props> = ({ reviewId }) => {
           <TitleReview>{data?.review?.titleReview}</TitleReview>
           <IntroReview>{data?.review?.introReview}</IntroReview>
           <ReviewImageCover imageCover={data?.review?.imageCover} />
-          <ReviewInfo />
+          <ReviewInfo updated={data?.review?.updated} />
           <div style={{ margin: '17px 0 32px 0' }}>
             <hr style={{ borderColor: '#fafafa61' }} />
           </div>

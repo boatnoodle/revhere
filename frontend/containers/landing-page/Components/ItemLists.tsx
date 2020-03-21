@@ -2,12 +2,18 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import Loader from './Loader';
 import Link from 'next/link';
+import dayjs from 'dayjs';
+import 'dayjs/locale/th';
 
 import { List } from 'antd';
 import { useQuery } from '@apollo/react-hooks';
-import { GET_MY_REVIEWS } from '../graphql';
+import { GET_REVIEWS } from '../graphql';
 import { Review } from 'types/review';
 import { ImageOptimized } from 'components/ImageOptimized';
+import { useSession } from 'hooks/useSession';
+import { UserProfile } from 'types/user';
+
+dayjs.locale('th');
 
 const status = {
   PUBLISH: 'PUBLISH',
@@ -32,9 +38,6 @@ const StyledListItem = styled(List.Item)`
   & .ant-list-item-action {
     margin-top: 10px !important;
   }
-  & .ant-list-item-main {
-    /* margin-left: 20px !important; */
-  }
   & img {
     border-radius: 10px;
   }
@@ -53,9 +56,10 @@ interface PropsReview {
   data: {
     reviews: Review[];
   };
+  user: UserProfile;
 }
 
-const ListUi: React.FC<PropsReview> = ({ data: { reviews } }) => {
+const ListUi: React.FC<PropsReview> = ({ data: { reviews }, user: { displayName } }) => {
   return (
     <List
       itemLayout="vertical"
@@ -77,8 +81,8 @@ const ListUi: React.FC<PropsReview> = ({ data: { reviews } }) => {
             }
           />
           {item.introReview}
-          <AuthorName>Nattasit Moonchanabaht</AuthorName>
-          หนังสือ - 6 มีนาคม
+          <AuthorName>{displayName}</AuthorName>
+          {`${item?.categoryReview?.name || 'ไม่ระบุ'} - ${dayjs(item?.updated).format('DD MMMM')}`}
         </StyledListItem>
       )}
     />
@@ -86,9 +90,10 @@ const ListUi: React.FC<PropsReview> = ({ data: { reviews } }) => {
 };
 const ListItem = styled(List.Item.Meta)``;
 export const ItemLists: FunctionComponent = () => {
-  const { data, loading, error } = useQuery(GET_MY_REVIEWS, params);
-  if (loading) {
+  const { user } = useSession();
+  const { data, loading } = useQuery(GET_REVIEWS, params);
+  if (loading || !user) {
     return <Loader qty={Array(6).fill(null)} />;
   }
-  return <ListUi data={data} />;
+  return <ListUi data={data} user={user} />;
 };

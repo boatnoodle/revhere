@@ -1,9 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import FacebookIcon from '../../../assets/icons/icon-facebook.svg';
+import ContentLoader from 'react-content-loader';
+import dayjs from 'dayjs';
+import 'dayjs/locale/th';
 
 import { Button } from 'antd';
 import { HeartFilled } from '@ant-design/icons';
-import FacebookIcon from '../../../assets/icons/icon-facebook.svg';
+import { useSession } from 'hooks/useSession';
+
+dayjs.locale('th');
 
 const Container = styled.div`
   display: grid;
@@ -46,20 +52,40 @@ const FacebookShareButton = styled(Button)`
   }
 `;
 
-export const ReviewInfo = () => {
+interface Props {
+  updated: Date;
+}
+
+const MyLoader = () => (
+  <ContentLoader
+    speed={2}
+    width={700}
+    height={50}
+    viewBox="0 0 700 50"
+    backgroundColor="#e6e6e6"
+    foregroundColor="#bfbfbf"
+  >
+    <circle cx="31" cy="27" r="23" />
+    <rect x="69" y="35" rx="0" ry="0" width="94" height="10" />
+    <rect x="67" y="12" rx="0" ry="0" width="178" height="12" />
+    <circle cx="551" cy="23" r="16" />
+    <rect x="581" y="9" rx="12" ry="12" width="104" height="27" />
+  </ContentLoader>
+);
+
+export const ReviewInfo: React.FC<Props> = ({ updated }) => {
+  const { user } = useSession();
+  if (!user) {
+    return <MyLoader />;
+  }
   return (
     <Container>
       <ImageProfile>
-        <img
-          src="https://scontent.furt3-1.fna.fbcdn.net/v/t1.0-9/s960x960/74396069_2594174023999170_8719079083155128320_o.jpg?_nc_cat=102&_nc_oc=AQlutKLKb3uNoRq709fD6_1rLDbaTcEIneNb1Srk4016I6lI9IlwFSHJ06jCVeymodc&_nc_ht=scontent.furt3-1.fna&_nc_tp=7&oh=dd756c038d1b68c9bac24b5fe85a4cdd&oe=5EFDF82A"
-          alt="image-profile"
-          width="44"
-          height="44"
-        />
+        <img src={user?.photoURL} alt="image-profile" width="44" height="44" />
       </ImageProfile>
       <InfoReview>
-        <OwnerReviewName>Rofeeya Dsh</OwnerReviewName>
-        <div>2 มีนาคม</div>
+        <OwnerReviewName>{user?.displayName}</OwnerReviewName>
+        <div>{dayjs(updated).format('DD MMMM')} </div>
       </InfoReview>
       <LoveButton>
         <HeartFilled />
