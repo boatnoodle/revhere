@@ -42,10 +42,10 @@ const MenuStyled = styled(Menu)`
 
 const menu = (
   <MenuStyled>
-    {menuLists.map(({ label, url }, index) => {
+    {menuLists.map(({ label, onClick }, index) => {
       return (
         <Menu.Item key={index}>
-          <a href={url}>{label}</a>
+          <a>{label}</a>
         </Menu.Item>
       );
     })}
