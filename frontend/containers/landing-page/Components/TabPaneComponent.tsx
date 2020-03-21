@@ -1,29 +1,10 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Tabs } from 'antd';
+import { CategoryReview } from 'types/categoryReview';
+import { CategoryLoader } from './CategoryLoader';
 
 const { TabPane } = Tabs;
-const tabLists = [
-  {
-    title: 'สำรวจ',
-  },
-  {
-    title: 'หนังสือ',
-  },
-  {
-    title: 'ภาพยนต์',
-  },
-  {
-    title: 'ดนตรี',
-  },
-  {
-    title: 'คอร์ส',
-  },
-  {
-    title: 'สถานที่',
-  },
-];
-
 const Span = styled.span`
   color: white;
   font-size: 16px;
@@ -63,12 +44,35 @@ const TabsStyled = styled(Tabs)`
 
 const TabPaneStyled = styled(TabPane)``;
 
-export const TabPaneComponent: FunctionComponent = () => {
+interface Props {
+  data: {
+    categoryLists: CategoryReview[];
+  };
+  setCategoryReview: Function;
+}
+const CategoryLists: React.FC<Props> = ({ data: { categoryLists }, setCategoryReview }) => {
   return (
-    <TabsStyled defaultActiveKey="0" animated={false}>
-      {tabLists.map(({ title }, index) => (
-        <TabPaneStyled tab={<Span>{title}</Span>} key={String(index)} />
+    <TabsStyled onTabClick={key => setCategoryReview(key)} defaultActiveKey="0" animated={false}>
+      <TabPaneStyled tab={<Span>สำรวจ</Span>} key={null} />
+      {categoryLists.map(({ _id, name }, index) => (
+        <TabPaneStyled tab={<Span>{name}</Span>} key={_id} />
       ))}
     </TabsStyled>
   );
+};
+
+interface TabPaneProps {
+  setCategoryReview: any;
+  data: {
+    categoryLists: CategoryReview[];
+  };
+  loading: boolean;
+}
+
+export const TabPaneComponent: React.FC<TabPaneProps> = ({ setCategoryReview, data, loading }) => {
+  if (loading || !data) {
+    return <CategoryLoader qty={Array(6).fill(null)} />;
+  }
+
+  return <CategoryLists data={data} setCategoryReview={setCategoryReview} />;
 };

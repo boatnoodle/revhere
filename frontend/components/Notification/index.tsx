@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
+import { BthWithIcon, OutlineDefaultButton } from 'components/Button';
 
 // Props
 interface Props {
@@ -49,6 +50,8 @@ export const Notification: FunctionComponent<Props> = ({ title, description }) =
       <CloseBtn onClick={() => setIsShowingNotification(false)} />
       <Title>{title}</Title>
       <Description>{description}</Description>
+      <BthWithIcon style={{ marginTop: 10 }}>บอกต่อเพื่อนๆ</BthWithIcon>
+      <OutlineDefaultButton>สมัครสมาชิก</OutlineDefaultButton>
     </Container>
   );
 };

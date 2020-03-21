@@ -1,9 +1,6 @@
-import React, { FunctionComponent } from 'react';
-import { NextPage } from 'next';
+import React from 'react';
 import { NextSeo } from 'next-seo';
-import Head from 'next/head';
 
-import { useRouter } from 'next/router';
 import { withApollo } from 'providers/web-client/with-apollo-client';
 import { Layouts } from 'components/Layout';
 import { Review } from 'containers/review';
