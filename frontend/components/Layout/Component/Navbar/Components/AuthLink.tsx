@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
+import RouterLink from 'next/router';
 import { useRouter } from 'next/router';
 import { DownOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Menu, Dropdown } from 'antd';
@@ -74,15 +75,27 @@ export const AuthLink = ({ setVisible }) => {
     }
   `;
 
+  const ProfileImage = styled.img`
+    border-radius: 50%;
+    width: 32px;
+  `;
+
+  const linkToUrl = url => (url ? RouterLink.push(url) : null);
+
   if (initializing) {
     return <LoadingOutlined style={{ fontSize: 24 }} spin />;
   } else if (user) {
     return (
-      <Dropdown overlay={menu} trigger={['click']}>
-        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-          {user?.displayName} <DownOutlined />
-        </a>
-      </Dropdown>
+      <div>
+        <OutlinePrimaryButton style={{ marginRight: 10 }} onClick={() => linkToUrl('/create-review')}>
+          เขียนรีวิว
+        </OutlinePrimaryButton>
+        <Dropdown overlay={menu} trigger={['click']}>
+          <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+            <ProfileImage src={user?.photoURL} /> <DownOutlined />
+          </a>
+        </Dropdown>
+      </div>
     );
   } else {
     return (
