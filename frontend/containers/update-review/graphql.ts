@@ -27,7 +27,7 @@ export const UPDATE_REVIEW_DETAIL = gql`
 `;
 
 export const UPLOAD_IMAGE_REVIEW_DETAIL = gql`
-  mutation UplaodImageReview($file: Upload, path: String) {
+  mutation UplaodImageReview($file: Upload, $path: String) {
     imageReviewDetail: uploadImageReview(file: $file, path: $path) {
       urlImage
     }
@@ -35,8 +35,8 @@ export const UPLOAD_IMAGE_REVIEW_DETAIL = gql`
 `;
 
 export const UPDATE_STATUS_REVIEW = gql`
-  mutation UpdateStatusReview($status: Status) {
-    updateStatusReview(status: $status) {
+  mutation UpdateStatusReview($_id: ID, $status: Status) {
+    updateStatusReview(_id: $_id, status: $status) {
       _id
     }
   }
