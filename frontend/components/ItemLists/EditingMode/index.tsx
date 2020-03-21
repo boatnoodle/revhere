@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Menu, Dropdown } from 'antd';
+import { REVIEW_STATUS_TEXT } from 'utils/revewStatus';
 
 const Container = styled.div`
   display: flex;
@@ -58,7 +59,7 @@ interface Props {
 export const EditingMode: React.FC<Props> = ({ status }) => {
   return (
     <Container>
-      <Status>{status}</Status>
+      <Status>{REVIEW_STATUS_TEXT[status]}</Status>
       <ManageText>แก้ไข</ManageText>
       <ManageBtn>
         <Dropdown overlay={menu} trigger={['click']}>
