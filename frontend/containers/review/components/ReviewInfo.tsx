@@ -74,13 +74,10 @@ interface Props {
 }
 
 export const ReviewInfo: React.FC<Props> = ({ review }) => {
-  // if (!user) {
-  //   return <MyLoader />;
-  // }
   return (
     <Container>
       <ImageProfile>
-        <img src={review?.user?.photoURL} alt="image-profile" width="44" height="44" />
+        <img src={review?.user?.photoURL || '/static/logo/logo.png'} alt="image-profile" width="44" height="44" />
       </ImageProfile>
       <InfoReview>
         <OwnerReviewName>{review?.user?.name}</OwnerReviewName>
