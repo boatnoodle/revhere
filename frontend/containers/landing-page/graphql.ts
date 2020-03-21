@@ -1,8 +1,17 @@
+import { CategoryReview } from './../../types/categoryReview';
 import { gql } from 'apollo-boost';
 
+export const GET_CATEGORY_LISTS = gql`
+  query GetCategoryLists {
+    categoryLists: getCategoryReview {
+      _id
+      name
+    }
+  }
+`;
 export const GET_REVIEWS = gql`
-  query getReviews($status: Status) {
-    reviews: getReviews(status: $status) {
+  query getReviews($status: Status, $categoryReview: ID) {
+    reviews: getReviews(status: $status, categoryReview: $categoryReview) {
       _id
       titleReview
       introReview

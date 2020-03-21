@@ -6,12 +6,8 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/th';
 
 import { List } from 'antd';
-import { useQuery } from '@apollo/react-hooks';
-import { GET_REVIEWS } from '../graphql';
 import { Review } from 'types/review';
 import { ImageOptimized } from 'components/ImageOptimized';
-import { useSession } from 'hooks/useSession';
-import { UserProfile } from 'types/user';
 
 dayjs.locale('th');
 
@@ -88,9 +84,14 @@ const ListUi: React.FC<PropsReview> = ({ data: { reviews } }) => {
   );
 };
 const ListItem = styled(List.Item.Meta)``;
-export const ItemLists: FunctionComponent = () => {
-  const { data, loading } = useQuery(GET_REVIEWS, params);
-  if (loading) {
+interface Props {
+  loading: boolean;
+  data: {
+    reviews: Review[];
+  };
+}
+export const ItemLists: FunctionComponent<Props> = ({ loading, data }) => {
+  if (loading || !data) {
     return <Loader qty={Array(6).fill(null)} />;
   }
   return <ListUi data={data} />;
