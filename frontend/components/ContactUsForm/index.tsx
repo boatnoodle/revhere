@@ -1,5 +1,5 @@
 import React, { FunctionComponent, Fragment } from 'react';
-import IconFeedback from '../../../../assets/icons/icon-feedback.svg';
+import IconFeedback from '../../assets/icons/icon-feedback.svg';
 import { Input } from 'antd';
 import styled, { css } from 'styled-components';
 import { OutlinePrimaryButton } from 'components/Button';
@@ -45,7 +45,7 @@ const CopyRightTextBox = styled.div`
   margin-top: 15px;
 `;
 
-export const ContactUs: FunctionComponent = () => {
+export const ContactUsForm: FunctionComponent = () => {
   return (
     <Fragment>
       <Container>

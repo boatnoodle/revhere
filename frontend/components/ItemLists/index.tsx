@@ -8,23 +8,23 @@ import 'dayjs/locale/th';
 import { List } from 'antd';
 import { Review } from 'types/review';
 import { ImageOptimized } from 'components/ImageOptimized';
+import { EditingMode } from './EditingMode';
 
 dayjs.locale('th');
 
-const status = {
-  PUBLISH: 'PUBLISH',
-  DRAFT: 'DRAFT',
-};
-const params = {
-  variables: {
-    status: status.DRAFT,
-  },
-};
 const StyledListItem = styled(List.Item)`
   background: white;
   border-radius: 13px;
   padding: 10px 20px;
   margin-bottom: 10px;
+  .ant-list-item-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    .ant-list-item-meta {
+      flex: 0;
+    }
+  }
   & .ant-list-item-extra {
     margin-left: 0 !important;
   }
@@ -37,24 +37,30 @@ const StyledListItem = styled(List.Item)`
   & img {
     border-radius: 10px;
   }
+  div.author-name {
+    color: #17bf63;
+    font-size: 1em;
+    font-weight: 700;
+  }
+  div.review-intro {
+  }
+  div.date {
+    font-weight: 700;
+  }
 `;
 const Title = styled.a`
   font-size: 1.3em;
   font-weight: bolder;
-`;
-const AuthorName = styled.div`
-  color: #17bf63;
-  font-size: 1em;
-  font-weight: 700;
 `;
 
 interface PropsReview {
   data: {
     reviews: Review[];
   };
+  isEditingMode: boolean;
 }
 
-const ListUi: React.FC<PropsReview> = ({ data: { reviews } }) => {
+const ListUi: React.FC<PropsReview> = ({ data: { reviews }, isEditingMode }) => {
   return (
     <List
       itemLayout="vertical"
@@ -69,15 +75,22 @@ const ListUi: React.FC<PropsReview> = ({ data: { reviews } }) => {
       renderItem={item => (
         <StyledListItem extra={<ImageOptimized width={144} height={144} alt="logo" imgPath={item.imageCover} />}>
           <ListItem
+            className="list-item"
             title={
               <Link href="/review/[reviewId]" as={`/review/${item._id}`}>
                 <Title>{item.titleReview}</Title>
               </Link>
             }
           />
-          {item.introReview}
-          <AuthorName>{item?.user?.name}</AuthorName>
-          {`${item?.categoryReview?.name || 'ไม่ระบุ'} - ${dayjs(item?.updated).format('DD MMMM')}`}
+          <div className="review-intro">{item.introReview}</div>
+          <div className="author-name">{item?.user?.name}</div>
+          {!isEditingMode ? (
+            <div className="date">
+              {`${item?.categoryReview?.name || 'ไม่ระบุ'} - ${dayjs(item?.updated).format('DD MMMM')}`}
+            </div>
+          ) : (
+            <EditingMode status={item.status} />
+          )}
         </StyledListItem>
       )}
     />
@@ -89,10 +102,11 @@ interface Props {
   data: {
     reviews: Review[];
   };
+  isEditingMode?: boolean;
 }
-export const ItemLists: FunctionComponent<Props> = ({ loading, data }) => {
+export const ItemLists: FunctionComponent<Props> = ({ loading, data, isEditingMode = false }) => {
   if (loading || !data) {
     return <Loader qty={Array(6).fill(null)} />;
   }
-  return <ListUi data={data} />;
+  return <ListUi data={data} isEditingMode={isEditingMode} />;
 };

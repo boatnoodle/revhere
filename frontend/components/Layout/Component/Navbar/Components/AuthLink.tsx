@@ -22,6 +22,21 @@ const MenuItem = styled(Menu.Item)`
   }
 `;
 
+const ButtonList = styled.div`
+  display: flex;
+  & div {
+    margin: 0 10px;
+    display: flex;
+  }
+`;
+
+const ProfileImage = styled.img`
+  border-radius: 50%;
+  width: 32px;
+`;
+
+const Container = styled.div``;
+
 export const AuthLink = ({ setVisible }) => {
   const router = useRouter();
   const { user, initializing } = useSession();
@@ -43,6 +58,7 @@ export const AuthLink = ({ setVisible }) => {
         break;
     }
   };
+
   const menuLists = [
     {
       key: 'reviewLists',
@@ -67,26 +83,13 @@ export const AuthLink = ({ setVisible }) => {
     </MenuStyled>
   );
 
-  const ButtonList = styled.div`
-    display: flex;
-    & div {
-      margin: 0 10px;
-      display: flex;
-    }
-  `;
-
-  const ProfileImage = styled.img`
-    border-radius: 50%;
-    width: 32px;
-  `;
-
   const linkToUrl = url => (url ? RouterLink.push(url) : null);
 
   if (initializing) {
     return <LoadingOutlined style={{ fontSize: 24 }} spin />;
   } else if (user) {
     return (
-      <div>
+      <Container>
         <OutlinePrimaryButton style={{ marginRight: 10 }} onClick={() => linkToUrl('/create-review')}>
           เขียนรีวิว
         </OutlinePrimaryButton>
@@ -95,7 +98,7 @@ export const AuthLink = ({ setVisible }) => {
             <ProfileImage src={user?.photoURL} /> <DownOutlined />
           </a>
         </Dropdown>
-      </div>
+      </Container>
     );
   } else {
     return (

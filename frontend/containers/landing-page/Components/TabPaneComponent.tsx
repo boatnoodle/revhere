@@ -13,7 +13,6 @@ const Span = styled.span`
 `;
 
 const TabsStyled = styled(Tabs)`
-  margin-top: 10px;
   .ant-tabs-tab:first-child {
     margin-left: 0px;
   }
@@ -39,6 +38,10 @@ const TabsStyled = styled(Tabs)`
   }
   div.ant-tabs-ink-bar {
     display: none !important;
+  }
+  .ant-tabs-bar {
+    margin-top: 15px;
+    margin-bottom: 0 !important;
   }
 `;
 

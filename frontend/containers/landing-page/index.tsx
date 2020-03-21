@@ -3,8 +3,8 @@ import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 import { TabPaneComponent } from './Components/TabPaneComponent';
 import { StandardGrid } from 'components/StandardGrid';
 import { Notification } from 'components/Notification';
-import { ContactUs } from './Components/ContactUs';
-import { ItemLists } from './Components/ItemLists';
+import { ContactUsForm } from 'components/ContactUsForm';
+import { ItemLists } from 'components/ItemLists';
 import { GET_CATEGORY_LISTS, GET_REVIEWS } from './graphql';
 
 export const LandingPage: FunctionComponent = () => {
@@ -28,7 +28,7 @@ export const LandingPage: FunctionComponent = () => {
         description="Revhere เป็นเว็บบอร์ดน้องใหม่ ที่มีการจัดหมวดหมู่ตามความสนใจนั้นๆ คุณสามารถเขียน และแบ่งปันประสบการณ์ คำวิจารณ์ และบอกต่อสิ่งๆนั้น ให้กับชุมชนที่มีความสนใจเดียวกัน"
       />
       <TabPaneComponent setCategoryReview={setCategoryReview} data={categoriesData} loading={loading} />
-      <StandardGrid left={<ItemLists data={reviewsData} loading={reviewsLoading} />} right={<ContactUs />} />
+      <StandardGrid left={<ItemLists data={reviewsData} loading={reviewsLoading} />} right={<ContactUsForm />} />
     </Fragment>
   );
 };
