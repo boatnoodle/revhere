@@ -9,6 +9,7 @@ export interface UserSchemaDb extends Document {
   uid: string;
   email: string;
   name: string;
+  photoURL: string;
   role: ROLE;
 }
 
@@ -23,6 +24,9 @@ const UserSchema = new Schema(
       type: String
     },
     name: {
+      type: String
+    },
+    photoURL: {
       type: String
     },
     role: {

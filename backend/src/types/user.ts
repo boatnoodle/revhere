@@ -17,6 +17,7 @@ export default gql`
     id: ID!
     name: String!
     email: String!
+    pictureURL: String
     role: String
   }
 `;

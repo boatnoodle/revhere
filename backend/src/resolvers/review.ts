@@ -43,6 +43,7 @@ const resolver = {
     },
     getReviews: async (_, { status = "PUBLISH", page, perPage = 10 }) => {
       const reviews = await Review.find({ status: ReviewStatus[status] })
+        .populate("categoryReview")
         .skip(page * perPage)
         .limit(perPage)
         .sort("-updatedAt");
