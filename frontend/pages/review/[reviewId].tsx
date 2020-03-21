@@ -29,8 +29,9 @@ function ReviewPage(props) {
           description: review?.introReview,
           images: [
             {
-              url: review?.imageCover && optimizedImgSrc({ imgPath: review?.imageCover, width: 320 }),
-              width: 320,
+              url: review?.imageCover && optimizedImgSrc({ imgPath: review?.imageCover, width: 800, height: 600 }),
+              width: 800,
+              height: 600,
               alt: 'image-cover',
             },
           ],
