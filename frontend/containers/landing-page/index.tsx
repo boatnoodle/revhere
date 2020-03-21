@@ -28,7 +28,7 @@ export const LandingPage: FunctionComponent = () => {
         description="Revhere เป็นเว็บบอร์ดน้องใหม่ ที่มีการจัดหมวดหมู่ตามความสนใจนั้นๆ คุณสามารถเขียน และแบ่งปันประสบการณ์ คำวิจารณ์ และบอกต่อสิ่งๆนั้น ให้กับชุมชนที่มีความสนใจเดียวกัน"
       />
       <TabPaneComponent setCategoryReview={setCategoryReview} data={categoriesData} loading={loading} />
-      <StandardGrid left={<ItemLists data={reviewsData} loading={reviewsLoading} />} content={<ContactUs />} />
+      <StandardGrid left={<ItemLists data={reviewsData} loading={reviewsLoading} />} right={<ContactUs />} />
     </Fragment>
   );
 };

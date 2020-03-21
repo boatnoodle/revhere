@@ -37,7 +37,7 @@ export const ReviewLists: FunctionComponent = () => {
 
   return (
     <Fragment>
-      <StandardGrid left={<ReviewListMain data={data} />} content={<SideBar />} />
+      <StandardGrid left={<ReviewListMain data={data} />} right={<SideBar />} />
     </Fragment>
   );
 };
