@@ -132,7 +132,7 @@ const resolver = {
         { _id },
         {
           $set: {
-            status
+            status: ReviewStatus[status]
           }
         }
       );
