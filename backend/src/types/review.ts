@@ -18,6 +18,7 @@ export default gql`
     updateReview(payload: ReviewInput): ReviewUpdated
     uploadImageReview(file: Upload, path: String): ImageUrl!
     updateStatusReview(_id: ID, status: Status): Review
+    deleteReview(_id: ID): Review
   }
 
   type ImageUrl {

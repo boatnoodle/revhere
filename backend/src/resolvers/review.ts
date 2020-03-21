@@ -138,6 +138,15 @@ const resolver = {
       );
 
       return review;
+    },
+    deleteReview: async (_, { _id }) => {
+      try {
+        const review = await Review.findByIdAndDelete(_id);
+        return review;
+      } catch (error) {
+        console.log(error);
+        throw new Error(error);
+      }
     }
   }
 };
