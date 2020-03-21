@@ -28,7 +28,7 @@ export const UPDATE_REVIEW_DETAIL = gql`
 
 export const UPLOAD_IMAGE_REVIEW_DETAIL = gql`
   mutation UplaodImageReviewDetail($file: Upload) {
-    imageReviewDetail: uploadImageReviewDetail(file: $file) {
+    imageReviewDetail: uploadImageReview(file: $file) {
       urlImage
     }
   }

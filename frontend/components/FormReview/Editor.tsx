@@ -28,9 +28,7 @@ export const Editor: React.FC<Props> = ({ setFieldValue, value }) => {
       apiKey="l521ol91f9n8nq7xqws25ffwjk6co687wtgf604pkxrbfyx9"
       initialValue={value}
       init={{
-        // body_class: 'tk-ibm-plex-thai-looped',
-        // content_css: 'https://use.typekit.net/vkl7rto.css',
-        content_style: 'body{font-size: 1.2rem; padding: 20px;}',
+        content_style: 'body{font-size: 1.2rem; padding: 20px;} img {max-width: 100%;}',
         width: 700,
         min_height: 10000,
         menubar: false,
@@ -50,11 +48,6 @@ export const Editor: React.FC<Props> = ({ setFieldValue, value }) => {
 
           success(gumletImagePath);
         },
-        // setup: function(editor) {
-        //   editor.on('init', function(e) {
-        //     editor.execCommand('mceFullScreen');
-        //   });
-        // },
       }}
       onEditorChange={handleEditorChange}
     />
