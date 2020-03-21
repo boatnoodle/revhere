@@ -65,8 +65,15 @@ const resolver = {
 
       return reviews;
     },
-    getReviewsMeta: async (_, { status = "PUBLISH" }) => {
+    getReviewsMeta: async (_, { categoryReview, status = "PUBLISH" }) => {
+      let filter;
+
+      if (categoryReview) {
+        filter = { ...filter, categoryReview };
+      }
+
       const countQuery = await Review.where({
+        ...filter,
         status: ReviewStatus[status]
       }).countDocuments();
 
@@ -119,6 +126,18 @@ const resolver = {
       const urlImage = await upload(file, path);
 
       return { urlImage };
+    },
+    updateStatusReview: async (_, { _id, status }) => {
+      const review = await Review.findOneAndUpdate(
+        { _id },
+        {
+          $set: {
+            status
+          }
+        }
+      );
+
+      return review;
     }
   }
 };

@@ -27,9 +27,17 @@ export const UPDATE_REVIEW_DETAIL = gql`
 `;
 
 export const UPLOAD_IMAGE_REVIEW_DETAIL = gql`
-  mutation UplaodImageReviewDetail($file: Upload) {
-    imageReviewDetail: uploadImageReview(file: $file) {
+  mutation UplaodImageReview($file: Upload, path: String) {
+    imageReviewDetail: uploadImageReview(file: $file, path: $path) {
       urlImage
+    }
+  }
+`;
+
+export const UPDATE_STATUS_REVIEW = gql`
+  mutation UpdateStatusReview($status: Status) {
+    updateStatusReview(status: $status) {
+      _id
     }
   }
 `;
