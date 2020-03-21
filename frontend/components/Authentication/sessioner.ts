@@ -29,7 +29,7 @@ export const useAuth = () => {
       localStorage.setItem('token', token);
       cookie.set('token', token, { expires: 1 });
       if (!authUserJson?.photoURL) {
-        authUserJson = { photoURL: '/static/logo/logo.png', ...authUserJson };
+        authUserJson = { ...authUserJson, photoURL: '/static/logo/logo.png' };
       }
       setUser(authUserJson);
       setInitializing(false);
