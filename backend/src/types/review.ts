@@ -27,6 +27,7 @@ export default gql`
     categoryReview: CategoryReview
     tags: [Tag]
     status: String
+    user: User
     createdAt: Date
     updatedAt: Date
   }
@@ -40,6 +41,7 @@ export default gql`
     categoryReview: String
     tags: [Tag]
     status: String
+    user: User
     createdAt: Date
     updatedAt: Date
   }

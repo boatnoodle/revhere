@@ -38,12 +38,15 @@ const resolver = {
       return reviews;
     },
     getReview: async (_, { _id }, context) => {
-      const review = await Review.findById(_id).populate("categoryReview");
+      const review = await Review.findById(_id)
+        .populate("categoryReview")
+        .populate("user");
       return review;
     },
     getReviews: async (_, { status = "PUBLISH", page, perPage = 10 }) => {
       const reviews = await Review.find({ status: ReviewStatus[status] })
         .populate("categoryReview")
+        .populate("user")
         .skip(page * perPage)
         .limit(perPage)
         .sort("-updatedAt");

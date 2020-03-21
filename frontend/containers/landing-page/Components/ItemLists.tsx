@@ -56,10 +56,9 @@ interface PropsReview {
   data: {
     reviews: Review[];
   };
-  user: UserProfile;
 }
 
-const ListUi: React.FC<PropsReview> = ({ data: { reviews }, user: { displayName } }) => {
+const ListUi: React.FC<PropsReview> = ({ data: { reviews } }) => {
   return (
     <List
       itemLayout="vertical"
@@ -81,7 +80,7 @@ const ListUi: React.FC<PropsReview> = ({ data: { reviews }, user: { displayName 
             }
           />
           {item.introReview}
-          <AuthorName>{displayName}</AuthorName>
+          <AuthorName>{item?.user?.name}</AuthorName>
           {`${item?.categoryReview?.name || 'ไม่ระบุ'} - ${dayjs(item?.updated).format('DD MMMM')}`}
         </StyledListItem>
       )}
@@ -90,10 +89,9 @@ const ListUi: React.FC<PropsReview> = ({ data: { reviews }, user: { displayName 
 };
 const ListItem = styled(List.Item.Meta)``;
 export const ItemLists: FunctionComponent = () => {
-  const { user } = useSession();
   const { data, loading } = useQuery(GET_REVIEWS, params);
-  if (loading || !user) {
+  if (loading) {
     return <Loader qty={Array(6).fill(null)} />;
   }
-  return <ListUi data={data} user={user} />;
+  return <ListUi data={data} />;
 };

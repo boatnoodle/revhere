@@ -8,11 +8,24 @@ export const GET_REVIEW = gql`
       introReview
       imageCover
       body
-      status
+      tags {
+        _id
+        name
+      }
       categoryReview {
         _id
         name
       }
+      user {
+        _id
+        name
+        email
+        photoURL
+        role
+      }
+      status
+      createdAt
+      updatedAt
     }
   }
 `;

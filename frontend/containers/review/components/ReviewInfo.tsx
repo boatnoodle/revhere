@@ -7,7 +7,7 @@ import 'dayjs/locale/th';
 
 import { Button } from 'antd';
 import { HeartFilled } from '@ant-design/icons';
-import { useSession } from 'hooks/useSession';
+import { Review } from 'types/review';
 
 dayjs.locale('th');
 
@@ -52,10 +52,6 @@ const FacebookShareButton = styled(Button)`
   }
 `;
 
-interface Props {
-  updated: Date;
-}
-
 const MyLoader = () => (
   <ContentLoader
     speed={2}
@@ -73,19 +69,22 @@ const MyLoader = () => (
   </ContentLoader>
 );
 
-export const ReviewInfo: React.FC<Props> = ({ updated }) => {
-  const { user } = useSession();
-  if (!user) {
-    return <MyLoader />;
-  }
+interface Props {
+  review: Review;
+}
+
+export const ReviewInfo: React.FC<Props> = ({ review }) => {
+  // if (!user) {
+  //   return <MyLoader />;
+  // }
   return (
     <Container>
       <ImageProfile>
-        <img src={user?.photoURL} alt="image-profile" width="44" height="44" />
+        <img src={review?.user?.photoURL} alt="image-profile" width="44" height="44" />
       </ImageProfile>
       <InfoReview>
-        <OwnerReviewName>{user?.displayName}</OwnerReviewName>
-        <div>{dayjs(updated).format('DD MMMM')} </div>
+        <OwnerReviewName>{review?.user?.name}</OwnerReviewName>
+        <div>{dayjs(review?.updated).format('DD MMMM')} </div>
       </InfoReview>
       <LoveButton>
         <HeartFilled />

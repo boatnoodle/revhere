@@ -12,6 +12,13 @@ export interface Review {
     _id: string;
     name: string;
   };
+  user: {
+    _id: string;
+    name: string;
+    email: string;
+    photoURL: string;
+    role: string;
+  };
   status: string;
   created: Date;
   updated: Date;

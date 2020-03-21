@@ -5,7 +5,7 @@ export const GET_PROFILE = gql`
     me {
       name
       email
-      pictureURL
+      photoURL
       role
     }
   }

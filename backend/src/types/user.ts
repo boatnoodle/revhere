@@ -14,10 +14,10 @@ export default gql`
   }
 
   type User {
-    id: ID!
+    _id: ID!
     name: String!
     email: String!
-    pictureURL: String
+    photoURL: String
     role: String
   }
 `;

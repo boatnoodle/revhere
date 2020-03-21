@@ -15,6 +15,13 @@ export const GET_REVIEWS = gql`
         _id
         name
       }
+      user {
+        _id
+        name
+        email
+        photoURL
+        role
+      }
       status
       createdAt
       updatedAt
