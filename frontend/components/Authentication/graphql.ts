@@ -1,8 +1,11 @@
 import { gql } from 'apollo-boost';
 
-export const GET_USER_ROLE = gql`
-  query GetUserRole {
+export const GET_PROFILE = gql`
+  query GetProfile {
     me {
+      name
+      email
+      pictureURL
       role
     }
   }

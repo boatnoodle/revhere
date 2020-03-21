@@ -5,13 +5,13 @@ import cookie from 'js-cookie';
 
 import { useRouter } from 'next/router';
 import { useLazyQuery } from '@apollo/react-hooks';
-import { GET_USER_ROLE } from './graphql';
+import { GET_PROFILE } from './graphql';
 
 export const useAuth = () => {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
   const [role, setRole] = useState(null);
-  const [getUserRole, { error }] = useLazyQuery(GET_USER_ROLE, {
+  const [getProfile, { error }] = useLazyQuery(GET_PROFILE, {
     onCompleted: data => {
       const role = data?.me?.role;
       setRole(role);
@@ -39,7 +39,7 @@ export const useAuth = () => {
 
   useEffect(() => {
     let isSubscribed = true;
-    getUserRole();
+    getProfile();
     const unsubscribe = firebase.auth().onAuthStateChanged(user => subscribeAuthChange(user, isSubscribed));
 
     return () => {
