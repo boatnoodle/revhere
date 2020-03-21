@@ -6,7 +6,6 @@ const resolver = {
     getCategoryReview: async () => {
       const categoryReview = await CategoryReview.find({});
 
-      console.log(categoryReview, "xxx");
       return categoryReview;
     }
   }
