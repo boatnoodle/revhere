@@ -43,8 +43,20 @@ const resolver = {
         .populate("user");
       return review;
     },
-    getReviews: async (_, { status = "PUBLISH", page, perPage = 10 }) => {
-      const reviews = await Review.find({ status: ReviewStatus[status] })
+    getReviews: async (
+      _,
+      { categoryReview, status = "PUBLISH", page, perPage = 10 }
+    ) => {
+      let filter;
+
+      if (categoryReview) {
+        filter = { ...filter, categoryReview };
+      }
+
+      const reviews = await Review.find({
+        ...filter,
+        status: ReviewStatus[status]
+      })
         .populate("categoryReview")
         .populate("user")
         .skip(page * perPage)

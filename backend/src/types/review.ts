@@ -3,7 +3,12 @@ import { gql } from "apollo-server";
 export default gql`
   type Query {
     getMyReview: [Review]
-    getReviews(status: Status, page: Int, perPage: Int): [Review]
+    getReviews(
+      categoryReview: ID
+      status: Status
+      page: Int
+      perPage: Int
+    ): [Review]
     getReview(_id: ID): Review
     getReviewsMeta(status: Status): ListMetadata
   }
