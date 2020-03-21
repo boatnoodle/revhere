@@ -1,14 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { Row, Col } from 'antd';
 interface Props {
-  content: JSX.Element;
+  right: JSX.Element;
   left: JSX.Element;
 }
-export const StandardGrid: FunctionComponent<Props> = ({ content, left }) => {
+export const StandardGrid: FunctionComponent<Props> = ({ right, left }) => {
   return (
     <Row gutter={[16, 16]}>
       <Col span={7} push={17}>
-        {content}
+        {right}
       </Col>
       <Col span={17} pull={7}>
         {left}

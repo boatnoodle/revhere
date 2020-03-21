@@ -24,10 +24,8 @@ const BaseButtonStyle = css`
 const BaseOutlineButton = css`
   ${BaseStyle};
   border-radius: 16px;
-  border: 1px solid #17bf63 !important;
   background-color: white;
   font-weight: bolder;
-  color: #17bf63;
   padding: 2px 23px;
 `;
 
@@ -43,8 +41,24 @@ export const PrimaryButton = styled(Button)<Props>`
 
 export const OutlinePrimaryButton = styled(Button)`
   ${BaseOutlineButton};
+  border: 1px solid #17bf63 !important;
+  color: #17bf63;
   :hover {
     color: white;
     background: #17bf63 !important;
   }
+`;
+
+export const OutlineDefaultButton = styled(Button)`
+  ${BaseOutlineButton};
+  color: #90a4ae;
+  border: 1px solid #90a4ae !important;
+  :hover {
+    color: white;
+    background: #90a4ae !important;
+  }
+`;
+
+export const BthWithIcon = styled(Button)`
+  ${BaseButtonStyle};
 `;

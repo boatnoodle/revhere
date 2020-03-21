@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import RouterLInk from 'next/router';
 import Link from 'next/link';
 
 import { Menu, Input } from 'antd';
 import { ModalAuth } from '../ModaAuth';
 import { AuthLink } from './Components/AuthLink';
-import { OutlinePrimaryButton } from 'components/Button';
-import { useSession } from 'hooks/useSession';
 const { Search } = Input;
 
 const MenuStyled = styled(Menu)`
@@ -57,16 +54,9 @@ const SearchInput = styled(Search)`
     padding: 20px !important;
   } */
 `;
-const CreateReviewButtonBox = styled.div`
-  position: absolute;
-  right: 200px;
-`;
-
-const linkToUrl = url => (url ? RouterLInk.push(url) : null);
 
 const Navbar: React.FunctionComponent = () => {
   const [visible, setVisible] = useState(false);
-  const { user, initializing } = useSession();
 
   const handleCancel = e => {
     setVisible(!visible);
@@ -82,11 +72,6 @@ const Navbar: React.FunctionComponent = () => {
       <SearchBox>
         <SearchInput placeholder="ค้นหาบน Revhere" onSearch={value => console.log(value)} />
       </SearchBox>
-      {user && (
-        <CreateReviewButtonBox>
-          <OutlinePrimaryButton onClick={() => linkToUrl('/create-review')}>เขียนรีวิว</OutlinePrimaryButton>
-        </CreateReviewButtonBox>
-      )}
       <MenuStyled mode="horizontal" defaultSelectedKeys={['0']}>
         <MenuItem>
           <AuthLink setVisible={setVisible} />
