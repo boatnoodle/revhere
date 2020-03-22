@@ -3,7 +3,7 @@ import IconFeedback from '../../assets/icons/icon-feedback.svg';
 import { Input } from 'antd';
 import styled, { css } from 'styled-components';
 import { OutlinePrimaryButton } from 'components/Button';
-import { CopyRightText } from 'components/copyRightText';
+import { CopyRightText } from 'components/CopyRightText';
 const { TextArea } = Input;
 const BaseBoxCss = css`
   padding: 10px 20px;

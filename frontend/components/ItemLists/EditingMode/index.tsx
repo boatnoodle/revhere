@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { notification } from 'antd';
 import { Menu, Dropdown } from 'antd';
-import { REVIEW_STATUS_TEXT } from 'utils/revewStatus';
+import { REVIEW_STATUS_TEXT, REVIEW_STATUS } from 'utils/reviewStatus';
+import { UPDATE_STATUS_REVIEW } from '../graphql';
+import { useMutation } from '@apollo/react-hooks';
 
 const Container = styled.div`
   display: flex;
@@ -33,33 +36,57 @@ const ManageBtn = styled.div`
     color: #607d8b;
   }
 `;
-const menuLists = [
-  { label: 'เปลี่ยนสถานะ', onClick: '' },
-  { label: 'ลบ', onClick: '' },
-];
 const MenuStyled = styled(Menu)`
   border-radius: 7px;
 `;
 
-const menu = (
-  <MenuStyled>
-    {menuLists.map(({ label, onClick }, index) => {
-      return (
-        <Menu.Item key={index}>
-          <a>{label}</a>
-        </Menu.Item>
-      );
-    })}
-  </MenuStyled>
-);
-
 interface Props {
   status: string;
+  id: string;
 }
-export const EditingMode: React.FC<Props> = ({ status }) => {
+export const EditingMode: React.FC<Props> = ({ status, id }) => {
+  const [stateStatus, setStateStatus] = useState(status);
+  const displayStatus = stateStatus === 'draft' ? REVIEW_STATUS_TEXT['publish'] : REVIEW_STATUS_TEXT['draft'];
+  const [updateReviewStatus] = useMutation(UPDATE_STATUS_REVIEW, {
+    onCompleted: ({ updateStatusReview: { status } }) => {
+      setStateStatus(status);
+      notification.success({
+        message: 'เปลี่ยนสถานะเป็น' + displayStatus,
+      });
+    },
+  });
+  const menuLists = [
+    {
+      label: 'เปลี่ยนสถานะเป็น ' + displayStatus,
+      function: (id: string, status: string) => {
+        updateReviewStatus({
+          variables: { _id: id, status: status === 'draft' ? REVIEW_STATUS['publish'] : REVIEW_STATUS['draft'] },
+        });
+      },
+    },
+    {
+      label: 'ลบ',
+      function: (id: string, status: string) => {},
+    },
+  ];
+  const menu = (
+    <MenuStyled
+      onClick={({ key }) => {
+        menuLists[key].function(id, stateStatus);
+      }}
+    >
+      {menuLists.map(({ label }, index) => {
+        return (
+          <Menu.Item key={index}>
+            <a>{label}</a>
+          </Menu.Item>
+        );
+      })}
+    </MenuStyled>
+  );
   return (
     <Container>
-      <Status>{REVIEW_STATUS_TEXT[status]}</Status>
+      <Status>{REVIEW_STATUS_TEXT[stateStatus]}</Status>
       <ManageText>แก้ไข</ManageText>
       <ManageBtn>
         <Dropdown overlay={menu} trigger={['click']}>

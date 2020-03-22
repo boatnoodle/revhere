@@ -60,6 +60,14 @@ interface PropsReview {
   isEditingMode: boolean;
 }
 
+const dynamicLink = (nameLink: string, href: string, as = ''): JSX.Element => {
+  return (
+    <Link href={href} as={as}>
+      <Title>{nameLink}</Title>
+    </Link>
+  );
+};
+
 const ListUi: React.FC<PropsReview> = ({ data: { reviews }, isEditingMode }) => {
   return (
     <List
@@ -77,9 +85,9 @@ const ListUi: React.FC<PropsReview> = ({ data: { reviews }, isEditingMode }) => 
           <ListItem
             className="list-item"
             title={
-              <Link href="/review/[reviewId]" as={`/review/${item._id}`}>
-                <Title>{item.titleReview}</Title>
-              </Link>
+              isEditingMode
+                ? dynamicLink(item.titleReview, `/update-review?reviewId=${item._id}`)
+                : dynamicLink(item.titleReview, '/review/[reviewId]', `/review/${item._id}`)
             }
           />
           <div className="review-intro">{item.introReview}</div>
@@ -89,7 +97,7 @@ const ListUi: React.FC<PropsReview> = ({ data: { reviews }, isEditingMode }) => 
               {`${item?.categoryReview?.name || 'ไม่ระบุ'} - ${dayjs(item?.updated).format('DD MMMM')}`}
             </div>
           ) : (
-            <EditingMode status={item.status} />
+            <EditingMode status={item.status} id={item._id} />
           )}
         </StyledListItem>
       )}

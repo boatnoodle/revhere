@@ -8,7 +8,6 @@ import { UserInfoCover } from 'components/UserInfoCover';
 
 export const ReviewLists: FunctionComponent = () => {
   const { data, loading, error } = useQuery(GET_MY_REVIEW);
-
   return (
     <Fragment>
       <UserInfoCover />

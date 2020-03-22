@@ -52,10 +52,10 @@ export const UserInfoCover: React.FC = () => {
     return (
       <Container>
         <div className="avatar">
-          <img src={user ? user.photoURL : ''} />
+          <img src={user.photoURL} />
         </div>
         <div className="content">
-          <div className="name">Nattashit Moonchanabaht</div>
+          <div className="name">{user.displayName}</div>
           <div className="desc">
             หนอนหนังสือหัดอ่าน ชื่นชอบวรรณกรรมแปลจากยุคคลาสสิก โดยเฉพาะจากรัสเซีย เยอรมัน บ้างก็อ่าน non-fiction
             แล้วแต่อารมณ์

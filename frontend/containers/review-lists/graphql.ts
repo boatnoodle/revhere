@@ -11,3 +11,11 @@ export const GET_MY_REVIEW = gql`
     }
   }
 `;
+
+export const UPDATE_REVIEW_STATUS = gql`
+  mutation UpdateStatusReview($_id: ID, $status: Status) {
+    updateStatusReview(_id: $_id, status: $status) {
+      _id
+    }
+  }
+`;
