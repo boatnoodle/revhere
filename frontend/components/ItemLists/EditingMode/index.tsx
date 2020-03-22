@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Menu, Dropdown } from 'antd';
-import { REVIEW_STATUS_TEXT } from 'utils/revewStatus';
+import { REVIEW_STATUS_TEXT } from 'utils/reviewStatus';
 
 const Container = styled.div`
   display: flex;
