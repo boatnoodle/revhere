@@ -134,7 +134,8 @@ const resolver = {
           $set: {
             status: ReviewStatus[status]
           }
-        }
+        },
+        { new: true }
       );
 
       return review;
