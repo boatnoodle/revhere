@@ -6,6 +6,7 @@ import { Notification } from 'components/Notification';
 import { ContactUsForm } from 'components/ContactUsForm';
 import { ItemLists } from 'components/ItemLists';
 import { GET_CATEGORY_LISTS, GET_REVIEWS } from './graphql';
+import { REVIEW_STATUS } from 'utils/reviewStatus';
 
 export const LandingPage: FunctionComponent = () => {
   const { data: categoriesData, loading } = useQuery(GET_CATEGORY_LISTS);
@@ -13,11 +14,11 @@ export const LandingPage: FunctionComponent = () => {
   const [categoryReview, setCategoryReview] = useState(null);
 
   useEffect(() => {
-    getReviews({ variables: { status: 'DRAFT' } });
+    getReviews({ variables: { status: REVIEW_STATUS.draft } });
     if (categoryReview === 'null') {
-      getReviews({ variables: { status: 'DRAFT' } });
+      getReviews({ variables: { status: REVIEW_STATUS.draft } });
     } else {
-      getReviews({ variables: { status: 'DRAFT', categoryReview } });
+      getReviews({ variables: { status: REVIEW_STATUS.draft, categoryReview } });
     }
   }, [categoryReview]);
 

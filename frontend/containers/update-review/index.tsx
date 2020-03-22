@@ -13,7 +13,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { FormReview } from 'components/FormReview';
 import { UtilityBar } from 'components/UtilityBar';
 import { PrimaryButton } from 'components/Button';
-import { REVIEW_STATUS_ENUM, REVIEW_STATUS_TEXT } from 'utils/revewStatus';
+import { REVIEW_STATUS_ENUM, REVIEW_STATUS_TEXT } from 'utils/reviewStatus';
 import { UPDATE_STATUS_REVIEW } from './graphql';
 import { useRouter } from 'next/router';
 
