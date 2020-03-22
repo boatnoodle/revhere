@@ -45,7 +45,7 @@ const resolver = {
     },
     getReviews: async (
       _,
-      { categoryReview, status = "PUBLISH", page, perPage = 10 }
+      { categoryReview, status = "PUBLISH", page, perPage = 5 }
     ) => {
       let filter;
 
@@ -71,8 +71,9 @@ const resolver = {
       if (categoryReview) {
         filter = { ...filter, categoryReview };
       }
+      console.log(categoryReview, status, "getReviewsMeta");
 
-      const countQuery = await Review.where({
+      const countQuery = await Review.find({
         ...filter,
         status: ReviewStatus[status]
       }).countDocuments();

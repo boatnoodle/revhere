@@ -10,11 +10,12 @@ import { REVIEW_STATUS } from 'utils/reviewStatus';
 
 export const LandingPage: FunctionComponent = () => {
   const { data: categoriesData, loading } = useQuery(GET_CATEGORY_LISTS);
-  const [getReviews, { data: reviewsData, loading: reviewsLoading, error: reviewsError }] = useLazyQuery(GET_REVIEWS);
+  const [getReviews, { data: reviewsData, loading: reviewsLoading, error: reviewsError, fetchMore }] = useLazyQuery(
+    GET_REVIEWS,
+  );
   const [categoryReview, setCategoryReview] = useState(null);
 
   useEffect(() => {
-    getReviews({ variables: { status: REVIEW_STATUS.draft } });
     if (categoryReview === 'null') {
       getReviews({ variables: { status: REVIEW_STATUS.draft } });
     } else {
@@ -29,7 +30,10 @@ export const LandingPage: FunctionComponent = () => {
         description="Revhere เป็นเว็บบอร์ดน้องใหม่ ที่มีการจัดหมวดหมู่ตามความสนใจนั้นๆ คุณสามารถเขียน และแบ่งปันประสบการณ์ คำวิจารณ์ และบอกต่อสิ่งๆนั้น ให้กับชุมชนที่มีความสนใจเดียวกัน"
       />
       <TabPaneComponent setCategoryReview={setCategoryReview} data={categoriesData} loading={loading} />
-      <StandardGrid left={<ItemLists data={reviewsData} loading={reviewsLoading} />} right={<ContactUsForm />} />
+      <StandardGrid
+        left={<ItemLists data={reviewsData} loading={reviewsLoading} fetchMore={fetchMore} />}
+        right={<ContactUsForm />}
+      />
     </Fragment>
   );
 };
