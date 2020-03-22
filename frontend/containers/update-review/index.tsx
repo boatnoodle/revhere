@@ -120,14 +120,14 @@ export const UpdateReview: FunctionComponent<Props> = ({ reviewId }) => {
   const TopBar = (): JSX.Element => {
     return (
       <TopBarStyled>
-        {data?.review?.status === REVIEW_STATUS_ENUM.DRAFT ? (
+        {data?.review?.status === REVIEW_STATUS_ENUM.draft ? (
           <ButtonAbsolute onClick={publishReview}>เผยแพร่</ButtonAbsolute>
         ) : (
-          <Publish>{REVIEW_STATUS_TEXT.PUBLISH}</Publish>
+          <Publish>{REVIEW_STATUS_TEXT.publish}</Publish>
         )}
 
         <div>
-          <b>{data?.review?.status === REVIEW_STATUS_ENUM.DRAFT ? 'บันทึกแบบร่างแล้ว' : 'บันทึกบทความแล้ว'}</b> -{' '}
+          <b>{data?.review?.status === REVIEW_STATUS_ENUM.draft ? 'บันทึกแบบร่างแล้ว' : 'บันทึกบทความแล้ว'}</b> -{' '}
           {dayjs().to(dayjs(data?.review?.updatedAt))} {loadingUpdateReview && 'กำลังบันทึก...'}
         </div>
       </TopBarStyled>
