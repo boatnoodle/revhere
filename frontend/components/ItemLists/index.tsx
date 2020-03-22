@@ -80,7 +80,6 @@ const ListUi: React.FC<PropsReview> = ({ data, isEditingMode, fetchMore }) => {
               if (!fetchMoreResult) return prev;
 
               const reviews = [...prev.reviews, ...fetchMoreResult.reviews];
-              console.log(data.reviewMeta.count, reviews.length, 'xx');
               if (data.reviewMeta.count === reviews.length) {
                 setHasMore(false);
               }

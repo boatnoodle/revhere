@@ -29,11 +29,14 @@ const upload = (file, path) => {
 
 const resolver = {
   Query: {
-    getMyReview: async (_, __, context) => {
+    getMyReview: async (_, { page, perPage = 5 }, context) => {
       const { uid } = await context?.user;
       const userId = await User.findOne({ uid }).select("_id");
 
-      const reviews = await Review.find({ user: userId });
+      const reviews = await Review.find({ user: userId })
+        .skip(page * perPage)
+        .limit(perPage)
+        .sort("-updatedAt");
 
       return reviews;
     },
@@ -71,11 +74,20 @@ const resolver = {
       if (categoryReview) {
         filter = { ...filter, categoryReview };
       }
-      console.log(categoryReview, status, "getReviewsMeta");
 
       const countQuery = await Review.find({
         ...filter,
         status: ReviewStatus[status]
+      }).countDocuments();
+
+      return { count: countQuery };
+    },
+    getMyReviewMeta: async (_, __, context) => {
+      const { uid } = await context?.user;
+      const user = await User.findOne({ uid }).select("_id");
+
+      const countQuery = await Review.find({
+        user
       }).countDocuments();
 
       return { count: countQuery };
