@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React, { FunctionComponent, Fragment } from 'react';
 import IconFeedback from '../../assets/icons/icon-feedback.svg';
-import { Input } from 'antd';
 import styled, { css } from 'styled-components';
+
+import { Input } from 'antd';
 import { OutlinePrimaryButton } from 'components/Button';
 import { CopyRightText } from 'components/CopyRightText';
+import fetch from 'isomorphic-unfetch';
+
 const { TextArea } = Input;
 const BaseBoxCss = css`
   padding: 10px 20px;
@@ -45,6 +49,42 @@ const CopyRightTextBox = styled.div`
   margin-top: 15px;
 `;
 
+const sendFeedback = async () => {
+  const accessToken = process.env.CLICKUP_PERSONAL_TOKEN;
+  const feedbackListsId = process.env.CLICKUP_FEEDBACK_LISTS_ID;
+  const url = `https://api.clickup.com/api/v2/list/${feedbackListsId}/task`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({
+        name: 'Feedback ลูกค้า',
+        content: 'New Task Content',
+        tags: ['feedback'],
+        priority: 1,
+        date_created: '1567780450202',
+        notify_all: true,
+        parent: null,
+        status: {
+          status: 'not read',
+          color: '#d3d3d3',
+          orderindex: 1,
+          type: 'open',
+        },
+      }),
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        Authorization: `${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    console.log(response, 'fire api');
+  } catch (error) {
+    console.log(error, 'error');
+  }
+};
+
 export const ContactUsForm: FunctionComponent = () => {
   return (
     <Fragment>
@@ -61,7 +101,7 @@ export const ContactUsForm: FunctionComponent = () => {
           </div>
           <TextAreaStyled allowClear rows={5} placeholder="กรุณาเข้าสู่ระบบ" />
           <div style={{ marginTop: '10px', textAlign: 'right' }}>
-            <OutlinePrimaryButton>ส่งข้อความ</OutlinePrimaryButton>
+            <OutlinePrimaryButton onClick={sendFeedback}>ส่งข้อความ</OutlinePrimaryButton>
           </div>
         </Box>
       </Container>
