@@ -1,4 +1,3 @@
-import { CategoryReview } from './../../types/categoryReview';
 import { gql } from 'apollo-boost';
 
 export const GET_CATEGORY_LISTS = gql`
@@ -10,8 +9,8 @@ export const GET_CATEGORY_LISTS = gql`
   }
 `;
 export const GET_REVIEWS = gql`
-  query getReviews($status: Status, $categoryReview: ID) {
-    reviews: getReviews(status: $status, categoryReview: $categoryReview) {
+  query getReviews($status: Status, $categoryReview: ID, $page: Int, $perPage: Int) {
+    reviews: getReviews(status: $status, categoryReview: $categoryReview, page: $page, perPage: $perPage) {
       _id
       titleReview
       introReview
@@ -35,7 +34,7 @@ export const GET_REVIEWS = gql`
       createdAt
       updatedAt
     }
-    reviewMeta: getReviewsMeta(status: $status) {
+    reviewMeta: getReviewsMeta(status: $status, categoryReview: $categoryReview) {
       count
     }
   }

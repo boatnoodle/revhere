@@ -2,7 +2,7 @@ import { gql } from "apollo-server";
 
 export default gql`
   type Query {
-    getMyReview: [Review]
+    getMyReview(page: Int, perPage: Int): [Review]
     getReviews(
       categoryReview: ID
       status: Status
@@ -11,6 +11,7 @@ export default gql`
     ): [Review]
     getReview(_id: ID): Review
     getReviewsMeta(categoryReview: ID, status: Status): ListMetadata
+    getMyReviewMeta: ListMetadata
   }
 
   type Mutation {

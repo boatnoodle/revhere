@@ -1,7 +1,8 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
 import Loader from './Loader';
 import Link from 'next/link';
+import InfiniteScroll from 'react-infinite-scroller';
 import dayjs from 'dayjs';
 import 'dayjs/locale/th';
 
@@ -9,6 +10,7 @@ import { List } from 'antd';
 import { Review } from 'types/review';
 import { ImageOptimized } from 'components/ImageOptimized';
 import { EditingMode } from './EditingMode';
+import { REVIEW_STATUS } from 'utils/reviewStatus';
 
 dayjs.locale('th');
 
@@ -56,8 +58,12 @@ const Title = styled.a`
 interface PropsReview {
   data: {
     reviews: Review[];
+    reviewMeta: {
+      count: number;
+    };
   };
   isEditingMode: boolean;
+  fetchMore: Function;
 }
 
 const dynamicLink = (nameLink: string, href: string, as = ''): JSX.Element => {
@@ -68,40 +74,59 @@ const dynamicLink = (nameLink: string, href: string, as = ''): JSX.Element => {
   );
 };
 
-const ListUi: React.FC<PropsReview> = ({ data: { reviews }, isEditingMode }) => {
+const ListUi: React.FC<PropsReview> = ({ data, isEditingMode, fetchMore }) => {
+  const [hasMore, setHasMore] = useState(true);
   return (
-    <List
-      itemLayout="vertical"
-      size="large"
-      pagination={{
-        onChange: page => {
-          console.log(page);
-        },
-        pageSize: 5,
+    <InfiniteScroll
+      pageStart={0}
+      loadMore={page => {
+        setTimeout(() => {
+          fetchMore({
+            variables: { status: REVIEW_STATUS.draft, page },
+            updateQuery: (prev, { fetchMoreResult }) => {
+              if (!fetchMoreResult) return prev;
+
+              const reviews = [...prev.reviews, ...fetchMoreResult.reviews];
+              if (data.reviewMeta.count === reviews.length) {
+                setHasMore(false);
+              }
+              return Object.assign({}, prev, {
+                reviews,
+              });
+            },
+          });
+        }, 1000);
       }}
-      dataSource={reviews}
-      renderItem={item => (
-        <StyledListItem extra={<ImageOptimized width={144} height={144} alt="logo" imgPath={item.imageCover} />}>
-          <ListItem
-            className="list-item"
-            title={
-              isEditingMode
-                ? dynamicLink(item.titleReview, `/update-review?reviewId=${item._id}`)
-                : dynamicLink(item.titleReview, '/review/[reviewId]', `/review/${item._id}`)
-            }
-          />
-          <div className="review-intro">{item.introReview}</div>
-          <div className="author-name">{item?.user?.name}</div>
-          {!isEditingMode ? (
-            <div className="date">
-              {`${item?.categoryReview?.name || 'ไม่ระบุ'} - ${dayjs(item?.updated).format('DD MMMM')}`}
-            </div>
-          ) : (
-            <EditingMode status={item.status} id={item._id} />
-          )}
-        </StyledListItem>
-      )}
-    />
+      hasMore={hasMore}
+      loader={data.reviews.length > 0 && <Loader qty={Array(1).fill(null)} />}
+    >
+      <List
+        itemLayout="vertical"
+        size="large"
+        dataSource={data.reviews}
+        renderItem={item => (
+          <StyledListItem extra={<ImageOptimized width={144} height={144} alt="logo" imgPath={item.imageCover} />}>
+            <ListItem
+              className="list-item"
+              title={
+                <Link href="/review/[reviewId]" as={`/review/${item._id}`}>
+                  <Title>{item.titleReview}</Title>
+                </Link>
+              }
+            />
+            <div className="review-intro">{item.introReview}</div>
+            <div className="author-name">{item?.user?.name}</div>
+            {!isEditingMode ? (
+              <div className="date">
+                {`${item?.categoryReview?.name || 'ไม่ระบุ'} - ${dayjs(item?.updated).format('DD MMMM')}`}
+              </div>
+            ) : (
+              <EditingMode status={item.status} id={item._id} />
+            )}
+          </StyledListItem>
+        )}
+      />
+    </InfiniteScroll>
   );
 };
 const ListItem = styled(List.Item.Meta)``;
@@ -109,12 +134,16 @@ interface Props {
   loading: boolean;
   data: {
     reviews: Review[];
+    reviewMeta: {
+      count: number;
+    };
   };
   isEditingMode?: boolean;
+  fetchMore?: Function;
 }
-export const ItemLists: FunctionComponent<Props> = ({ loading, data, isEditingMode = false }) => {
+export const ItemLists: FunctionComponent<Props> = ({ loading, data, isEditingMode = false, fetchMore }) => {
   if (loading || !data) {
     return <Loader qty={Array(6).fill(null)} />;
   }
-  return <ListUi data={data} isEditingMode={isEditingMode} />;
+  return <ListUi data={data} isEditingMode={isEditingMode} fetchMore={fetchMore} />;
 };
