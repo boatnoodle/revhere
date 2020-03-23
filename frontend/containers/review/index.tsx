@@ -2,13 +2,11 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import IconCountView from '../../assets/icons/icons8-eye.svg';
 
-import { NextSeo } from 'next-seo';
 import { useQuery } from '@apollo/react-hooks';
 import { ReviewImageCover } from './components/ReviewImageCover';
 import { GET_REVIEW } from './graphql';
 import { UtilityBar } from 'components/UtilityBar';
 import { ReviewInfo } from './components/ReviewInfo';
-import { optimizedImgSrc } from 'components/ImageOptimized';
 
 interface Props {
   reviewId: {};

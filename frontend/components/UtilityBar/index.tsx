@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
+import { useRouter } from 'next/router';
+
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -26,22 +28,20 @@ const CloseOutlinedAbsolute = styled(CloseOutlined)`
 
 interface Props {
   content: JSX.Element;
+  path?: string;
 }
 
-export const UtilityBar: React.FC<Props> = ({ content }) => {
-  const [visible, setVisible] = useState(true);
+export const UtilityBar: React.FC<Props> = ({ content, path = '/' }) => {
+  const router = useRouter();
 
   const handleClose = () => {
-    setVisible(!visible);
+    router.push(path);
   };
+
   return (
-    <>
-      {visible && (
-        <Wrapper>
-          <ReactNode>{content}</ReactNode>
-          <CloseOutlinedAbsolute onClick={handleClose} />
-        </Wrapper>
-      )}
-    </>
+    <Wrapper>
+      <ReactNode>{content}</ReactNode>
+      <CloseOutlinedAbsolute onClick={handleClose} />
+    </Wrapper>
   );
 };
