@@ -80,22 +80,20 @@ const ListUi: React.FC<PropsReview> = ({ data, isEditingMode, fetchMore }) => {
     <InfiniteScroll
       pageStart={0}
       loadMore={page => {
-        setTimeout(() => {
-          fetchMore({
-            variables: { status: REVIEW_STATUS.draft, page },
-            updateQuery: (prev, { fetchMoreResult }) => {
-              if (!fetchMoreResult) return prev;
+        fetchMore({
+          variables: { status: REVIEW_STATUS.draft, page },
+          updateQuery: (prev, { fetchMoreResult }) => {
+            if (!fetchMoreResult) return prev;
 
-              const reviews = [...prev.reviews, ...fetchMoreResult.reviews];
-              if (data.reviewMeta.count === reviews.length) {
-                setHasMore(false);
-              }
-              return Object.assign({}, prev, {
-                reviews,
-              });
-            },
-          });
-        }, 1000);
+            const reviews = [...prev.reviews, ...fetchMoreResult.reviews];
+            if (data.reviewMeta.count === reviews.length) {
+              setHasMore(false);
+            }
+            return Object.assign({}, prev, {
+              reviews,
+            });
+          },
+        });
       }}
       hasMore={hasMore}
       loader={data.reviews.length > 0 && <Loader qty={Array(1).fill(null)} />}
