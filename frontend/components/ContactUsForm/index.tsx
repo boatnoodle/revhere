@@ -52,34 +52,29 @@ const CopyRightTextBox = styled.div`
 const sendFeedback = async () => {
   const accessToken = process.env.CLICKUP_PERSONAL_TOKEN;
   const feedbackListsId = process.env.CLICKUP_FEEDBACK_LISTS_ID;
-  const url = `https://api.clickup.com/api/v2/list/${feedbackListsId}/task`;
+  const url = 'https://private-anon-2ee8b78d31-clickup20.apiary-proxy.com/api/v2/list/10002611/task';
 
   try {
+    const body = {
+      name: 'Feedback ลูกค้า',
+      content: 'New Task Content',
+      tags: ['feedback'],
+      priority: 1,
+      date_created: '1567780450202',
+      notify_all: true,
+      parent: null,
+    };
+
     const response = await fetch(url, {
       method: 'POST',
-      body: JSON.stringify({
-        name: 'Feedback ลูกค้า',
-        content: 'New Task Content',
-        tags: ['feedback'],
-        priority: 1,
-        date_created: '1567780450202',
-        notify_all: true,
-        parent: null,
-        status: {
-          status: 'not read',
-          color: '#d3d3d3',
-          orderindex: 1,
-          type: 'open',
-        },
-      }),
       headers: {
-        'Access-Control-Allow-Origin': '*',
-        Authorization: `${accessToken}`,
+        Authorization: 'pk_3665453_9WVOB8EUVLZFEDJ4B711MM51CPRCKUSO',
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify(body),
     });
 
-    console.log(response, 'fire api');
+    console.log(response);
   } catch (error) {
     console.log(error, 'error');
   }
