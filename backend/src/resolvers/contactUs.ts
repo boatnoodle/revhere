@@ -1,4 +1,5 @@
 import request from "request";
+import "dotenv/config";
 
 const hookSlack = text => {
   const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
