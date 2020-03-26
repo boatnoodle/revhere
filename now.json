@@ -14,6 +14,8 @@
     "PORT": "@port",
     "NODE_ENV": "@node_env",
     "CLICKUP_PERSONAL_TOKEN": "@clickup_personal_token",
-    "CLICKUP_FEEDBACK_LISTS_ID": "@clickup_feedback_lists_id"
+    "CLICKUP_FEEDBACK_LISTS_ID": "@clickup_feedback_lists_id",
+    "CLICKUP_LIST_ID": "@clickup_list_id",
+    "SLACK_WEBHOOK_URL": "@slack_webhook_url"
   }
 }
