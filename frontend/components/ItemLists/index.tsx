@@ -116,7 +116,7 @@ const ListUi: React.FC<PropsReview> = ({ data, isEditingMode, fetchMore }) => {
             <div className="author-name">{item?.user?.name}</div>
             {!isEditingMode ? (
               <div className="date">
-                {`${item?.categoryReview?.name || 'ไม่ระบุ'} - ${dayjs(item?.updated).format('DD MMMM')}`}
+                {`${item?.categoryReview?.name || 'ไม่ระบุ'} - ${dayjs(item.updated).format('DD MMMM')}`}
               </div>
             ) : (
               <EditingMode status={item.status} id={item._id} />
