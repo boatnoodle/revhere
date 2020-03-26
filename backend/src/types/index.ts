@@ -5,6 +5,7 @@ import ReviewSchema from "./review";
 import CategoryReviewSchema from "./categoryReview";
 import TagSchema from "./tag";
 import MetaDataSchema from "./metaData";
+import ContactUsSchema from "./contactUs";
 
 const types = [
   GraphqlDate,
@@ -12,7 +13,8 @@ const types = [
   ReviewSchema,
   CategoryReviewSchema,
   TagSchema,
-  MetaDataSchema
+  MetaDataSchema,
+  ContactUsSchema
 ];
 
 export default mergeTypes(types, { all: true });
