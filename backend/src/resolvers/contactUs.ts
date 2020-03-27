@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const hookSlack = async (text, urlClickUp) => {
-  const slackWebhookUrl =
-    "https://hooks.slack.com/services/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";
+  const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
   let formatText = `:envelope_with_arrow: ความคิดเห็น: ${truncate(
     text,
     100
@@ -26,11 +25,11 @@ const truncate = (input, limitText) =>
 
 export default {
   Mutation: {
-    sendFeedback: async (_, { payload: { name, content, tags, priority } }) => {
-      const folderListId = "10002611";
-      const accessToken = "pk_3665453_9WVOB8EUVLZFEDJ4B711MM51CPRCKUSO";
+    sendFeedback: async (_, { payload: { content, tags, priority } }) => {
+      const folderListId = process.env.CLICKUP_LIST_ID;
+      const accessToken = process.env.CLICKUP_TOKEN;
+
       const url = `https://api.clickup.com/api/v2/list/${folderListId}/task`;
-      let urlClickUp;
 
       const result = await axios({
         method: "post",
