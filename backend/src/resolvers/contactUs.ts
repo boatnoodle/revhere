@@ -3,7 +3,6 @@ import "dotenv/config";
 
 const hookSlack = text => {
   const slackWebhookUrl =
-    process.env.SLACK_WEBHOOK_URL ||
     "https://hooks.slack.com/services/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";
 
   request(
@@ -25,10 +24,8 @@ const truncate = (input, limitText) =>
 export default {
   Mutation: {
     sendFeedback: async (_, { payload: { name, content, tags, priority } }) => {
-      const folderListId = process.env.CLICKUP_LIST_I || 10002611;
-      const accessToken =
-        process.env.CLICKUP_TOKEN ||
-        "pk_3665453_9WVOB8EUVLZFEDJ4B711MM51CPRCKUSO";
+      const folderListId = 10002611;
+      const accessToken = "pk_3665453_9WVOB8EUVLZFEDJ4B711MM51CPRCKUSO";
       const url = `https://api.clickup.com/api/v2/list/${folderListId}/task`;
       request(
         {
