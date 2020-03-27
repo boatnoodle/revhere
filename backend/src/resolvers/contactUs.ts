@@ -24,9 +24,9 @@ const truncate = (input, limitText) =>
 export default {
   Mutation: {
     sendFeedback: async (_, { payload: { name, content, tags, priority } }) => {
-      const folderListId = 10002611;
+      const folderListId = "10002611";
       const accessToken = "pk_3665453_9WVOB8EUVLZFEDJ4B711MM51CPRCKUSO";
-      const url = `https://api.clickup.com/api/v2/list/${folderListId}/task`;
+      const url = `https://api.clickup.com/api/v2/list/10002611/task`;
       let urlClickUp;
       request(
         {
@@ -40,8 +40,7 @@ export default {
             name: truncate(content, 20),
             content,
             tags,
-            priority,
-            date_created: Date.now()
+            priority
           })
         },
         function async(error, response, body) {
