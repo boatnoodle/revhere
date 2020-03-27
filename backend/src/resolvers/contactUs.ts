@@ -1,5 +1,4 @@
-import request from "request";
-import "dotenv/config";
+import axios from "axios";
 
 const hookSlack = text => {
   const slackWebhookUrl =
@@ -26,42 +25,28 @@ export default {
     sendFeedback: async (_, { payload: { name, content, tags, priority } }) => {
       const folderListId = "10002611";
       const accessToken = "pk_3665453_9WVOB8EUVLZFEDJ4B711MM51CPRCKUSO";
-      const url = `https://api.clickup.com/api/v2/list/10002611/task`;
+      const url = `https://api.clickup.com/api/v2/list/${folderListId}/task`;
       let urlClickUp;
-      request(
-        {
-          method: "POST",
-          url,
-          headers: {
-            Authorization: accessToken,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            name: truncate(content, 20),
-            content,
-            tags,
-            priority
-          })
+
+      const result = await axios({
+        method: "post",
+        url,
+        headers: {
+          Authorization: accessToken,
+          "Content-Type": "application/json"
         },
-        function async(error, response, body) {
-          if (response.statusCode === 200) {
-            const response = JSON.parse(body);
-            const url = response?.url;
-            urlClickUp = response?.url;
-            let text = ":envelope_with_arrow: *ความคิดเห็น:* ";
-
-            text += truncate(content, 100) + "\n";
-
-            text += `*ดูความคิดเห็นทั้งหมดได้ที่ลิงค์* ${url}`;
-
-            hookSlack(text);
-          } else {
-            console.log(error);
-            return false;
-          }
+        data: {
+          name: truncate(content, 20),
+          content,
+          tags,
+          priority
         }
-      );
-      return { message: urlClickUp };
+      });
+
+      console.log(result, "result");
+
+      const urlTask = result.data.url;
+      return { message: urlTask };
       // return { message: "ความคิดเห็นของคุณทุกส่งเรียบร้อยแล้ว" };
     }
   }
