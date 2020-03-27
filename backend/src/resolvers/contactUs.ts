@@ -1,21 +1,25 @@
 import axios from "axios";
 
-const hookSlack = text => {
+const hookSlack = async (text, urlClickUp) => {
   const slackWebhookUrl =
     "https://hooks.slack.com/services/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";
+  let formatText = `:envelope_with_arrow: ความคิดเห็น: ${truncate(
+    text,
+    100
+  )} \n`;
 
-  request(
-    {
-      method: "POST",
-      url: slackWebhookUrl,
-      body: JSON.stringify({
-        text
-      })
+  formatText += `ดูความคิดเห็นทั้งหมดได้ที่ลิงค์ ${urlClickUp}`;
+
+  await axios({
+    method: "post",
+    url: slackWebhookUrl,
+    headers: {
+      "Content-Type": "application/json"
     },
-    function(error) {
-      if (error) return false;
+    data: {
+      text: formatText
     }
-  );
+  });
 };
 const truncate = (input, limitText) =>
   input.length > limitText ? `${input.substring(0, limitText)}...` : input;
@@ -36,18 +40,18 @@ export default {
           "Content-Type": "application/json"
         },
         data: {
-          name: truncate(content, 20),
+          name: truncate(content, 100),
           content,
           tags,
           priority
         }
       });
 
-      console.log(result, "result");
-
       const urlTask = result.data.url;
-      return { message: urlTask };
-      // return { message: "ความคิดเห็นของคุณทุกส่งเรียบร้อยแล้ว" };
+
+      hookSlack(content, urlTask);
+
+      return { message: "ความคิดเห็นของคุณทุกส่งเรียบร้อยแล้ว" };
     }
   }
 };
