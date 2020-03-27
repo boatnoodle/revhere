@@ -27,6 +27,7 @@ export default {
       const folderListId = 10002611;
       const accessToken = "pk_3665453_9WVOB8EUVLZFEDJ4B711MM51CPRCKUSO";
       const url = `https://api.clickup.com/api/v2/list/${folderListId}/task`;
+      let urlClickUp;
       request(
         {
           method: "POST",
@@ -47,6 +48,7 @@ export default {
           if (response.statusCode === 200) {
             const response = JSON.parse(body);
             const url = response?.url;
+            urlClickUp = response?.url;
             let text = ":envelope_with_arrow: *ความคิดเห็น:* ";
 
             text += truncate(content, 100) + "\n";
@@ -60,7 +62,8 @@ export default {
           }
         }
       );
-      return { message: "ความคิดเห็นของคุณทุกส่งเรียบร้อยแล้ว" };
+      return { message: urlClickUp };
+      // return { message: "ความคิดเห็นของคุณทุกส่งเรียบร้อยแล้ว" };
     }
   }
 };
