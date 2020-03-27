@@ -102,27 +102,29 @@ const ListUi: React.FC<PropsReview> = ({ data, isEditingMode, fetchMore }) => {
         itemLayout="vertical"
         size="large"
         dataSource={data.reviews}
-        renderItem={item => (
-          <StyledListItem extra={<ImageOptimized width={200} height={200} alt="logo" imgPath={item.imageCover} />}>
-            <ListItem
-              className="list-item"
-              title={
-                <Link href="/review/[reviewId]" as={`/review/${item._id}`}>
-                  <Title>{item.titleReview}</Title>
-                </Link>
-              }
-            />
-            <div className="review-intro">{item.introReview}</div>
-            <div className="author-name">{item?.user?.name}</div>
-            {!isEditingMode ? (
-              <div className="date">
-                {`${item?.categoryReview?.name || 'ไม่ระบุ'} - ${dayjs(item.updated).format('DD MMMM')}`}
-              </div>
-            ) : (
-              <EditingMode status={item.status} id={item._id} />
-            )}
-          </StyledListItem>
-        )}
+        renderItem={item => {
+          return (
+            <StyledListItem extra={<ImageOptimized width={200} height={200} alt="logo" imgPath={item.imageCover} />}>
+              <ListItem
+                className="list-item"
+                title={
+                  <Link href="/review/[reviewId]" as={`/review/${item._id}`}>
+                    <Title>{item.titleReview}</Title>
+                  </Link>
+                }
+              />
+              <div className="review-intro">{item.introReview}</div>
+              <div className="author-name">{item?.user?.name}</div>
+              {!isEditingMode ? (
+                <div className="date">
+                  {`${item?.categoryReview?.name || 'ไม่ระบุ'} - ${dayjs(item.updated).format('DD MMMM')}`}
+                </div>
+              ) : (
+                <EditingMode status={item.status} id={item._id} />
+              )}
+            </StyledListItem>
+          );
+        }}
       />
     </InfiniteScroll>
   );

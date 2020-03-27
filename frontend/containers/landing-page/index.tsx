@@ -10,7 +10,9 @@ import { REVIEW_STATUS } from 'utils/reviewStatus';
 
 export const LandingPage: FunctionComponent = () => {
   const { data: categoriesData, loading } = useQuery(GET_CATEGORY_LISTS);
-  const [getReviews, { data: reviewsData, loading: reviewsLoading, fetchMore }] = useLazyQuery(GET_REVIEWS);
+  const [getReviews, { data: reviewsData, loading: reviewsLoading, fetchMore }] = useLazyQuery(GET_REVIEWS, {
+    fetchPolicy: 'no-cache',
+  });
   const [categoryReview, setCategoryReview] = useState(null);
 
   useEffect(() => {
