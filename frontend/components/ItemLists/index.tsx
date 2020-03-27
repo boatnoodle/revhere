@@ -81,7 +81,7 @@ const ListUi: React.FC<PropsReview> = ({ data, isEditingMode, fetchMore }) => {
       pageStart={0}
       loadMore={page => {
         fetchMore({
-          variables: { status: REVIEW_STATUS.draft, page },
+          variables: { status: REVIEW_STATUS.publish, page },
           updateQuery: (prev, { fetchMoreResult }) => {
             if (!fetchMoreResult) return prev;
 
@@ -103,7 +103,7 @@ const ListUi: React.FC<PropsReview> = ({ data, isEditingMode, fetchMore }) => {
         size="large"
         dataSource={data.reviews}
         renderItem={item => (
-          <StyledListItem extra={<ImageOptimized width={144} height={144} alt="logo" imgPath={item.imageCover} />}>
+          <StyledListItem extra={<ImageOptimized width={200} height={200} alt="logo" imgPath={item.imageCover} />}>
             <ListItem
               className="list-item"
               title={

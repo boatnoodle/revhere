@@ -15,9 +15,9 @@ export const LandingPage: FunctionComponent = () => {
 
   useEffect(() => {
     if (categoryReview === 'null') {
-      getReviews({ variables: { status: REVIEW_STATUS.draft } });
+      getReviews({ variables: { status: REVIEW_STATUS.publish } });
     } else {
-      getReviews({ variables: { status: REVIEW_STATUS.draft, categoryReview } });
+      getReviews({ variables: { status: REVIEW_STATUS.publish, categoryReview } });
     }
   }, [categoryReview]);
 

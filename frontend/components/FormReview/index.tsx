@@ -32,11 +32,11 @@ const FormItem = styled(FormAnt.Item)`
 
 const UploadStyled = styled(Upload)`
   .avatar-uploader > .ant-upload {
-    width: 100%;
+    width: 700px;
     height: 300px;
   }
   .ant-upload.ant-upload-select-picture-card {
-    width: 100%;
+    width: 700px;
     height: 300px;
   }
 `;

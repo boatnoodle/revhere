@@ -39,14 +39,14 @@ export const ImageOptimized: React.FC<Props> = ({ imgPath, width, height, alt = 
 
   let dataSrc = `https://revhere.gumlet.com/${path}/${nameImage}`;
   if (width && height) {
-    dataSrc += `?w=${width}&h=${height}`;
+    dataSrc += `?width=${width}&hight=${height}`;
   } else {
     if (width) {
-      dataSrc += `?w=${width}`;
+      dataSrc += `?width=${width}`;
     }
 
     if (height) {
-      dataSrc += `?h=${height}`;
+      dataSrc += `?hight=${height}`;
     }
   }
 

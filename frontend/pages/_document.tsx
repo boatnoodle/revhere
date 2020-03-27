@@ -44,10 +44,9 @@ export default class MyDocument extends Document<any> {
                 window.GUMLET_CONFIG = {
                   hosts: [{
                       current: "storage.googleapis.com",
-                      gumlet: "revhere.gumlet.com"
                   }],
                   lazy_load: true,
-                  auto_webp: true
+                  auto_webp: true,
                 };
                 `,
             }}
