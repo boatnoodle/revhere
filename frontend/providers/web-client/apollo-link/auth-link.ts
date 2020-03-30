@@ -23,7 +23,9 @@ export const authLink = setContext(async (_, { headers }) => {
         },
       };
     }
+    console.log(headers, ' browser');
   } else {
+    console.log(headers, ' ssr');
     return {
       headers: {
         ...headers,

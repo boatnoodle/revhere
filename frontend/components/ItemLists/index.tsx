@@ -19,23 +19,6 @@ const StyledListItem = styled(List.Item)`
   border-radius: 13px;
   padding: 10px 20px;
   margin-bottom: 10px;
-  .ant-list-item-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    .ant-list-item-meta {
-      flex: 0;
-    }
-  }
-  & .ant-list-item-extra {
-    margin-left: 0 !important;
-  }
-  & .ant-list-item-meta {
-    margin-bottom: 10px !important;
-  }
-  & .ant-list-item-action {
-    margin-top: 10px !important;
-  }
   & img {
     border-radius: 10px;
   }

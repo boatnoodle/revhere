@@ -15,8 +15,8 @@ export default gql`
 
   type User {
     _id: ID!
-    name: String!
-    email: String!
+    name: String
+    email: String
     photoURL: String
     role: String
   }

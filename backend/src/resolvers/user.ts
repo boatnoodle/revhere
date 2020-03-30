@@ -8,7 +8,9 @@ export default {
     },
     me: async (_, __, context) => {
       const uid = await context?.user?.uid;
-      return await User.find({ uid });
+      console.log(uid, " uid");
+      const user = await User.find({ uid });
+      return user;
     },
     users: async () => {
       return [];

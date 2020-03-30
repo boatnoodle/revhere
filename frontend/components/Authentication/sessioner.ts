@@ -31,6 +31,7 @@ export const useAuth = () => {
       if (!authUserJson?.photoURL) {
         authUserJson = { ...authUserJson, photoURL: '/static/logo/logo.png' };
       }
+      // getProfile();
       setUser(authUserJson);
       setInitializing(false);
     } else {
@@ -42,7 +43,6 @@ export const useAuth = () => {
 
   useEffect(() => {
     let isSubscribed = true;
-    getProfile();
     const unsubscribe = firebase.auth().onAuthStateChanged(user => subscribeAuthChange(user, isSubscribed));
 
     return () => {
